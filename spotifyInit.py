@@ -17,11 +17,14 @@ def genAuth():
 
 def show_tracks(playname,tracks):
     retdic=[]
-    for i, item in enumerate(tracks['items']):
+    for i,item in enumerate(tracks['items']):
         track = item['track']
         artist=track['artists'][0]['name']
         trackname=track['name']
         album=track['album']['name']
-        retarray=[playname,artist,album,trackname]
+        trackid=track['id']
+        albumid=track['album']['id']
+        artistid=track['artists'][0]['id']
+        retarray=[playname,artist,album,trackname,trackid,albumid,artistid]
         retdic.append(retarray)
     return retdic 

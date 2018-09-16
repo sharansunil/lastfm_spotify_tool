@@ -20,9 +20,11 @@ for playlist in playlists['items']:
 	tracks=results['tracks']
 	x=spi.show_tracks(playname,tracks)
 	playlistarray.append(x)
+plArray=list(itertools.chain(*playlistarray))
 
-merged=list(itertools.chain(*playlistarray))
+referenceDataset=pd.DataFrame(data=plArray,columns=['Playlist','Artist','Album','Trackname','TrackID','AlbumID','ArtistID'])
+referenceDataset.index.name = 'ID'
+referenceCSV = referenceDataset.to_csv('base.csv')
+print("done")
 
-colloquialFrame=pd.DataFrame(data=merged,columns=['Playlist','Artist','Album','Trackname'])
 
- 
