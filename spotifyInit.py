@@ -15,7 +15,7 @@ def genAuth():
     sp = spotipy.Spotify(auth=token)
     return sp,username 
 
-def show_tracks(playname,tracks):
+def show_tracks(playname,playid,tracks):
     retdic=[]
     for i,item in enumerate(tracks['items']):
         track = item['track']
@@ -25,6 +25,6 @@ def show_tracks(playname,tracks):
         trackid=track['id']
         albumid=track['album']['id']
         artistid=track['artists'][0]['id']
-        retarray=[playname,artist,album,trackname,trackid,albumid,artistid]
+        retarray=[playname,playid,artist,artistid,album,albumid,trackname,trackid]
         retdic.append(retarray)
     return retdic 
