@@ -41,6 +41,16 @@ def generateFeatureSet(df):
     features = df.iloc[:, -1].apply(sp.audio_features)
     chain = list(itertools.chain(*features))
     featdf = pd.DataFrame(chain)
-    trackSet2 = pd.concat(
-    	[df.iloc[:, 0:2], featdf], axis=1, join='outer')
+    trackSet2 = pd.concat([df.iloc[:, 0:2], featdf], axis=1, join='outer')
     return trackSet2
+
+def generateMaster():
+	trackColumns = ['Trackname', 'TrackID']
+	sp=init()
+	df=generateRefSet(sp)
+	trackSet=sliceRefSet(df,trackColumns)
+	featureSet=generateFeatureSet(trackSet)
+	totalSet=pd.merge(df,featureSet,on=["Trackname","TrackID"])
+	totalSet=totalSet.drop_duplicates()
+	totalSet=totalSet.sort_values(by=['Playlist'])
+	return totalSet 
