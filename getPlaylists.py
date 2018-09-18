@@ -51,6 +51,8 @@ def generateMaster():
 	trackSet=sliceRefSet(df,trackColumns)
 	featureSet=generateFeatureSet(trackSet)
 	totalSet=pd.merge(df,featureSet,on=["Trackname","TrackID"])
+	keyMap = pd.DataFrame({'key': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], 'music_key': ["C", "C#", "D", "D#", "E", "E#", "F", "F#", "G", "G#", "A", "A#", "B", "B#"]})
+	totalSet = totalSet.merge(keyMap, on="key")
 	totalSet=totalSet.drop_duplicates()
 	totalSet=totalSet.sort_values(by=['Playlist'])
 	return totalSet 
