@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import itertools
 
-
 def init():
 	sp= spi.genAuth()
 	spo = sp[0]
@@ -52,7 +51,10 @@ def generateMaster():
 	featureSet=generateFeatureSet(trackSet)
 	totalSet=pd.merge(df,featureSet,on=["Trackname","TrackID"])
 	keyMap = pd.DataFrame({'key': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], 'music_key': ["C", "C#", "D", "D#", "E", "E#", "F", "F#", "G", "G#", "A", "A#", "B", "B#"]})
+	modalMap= pd.DataFrame({'mode':[0,1],'modality':['Major','Minor']})
+	totalSet=totalSet.merge(modalMap,on="mode")
 	totalSet = totalSet.merge(keyMap, on="key")
+	totalSet["modalityKey"] = totalSet["music_key"] + " " + totalSet["modality"]
 	totalSet=totalSet.drop_duplicates()
 	totalSet=totalSet.sort_values(by=['Playlist'])
 	return totalSet 
