@@ -96,7 +96,7 @@ def make_spider(df, row, title, color):
     plt.yticks([0.2, 0.4, 0.6, 0.8], ["0.2", "0.4",
                                       "0.6", "0.8"], color="grey", size=7)
     plt.ylim(0, 1)
-
+    plt.rcParams["figure.dpi"]=188
     # Ind1
     values = df.iloc[row].values.flatten().tolist()
     values += values[:1]
@@ -113,7 +113,7 @@ def generatePlaylistPlots(df):
     # Create a color palette:
     sns.set_palette("pastel")
     cmap = ListedColormap(sns.color_palette(n_colors=256))
-
+    sns.set()
     # initialise average dataset
     playlistAnalysisMean = pd.DataFrame(playlistAnalysis.mean())
     playlistAnalysisMean = playlistAnalysisMean.transpose()
@@ -128,3 +128,7 @@ def generatePlaylistPlots(df):
     print("images generated")
 
 
+def exportVisualizationDataset(df):
+    playlistAnalysis = df.groupby(["Playlist"])['valence', 'energy', 'acousticness',
+                                                'speechiness', 'danceability', 'instrumentalness', 'liveness', 'mode'].mean().round(3)
+    playlistAnalysis.to_csv('playlistViz.csv')

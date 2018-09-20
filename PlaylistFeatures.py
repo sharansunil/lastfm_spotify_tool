@@ -13,6 +13,10 @@ myCred = SpotifyCredentials(client_id=client_id, client_secret=client_secret,
                             redirect_uri=redirect_uri, username=username, scope=scope)
 
 sp = myCred.genAuth()
-hf.updateDataset(sp,username)
+#hf.updateDataset(sp,username)
 df=pd.read_csv('playlistDB.csv')
-hf.generatePlaylistPlots(df)
+
+hf.exportVisualizationDataset(df)
+
+# hf.generatePlaylistPlots(df)
+
