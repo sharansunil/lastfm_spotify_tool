@@ -4,6 +4,8 @@ library(fmsb)
 library(tidyverse)
 library(svglite)
 library(gdtools)
+
+rm(list=ls())
 par(mfrow=c(2,2),mar=c(4,1,4,1), oma=c(1,0,1,0))
 
 setwd("~/Documents/spotify-hacks")
@@ -15,8 +17,17 @@ df<-rbind(rep(1,9),rep(0,9),df)
 colors_border <- c( rgb(0.2,0.5,0.5,0.9), rgb(0.8,0.2,0.5,0.9), rgb(0.7,0.5,0.1,0.9))
 colors_in <- c( rgb(0.2,0.5,0.5,0.4), rgb(0.8,0.2,0.5,0.4), rgb(0.7,0.5,0.1,0.4))
 
-for (index in seq(3,nrow(df))){
-  rows<-c(1,2,index)
+dfAve <- c(apply(df,2,mean))
+
+df[nrow(df)+1,]=dfAve
+
+
+
+
+for (index in seq(3,nrow(df)-1)){
+  
+  rows<-c(1,2,index,nrow(df))
+  
   svg(filename=paste("plots/",rownames(df[index,]),".svg",sep=""), 
       width=5, 
       height=4, 
@@ -37,8 +48,20 @@ for (index in seq(3,nrow(df))){
              caxislabels=seq(0,1,5), 
              cglwd=0.5,
              #custom labels
-             vlcex=0.48,
+             vlcex=0.7,
              calcex=0.5,
-             title=rownames(df[index,])) 
+             title=rownames(df[index,]))
+  
+  legend("topright",
+         legend=c(rownames(df[index,]),"Average"),
+         col=colors_in,
+         pt.cex=2,
+         pch=16,
+         bty="n",
+         cex=1,
+         text.col=colors_in
+  )
+  
              dev.off()
+             
 }
