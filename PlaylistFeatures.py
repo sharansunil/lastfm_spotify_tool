@@ -13,10 +13,16 @@ myCred = SpotifyCredentials(client_id=client_id, client_secret=client_secret,
                             redirect_uri=redirect_uri, username=username, scope=scope)
 
 sp = myCred.genAuth()
-#hf.updateDataset(sp,username)
-df=pd.read_csv('playlistDB.csv')
-
-hf.exportVisualizationDataset(df)
-
+hf.updateDataset("saved",sp,username)
+df=pd.read_csv('savedDB.csv')
+# hf.exportVisualizationDataset(df)
 # hf.generatePlaylistPlots(df)
+# hf.runRscript('playlistPlots.R')
 
+df.head()
+
+artistProfile=df.groupby(['Artist']).mean().loc[:,['Popularity','acousticness','danceability','energy','instrumentalness','liveness','speechiness','tempo','valence']]
+albumProfile=df.groupby(['Album']).mean().loc[:,['Popularity','acousticness','danceability','energy','instrumentalness','liveness','speechiness','tempo','valence']]
+artistProfile= artistProfile.assign(no_albums=df.groupby(['Artist'])['Album'].nunique())
+
+artistProfile

@@ -26,7 +26,7 @@ df[nrow(df)+1,]=dfAve
 
 for (index in seq(3,nrow(df)-1)){
   
-  rows<-c(1,2,index,nrow(df))
+  rows<-c(1,2,nrow(df),index)
   
   svg(filename=paste("plots/",rownames(df[index,]),".svg",sep=""), 
       width=5, 
@@ -44,22 +44,22 @@ for (index in seq(3,nrow(df)-1)){
              #customize the grid
              cglcol="grey", 
              cglty=1, 
-             axislabcol="grey", 
+             axislabcol="black", 
              caxislabels=seq(0,1,5), 
              cglwd=0.5,
              #custom labels
              vlcex=0.7,
-             calcex=0.5,
+             calcex=0.8,
              title=rownames(df[index,]))
   
   legend("topright",
-         legend=c(rownames(df[index,]),"Average"),
+         legend=c("Average",rownames(df[index,])),
          col=colors_in,
-         pt.cex=2,
+         pt.cex=2.5,
          pch=16,
          bty="n",
          cex=1,
-         text.col=colors_in
+         text.col="black"
   )
   
              dev.off()
