@@ -45,7 +45,7 @@ def sliceRefSet(df, segment):
     df1 = df[[segment[0], segment[1]]]
     return df1
 def generateFeatureSet(df,sp):
-    df['Features'] = df.iloc[:, -1]
+    df = df.assign(Features=df.iloc[:, -1])
     features = df.iloc[:, -1].apply(sp.audio_features)
     chain = list(itertools.chain(*features))
     featdf = pd.DataFrame(chain)
@@ -115,10 +115,10 @@ def generateSavedTracksSet(sp):
 def updateDataset(key,sp,username):
     if key=="playlist":
         df = generatePlaylistSet(sp,username)
-        df.to_csv('playlistDB.csv')
+        df.to_csv('exports/playlistDB.csv')
     elif key=="saved":
         df=generateSavedTracksSet(sp)
-        df.to_csv('savedDB.csv')
+        df.to_csv('exports/savedDB.csv')
     else:
         print("Wrong key")
 
@@ -173,7 +173,7 @@ def generatePlaylistPlots(df):
 def exportVisualizationDataset(df):
     playlistAnalysis = df.groupby(["Playlist"])['valence', 'energy', 'acousticness',
                                                 'speechiness', 'danceability', 'instrumentalness', 'liveness', 'mode'].mean().round(3)
-    playlistAnalysis.to_csv('playlistViz.csv')
+    playlistAnalysis.to_csv('exports/playlistViz.csv')
 def runRscript(filename):
     command = 'Rscript'
     path2script = filename
@@ -182,5 +182,5 @@ def runRscript(filename):
 def exportArtistAlbumSegments(df):
     artistProfile = df.groupby(['Artist']).mean().loc[:, ['Popularity', 'acousticness', 'danceability', 'energy', 'instrumentalness','liveness', 'speechiness', 'tempo', 'valence']].assign(no_albums=df.groupby(['Artist'])['Album'].nunique())
     albumProfile = df.groupby(['Album']).mean().loc[:, ['Popularity', 'acousticness', 'danceability','energy', 'instrumentalness', 'liveness', 'speechiness', 'tempo', 'valence']]
-    artistProfile.to_csv('artistProfile.csv')
-    albumProfile.to_csv('albumProfile.csv')
+    artistProfile.to_csv('exports/artistProfile.csv')
+    albumProfile.to_csv('exports/albumProfile.csv')

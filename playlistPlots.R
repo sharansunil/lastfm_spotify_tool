@@ -10,7 +10,7 @@ par(mfrow=c(2,2),mar=c(4,1,4,1), oma=c(1,0,1,0))
 
 setwd("~/Documents/spotify-hacks")
 
-df<-read.csv("playlistViz.csv",row.names=1)
+df<-read.csv("exports/playlistViz.csv",row.names=1)
 
 df<-rbind(rep(1,9),rep(0,9),df)
 # Radar chart
