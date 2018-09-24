@@ -16,20 +16,5 @@ myCred = SpotifyCredentials(client_id=client_id, client_secret=client_secret,
 
 sp = myCred.genAuth()
 
-######playlist db generation
-hf.updateDataset("playlist",sp,username)
-df=pd.read_csv('exports/playlistDB.csv')
-hf.exportVisualizationDataset(df)
-hf.generatePlaylistPlots(df)
-hf.runRscript('playlistPlots.R')
-
-print('playlist done, 1 minute break')
-sleep(60)
-print('starting on saved db')
-#####saved songs db generation
-hf.updateDataset("saved", sp, username)
-df2=pd.read_csv('exports/savedDB.csv')
-hf.exportArtistAlbumSegments(df2)
-hf.runRscript('savedPlots.R')
-
-print('saved db done')
+hf.generateAllDatasets(sp,username)
+hf.artistSegments()
