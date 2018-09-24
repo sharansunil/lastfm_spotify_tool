@@ -1,5 +1,6 @@
 Playlist,valence,energy,acousticness,speechiness,danceability,instrumentalness,liveness,mode
 2018,0.419,0.666,0.196,0.1,0.573,0.141,0.182,0.6
+Alt Rock,0.513,0.731,0.057,0.059,0.462,0.148,0.147,0.667
 BROCKHAMPTON TOP BOIS,0.596,0.601,0.364,0.133,0.68,0.009,0.194,0.545
 Classic rock ,0.466,0.749,0.111,0.059,0.446,0.086,0.232,0.697
 Fall,0.358,0.497,0.53,0.042,0.492,0.234,0.155,0.784
