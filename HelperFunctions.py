@@ -212,3 +212,21 @@ def artistSegments():
              'energy', 'speechiness', 'Popularity', 'liveness']
 	for artist in artistList:
 		getartistDist(df, artist, features)
+
+
+def generateAllDatasets(sp, username):
+        ######playlist db generation
+    updateDataset("playlist", sp, username)
+    df = pd.read_csv('exports/playlistDB.csv')
+    exportVisualizationDataset(df)
+    generatePlaylistPlots(df)
+    runRscript('playlistPlots.R')
+    #####break
+    print('playlist done, 1 minute break')
+    sleep(60)
+    print('starting on saved db')
+    #####saved songs db generation
+    updateDataset("saved", sp, username)
+    df2 = pd.read_csv('exports/savedDB.csv')
+    exportArtistAlbumSegments(df2)
+    runRscript('savedPlots.R')
