@@ -29,10 +29,10 @@ for (index in seq(3,nrow(df)-1)){
   
   rows<-c(1,2,nrow(df),index)
   
-  svg(filename=paste("artistPlots/",rownames(df[index,]),".svg",sep=""), 
-      width=5, 
-      height=4, 
-      pointsize=8)
+  svg(filename=paste("artistDistribution/",rownames(df[index,]),"/",rownames(df[index,])," profile.svg",sep=""), 
+      width=6, 
+      height=6, 
+      pointsize=10)
   
   radarchart(df[rows,], 
              axistype=1 , 
