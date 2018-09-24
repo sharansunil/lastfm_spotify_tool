@@ -7,6 +7,7 @@ from math import pi
 from matplotlib.colors import ListedColormap
 import subprocess
 from time import sleep
+import os
 
 def show_tracks(playname, playid, tracks):
     retdic = []
@@ -168,7 +169,7 @@ def generatePlaylistPlots(df):
         make_spider(df=playlistAnalysisMean, row=0, title="", color='grey')
         make_spider(df=playlistAnalysis, row=row,
                        title=plNames[row], color=cmap(row))
-        plt.savefig('plots/'+plNames[row]+'.svg')
+        plt.savefig('playlistPlots/'+plNames[row]+'.svg')
     print("images generated")
 def exportVisualizationDataset(df):
     playlistAnalysis = df.groupby(["Playlist"])['valence', 'energy', 'acousticness',
@@ -184,3 +185,30 @@ def exportArtistAlbumSegments(df):
     albumProfile = df.groupby(['Album']).mean().loc[:, ['Popularity', 'acousticness', 'danceability','energy', 'instrumentalness', 'liveness', 'speechiness', 'tempo', 'valence']]
     artistProfile.to_csv('exports/artistProfile.csv')
     albumProfile.to_csv('exports/albumProfile.csv')
+
+###########CREATE ARTIST DISTRIBUTIONS##############
+def prepareArtistDf():
+	df = pd.read_csv('exports/savedDB.csv')
+
+	df['duration_min'] = df['duration_ms'].apply(lambda x: x/(1000*60)).round(2)
+	df.drop(['duration_ms'], axis=1)
+	return df
+def getartistDist(df, artist, features):
+	artistSet = df[df.Artist == artist]
+	filename = "artistDistribution/"+artist+"/"
+	os.makedirs(os.path.dirname(filename), exist_ok=True)
+	for feature in features:
+		plt.clf()
+		sns.kdeplot(artistSet.loc[:, feature], label=artist, shade=True)
+		sns.kdeplot(df.loc[:, feature], label="Dataset", shade=True)
+		plt.title(feature.capitalize() + " distribution of " + artist)
+		plt.legend()
+		plt.savefig(filename+artist+" "+feature+".png")
+def artistSegments():
+	df = prepareArtistDf()
+	sns.set(color_codes=True)
+	artistList = list(df.loc[:, 'Artist'].unique())
+	features = ['valence', 'acousticness', 'instrumentalness',
+             'energy', 'speechiness', 'Popularity', 'liveness']
+	for artist in artistList:
+		getartistDist(df, artist, features)

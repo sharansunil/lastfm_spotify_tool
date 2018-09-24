@@ -30,4 +30,6 @@ print('starting on saved db')
 hf.updateDataset("saved", sp, username)
 df2=pd.read_csv('exports/savedDB.csv')
 hf.exportArtistAlbumSegments(df2)
+hf.runRscript('savedPlots.R')
+
 print('saved db done')
