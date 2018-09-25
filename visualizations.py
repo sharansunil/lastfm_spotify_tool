@@ -2,6 +2,7 @@ import pandas as pd
 import HelperFunctions as hf
 from CredentialClass import SpotifyCredentials
 import lastfm as lfm 
+import itertools
 
 client_id = 'fe3712517e674d46b0dad0f1e83149cd'
 client_secret = '4adc68cc4f874edc9a7a2b655d8ccaf0'
@@ -20,3 +21,5 @@ sp = myCred.genAuth()
 hf.generateAllDatasets(sp,username,refresh=0)
 hf.artistSegments()
 df=lfm.generateRecentTrackSet(n=1000)
+
+
