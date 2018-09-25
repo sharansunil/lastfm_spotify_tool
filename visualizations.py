@@ -17,5 +17,5 @@ myCred = SpotifyCredentials(client_id=client_id, client_secret=client_secret,
 sp = myCred.genAuth()
 
 ###toggle between 1 and 0: 1 to refresh, 0 to skip
-hf.generateAllDatasets(sp,username,refresh=0)
+hf.generateAllDatasets(sp,username,refresh=1)
 hf.artistSegments()

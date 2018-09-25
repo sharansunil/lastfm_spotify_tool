@@ -54,7 +54,7 @@ for (index in seq(3,nrow(df)-1)){
              title=rownames(df[index,]))
   
   legend("topright",
-         legend=c("Average",rownames(df[index,])),
+         legend=c("Average Artist",rownames(df[index,])),
          col=colors_in,
          pt.cex=2.5,
          pch=16,
