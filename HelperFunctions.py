@@ -56,13 +56,6 @@ def generatePlaylistSet(sp,username):
     df = generateRefSet(sp,username)
     featureSet = generateFeatureSet(df,sp,trackColumns)
     totalSet = pd.merge(df, featureSet, on=["Trackname", "TrackID"])
-    keyMap = pd.DataFrame({'key': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], 'music_key': [
-                          "C", "C#", "D", "D#", "E", "E#", "F", "F#", "G", "G#", "A", "A#", "B", "B#"]})
-    modalMap = pd.DataFrame({'mode': [0, 1], 'modality': ['Major', 'Minor']})
-    totalSet = totalSet.merge(modalMap, on="mode")
-    totalSet = totalSet.merge(keyMap, on="key")
-    totalSet["modalityKey"] = totalSet["music_key"] + \
-        " " + totalSet["modality"]
     totalSet = totalSet.drop_duplicates()
     totalSet = totalSet.sort_values(by=['Playlist'])
     return totalSet
@@ -98,15 +91,8 @@ def generateSavedTracksSet(sp):
     chain = list(itertools.chain(*features))
     df2 = pd.DataFrame(chain)
     df = pd.concat([df.iloc[:, 0:5], df2], axis=1, join='outer')
-    keyMap = pd.DataFrame({'key': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], 'music_key': [
-                          "C", "C#", "D", "D#", "E", "E#", "F", "F#", "G", "G#", "A", "A#", "B", "B#"]})
-    modalMap = pd.DataFrame({'mode': [0, 1], 'modality': ['Major', 'Minor']})
-    df = df.merge(modalMap, on="mode")
-    df = df.merge(keyMap, on="key")
-    df["modalityKey"] = df["music_key"] + " " + df["modality"]
     df = df.drop_duplicates()
     df = df.sort_values(by=['Date Added'],ascending=False)
-    df=df.iloc[:,1:-1]
     return df
 
 
