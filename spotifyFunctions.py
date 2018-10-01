@@ -196,8 +196,6 @@ def artistSegments():
              'energy', 'speechiness', 'Popularity', 'liveness']
 	for artist in artistList:
 		getartistDist(df, artist, features)
-
-
 def generateAllDatasets(sp, username,refresh):
         ######playlist db generation
     if refresh==1:

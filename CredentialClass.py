@@ -1,25 +1,17 @@
 import spotipy
 import spotipy.util as util
 
-
-
 class SpotifyCredentials():
 
-    def __init__(self, client_id, client_secret, redirect_uri, username, scope):
-        self.client_id = client_id
-        self.client_secret = client_secret
-        self.redirect_uri = redirect_uri
+
+    def __init__(self,username, scope):
         self.username = username
         self.scope = scope
+    
+    client_id = 'fe3712517e674d46b0dad0f1e83149cd'
+    client_secret = '4adc68cc4f874edc9a7a2b655d8ccaf0'
+    redirect_uri = 'https://facebook.com'
 
-    def setClientId(self, client_id):
-        self.client_id = client_id
-
-    def setClientSecret(self, client_secret):
-        self.client_secret = client_secret
-
-    def setRedirect(self, redirect_uri):
-        self.redirect_uri = redirect_uri
 
     def setScope(self, scope):
         self.scope = scope
