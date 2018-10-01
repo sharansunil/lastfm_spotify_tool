@@ -100,10 +100,10 @@ def generateSavedTracksSet(sp):
 def updateDataset(key,sp,username):
     if key=="playlist":
         df = generatePlaylistSet(sp,username)
-        df.to_csv('exports/playlistDB.csv')
+        df.to_csv('exports/playlistDB.csv',index=False)
     elif key=="saved":
         df=generateSavedTracksSet(sp)
-        df.to_csv('exports/savedDB.csv')
+        df.to_csv('exports/savedDB.csv',index=False)
     else:
         print("Wrong key")
 
@@ -134,6 +134,7 @@ def make_spider(df, row, title, color):
     ax.fill(angles, values, color=color, alpha=0.5)
     plt.title(title, size=14, color=color, y=1.08, weight='bold')
     plt.tight_layout()
+
 def generatePlaylistPlots(df):
     # extract usable data
     playlistAnalysis = df.groupby(["Playlist"])['valence', 'energy', 'acousticness',
@@ -155,20 +156,23 @@ def generatePlaylistPlots(df):
                        title=plNames[row], color=cmap(row))
         plt.savefig('playlistPlots/'+plNames[row]+'.svg')
     print("images generated")
+
 def exportVisualizationDataset(df):
     playlistAnalysis = df.groupby(["Playlist"])['valence', 'energy', 'acousticness',
                                                 'speechiness', 'danceability', 'instrumentalness', 'liveness', 'mode'].mean().round(3)
-    playlistAnalysis.to_csv('exports/playlistViz.csv')
+    playlistAnalysis.to_csv('exports/playlistViz.csv',index=False)
+
 def runRscript(filename):
     command = 'Rscript'
     path2script = filename
     cmd = [command, path2script]
     subprocess.check_output(cmd)
+
 def exportArtistAlbumSegments(df):
     artistProfile = df.groupby(['Artist']).mean().loc[:, ['Popularity', 'acousticness', 'danceability', 'energy', 'instrumentalness','liveness', 'speechiness', 'tempo', 'valence']].assign(no_albums=df.groupby(['Artist'])['Album'].nunique())
     albumProfile = df.groupby(['Album']).mean().loc[:, ['Popularity', 'acousticness', 'danceability','energy', 'instrumentalness', 'liveness', 'speechiness', 'tempo', 'valence']]
-    artistProfile.to_csv('exports/artistProfile.csv')
-    albumProfile.to_csv('exports/albumProfile.csv')
+    artistProfile.to_csv('exports/artistProfile.csv',index=False)
+    albumProfile.to_csv('exports/albumProfile.csv',index=False)
 
 ###########CREATE ARTIST DISTRIBUTIONS##############
 def prepareArtistDf():
@@ -177,6 +181,7 @@ def prepareArtistDf():
 	df['duration_min'] = df['duration_ms'].apply(lambda x: x/(1000*60)).round(2)
 	df.drop(['duration_ms'], axis=1)
 	return df
+
 def getartistDist(df, artist, features):
 	artistSet = df[df.Artist == artist]
 	filename = "artistDistribution/"+artist+"/"
@@ -188,6 +193,7 @@ def getartistDist(df, artist, features):
 		plt.title(feature.capitalize() + " distribution of " + artist)
 		plt.legend()
 		plt.savefig(filename+artist+" "+feature+".png")
+
 def artistSegments():
 	df = prepareArtistDf()
 	sns.set(color_codes=True)
@@ -196,6 +202,7 @@ def artistSegments():
              'energy', 'speechiness', 'Popularity', 'liveness']
 	for artist in artistList:
 		getartistDist(df, artist, features)
+
 def generateAllDatasets(sp, username,refresh):
         ######playlist db generation
     if refresh==1:
@@ -213,4 +220,4 @@ def generateAllDatasets(sp, username,refresh):
         updateDataset("saved", sp, username)
     df2 = pd.read_csv('exports/savedDB.csv')
     exportArtistAlbumSegments(df2)
-    runRscript('savedPlots.R')
+    runRscript('savedPlots.R') 

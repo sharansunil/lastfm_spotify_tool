@@ -1,19 +1,12 @@
 ##############LASTFM
-import json
-import requests
 import pandas as pd
 import pylast
 import sys
 import itertools
 import datetime
+import numpy as np
 
 TRACK_SEPARATOR = u" - "
-
-
-def get_recent_tracks(network ,username, number):
-	recent_tracks = network.get_user(username).get_recent_tracks(limit=number)
-	return recent_tracks
-
 
 def unicode_track_and_timestamp(track):
 	unicode_track = str(track.track)
@@ -38,27 +31,39 @@ def fixTime(test):
 	return test
 
 
-def generateRecentTrackSet(network,username,n=500):
-	df = list(get_recent_tracks(network,username, n))
-	df = pd.DataFrame(df, columns=['trackartist', 'album', 'datetime', 'rand'])
+def generateTrackSet(network,username):
+	df = list(network.get_user(username).get_recent_tracks(limit=1000))
+	df = pd.DataFrame(df, columns=['trackartist', 'album', 'datetime', 'timestamp'])
+	lastplayed = df.iloc[-1, -1]
+	starttime = int(lastplayed)
+	maxtime =1514764800
+	limit=500
+	while maxtime<starttime:
+		df1 = network.get_user(username).get_recent_tracks(limit=limit, time_to=str(starttime))
+		df1 = pd.DataFrame(df1, columns=['trackartist', 'album', 'datetime', 'timestamp'])
+		starttime = int(df1.iloc[-1, -1])
+		df = pd.concat([df, df1])
 	# fix datetime
 	dates = df.iloc[:, 2].str.split(",", expand=True)
 	dates.columns = ['date', 'time']
 	dates.time = dates.time.str.strip()
 	dates.time = dates.time.apply(lambda x: fixTime(x))
+
 	#fix track and artist
 	trackList = df.iloc[:, 0].tolist()
 	trackArtist = []
+	album = df.loc[:, ['album']].iloc[:, -1].tolist()
+	dates = dates.values.tolist()
+	counter = 0
 	for item in trackList:
 		trackname = item.get_title()
 		artistname = item.get_artist().get_name()
-		trackArtist.append([trackname, artistname])
-	trackArtist = pd.DataFrame(trackArtist, columns=['track', 'artist'])
-	# albums
-	albums = df.loc[:, 'album']
-	trackArtist = trackArtist.assign(albums=albums)
-	df = pd.concat([trackArtist, dates], axis=1)
-	df.to_csv('exports/recentTracks.csv')
+		albname = album[counter]
+		date = dates[counter][0]
+		time = dates[counter][1]
+		trackArtist.append([trackname, artistname, albname, date, time])
+		counter += 1
+	df = pd.DataFrame(trackArtist, columns=['Track', 'Artist', 'Album', 'Date', 'Time'])
 	return df
 
 
@@ -75,19 +80,19 @@ def topAlbumsArtists(network,username):
 		plays = obj.weight
 		ArtistPlays.append([sx, plays])
 	df1 = pd.DataFrame(ArtistPlays, columns=["Artist", "Plays"])
-	df1.to_csv('exports/TopArtist.csv')
+	df1.to_csv('exports/TopArtist.csv',index=False)
 	for obj in topAlbums:
 		sx = obj.item
 		sx = sx.get_name()
 		plays = obj.weight
 		AlbumPlays.append([sx, plays])
 	df2 = pd.DataFrame(AlbumPlays, columns=["Album", "Plays"])
-	df2.to_csv("exports/TopAlbums.csv")
+	df2.to_csv("exports/TopAlbums.csv",index=False)
 	return df1,df2
 
 def makeAllLastFm(network,username):
 	tup=topAlbumsArtists(network,username)
-	recentTracks=generateRecentTrackSet(network,username,1000)
+	recentTracks=generateTrackSet(network,username)
 	topArtists=tup[0]
 	topAlbums=tup[1]
 	dataframes={
@@ -96,3 +101,25 @@ def makeAllLastFm(network,username):
 		"Top Albums":topAlbums
 	}
 	return dataframes
+
+def topTracksDB(network, username):
+	df = generateTrackSet(network, username)
+	df = df.assign(key=pd.Series(np.random.randn(len(df.index))).values)
+	playFreq = pd.DataFrame(df.groupby(["Track", "Artist"])["key"].nunique().to_frame(
+	).reset_index().sort_values(by="key", ascending=False).reset_index().drop("index", axis=1))
+	playFreq.columns=["Track","Artist","Plays"]
+	playFreq.to_csv("exports/AllTracksPlayed.csv",index=False)
+	return playFreq
+
+
+def generateMasterTrackDatabase():
+	tracksDB = pd.read_csv("exports/savedDB.csv", index_col=0).reset_index()
+	trackPlaysDB = pd.read_csv("exports/AllTracksPlayed.csv")
+	trackPlaysDB.columns = ["Track", "Artist", "Plays"]
+	df = pd.merge(tracksDB, trackPlaysDB, how="left", on=["Track", "Artist"])
+
+	df_usable = df.loc[:, ["Track", "Artist", "Album", "Date Added", "Plays", "Popularity", "acousticness", "danceability", "speechiness", "tempo", "time_signature", "valence", "energy", "liveness", "instrumentalness"]].sort_values(by="Date Added", ascending=False)
+	df_usable = df_usable.fillna(0).reset_index(drop=True)
+	df_usable.loc[:, "Plays"] = df_usable.loc[:, "Plays"].astype(int)
+	df_usable.to_csv("exports/MasterTrackDatabase.csv")
+	return df_usable
