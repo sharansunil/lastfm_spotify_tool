@@ -121,5 +121,5 @@ def generateMasterTrackDatabase():
 	df_usable = df.loc[:, ["Track", "Artist", "Album", "Date Added", "Plays", "Popularity", "acousticness", "danceability", "speechiness", "tempo", "time_signature", "valence", "energy", "liveness", "instrumentalness"]].sort_values(by="Date Added", ascending=False)
 	df_usable = df_usable.fillna(0).reset_index(drop=True)
 	df_usable.loc[:, "Plays"] = df_usable.loc[:, "Plays"].astype(int)
-	df_usable.to_csv("exports/MasterTrackDatabase.csv")
+	df_usable.to_csv("exports/MasterTrackDatabase.csv",index=False)
 	return df_usable
