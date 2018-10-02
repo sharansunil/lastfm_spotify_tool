@@ -1,8 +1,5 @@
 ##############LASTFM
 import pandas as pd
-import pylast
-import sys
-import itertools
 import datetime
 import numpy as np
 
@@ -131,3 +128,54 @@ def generateMasterTrackDatabase():
 	df.tempo = df.tempo.apply(lambda x: int(x))
 	df = df.sort_values(by="Plays", ascending=False).reset_index(drop=True)
 	df.to_csv("exports/MasterTrackDatabase.csv",index=False)
+
+
+def generatePlaylistDb():
+	""""fixdf"""
+	df = pd.read_csv("exports/playlistDB.csv", index_col=0).reset_index()
+	df = df.assign(uid=df["Trackname"]+df["Artist"])
+	df.uid = df.uid.str.lower()
+	df.uid = df.uid.str.strip()
+
+	"""fixtracks"""
+	trackPlaysDB = pd.read_csv("exports/AllTracksPlayed.csv")
+	trackPlaysDB.uid = trackPlaysDB.uid.str.lower()
+	trackPlaysDB.uid = trackPlaysDB.uid.str.strip()
+
+	"""merge and clean"""
+
+	df = pd.merge(df, trackPlaysDB, how="left", on="uid", suffixes=('', '_y'))
+	df = df.loc[:, ["Playlist", "Track", "Artist", "Album", "Plays", "acousticness", "liveness",
+                 "instrumentalness", "valence", "energy", "tempo", "time_signature", "danceability", "speechiness"]]
+	df.iloc[:, 0:3] = df.iloc[:, 0:3].apply(lambda x: x.str.strip())
+	df.Plays = df.Plays.fillna(0).astype(int)
+	df.loc[:, ["acousticness", "liveness", "instrumentalness", "valence", "energy", "danceability", "speechiness"]] = df.loc[:, [
+		"acousticness", "liveness", "instrumentalness", "valence", "energy", "danceability", "speechiness"]].apply(lambda x: x.round(2))
+	df.tempo = df.tempo.astype(int)
+
+	df.to_csv('exports/MasterPlaylistDatabase.csv', index=False)
+
+def generateCombinedDatabases(network,lastfm_username,refresh=0):
+
+	if refresh==0:
+		
+		try:
+			generateMasterTrackDatabase()
+			generatePlaylistDb()
+			print("both datasets generated")
+		
+		except Exception as e:
+			print("An error occurred: \n" + e )
+	
+	elif refresh ==1:
+		try:
+			topAlbumsArtists(network,lastfm_username)
+			topTracksDB(network,lastfm_username)
+			generateMasterTrackDatabase()
+			generatePlaylistDb()
+			print("LastFM data refreshed and datasets generated")
+		except Exception as e:
+			print("An error occurred: \n" + e )
+
+	else:
+		print("Wrong refresh key: 1 for yes, 0 for no. Its pretty straightforward.")
