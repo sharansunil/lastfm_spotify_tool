@@ -1,11 +1,7 @@
 ##############LASTFM
 import pandas as pd
-import pylast
-import sys
-import itertools
 import datetime
 import numpy as np
-import uuid
 
 TRACK_SEPARATOR = u" - "
 
@@ -106,29 +102,80 @@ def makeAllLastFm(network,username):
 def topTracksDB(network, username):
 	df = generateTrackSet(network, username)
 	df = df.assign(key=pd.Series(np.random.randn(len(df.index))).values)
-	playFreq = pd.DataFrame(df.groupby(["Track", "Artist"])["key"].nunique().to_frame(
+	df = pd.DataFrame(df.groupby(["Track", "Artist"])["key"].nunique().to_frame(
 	).reset_index().sort_values(by="key", ascending=False).reset_index().drop("index", axis=1))
-	playFreq.columns=["Track","Artist","Plays"]
-	playFreq.to_csv("exports/AllTracksPlayed.csv",index=False)
-	return playFreq
+	df.columns=["Track","Artist","Plays"]
+	df = df.assign(uid=df["Track"]+df["Artist"])
+	df.to_csv("exports/AllTracksPlayed.csv",index=False)
+	return df
 
 
 def generateMasterTrackDatabase():
 	tracksDB = pd.read_csv("exports/savedDB.csv", index_col=0).reset_index()
+	df = tracksDB.assign(uid=tracksDB["Track"]+tracksDB["Artist"])
 	trackPlaysDB = pd.read_csv("exports/AllTracksPlayed.csv")
-	trackPlaysDB.columns = ["Track", "Artist", "Plays"]
-	df = pd.merge(tracksDB, trackPlaysDB, how="left", on=["Track", "Artist"])
-
-	df_usable = df.loc[:, ["Track", "Artist", "Album", "Date Added", "Plays", "Popularity", "acousticness", "danceability", "speechiness", "tempo", "time_signature", "valence", "energy", "liveness", "instrumentalness"]].sort_values(by="Date Added", ascending=False)
-	df = df_usable.fillna(0).reset_index(drop=True)
+	trackPlaysDB.uid = trackPlaysDB.uid.str.lower()
+	trackPlaysDB.uid = trackPlaysDB.uid.str.strip()
+	df.uid = df.uid.str.lower()
+	df.uid = df.uid.str.strip()
+	df = pd.merge(df, trackPlaysDB, how="left", on="uid", suffixes=('', '_y'))
+	df = df.drop(columns=['Track_y', 'Artist_y'])
+	df["Plays"] = df["Plays"].fillna(0)
 	df.loc[:, "Plays"] = df.loc[:, "Plays"].astype(int)
+	df = df.loc[:, ["Track", "Artist", "Album", "Date Added", "Plays", "Popularity", "acousticness", "danceability", "speechiness","tempo", "time_signature", "valence", "energy", "liveness", "instrumentalness"]].sort_values(by="Date Added", ascending=False)
 	df.iloc[:, [0, 1, 2, 3]] = df.iloc[:, [0, 1, 2, 3]].apply(lambda x: x.str.strip())
 	df.iloc[:, [6, 7, 8, 9, 11, 12, 13, 14]] = df.iloc[:, [6, 7, 8, 9, 11, 12, 13, 14]].apply(lambda x: x.round(2))
-	df = df.assign(uid=df["Track"]+df["Artist"])
-	df["uid"] = df["uid"].apply(lambda x: uuid.uuid3(uuid.NAMESPACE_DNS, x))
-
-	cols = df.columns.tolist()
-	cols = cols[-1:]+cols[:-1]
-	df = df[cols]
+	df.tempo = df.tempo.apply(lambda x: int(x))
+	df = df.sort_values(by="Plays", ascending=False).reset_index(drop=True)
 	df.to_csv("exports/MasterTrackDatabase.csv",index=False)
-	return df
+
+
+def generatePlaylistDb():
+	""""fixdf"""
+	df = pd.read_csv("exports/playlistDB.csv", index_col=0).reset_index()
+	df = df.assign(uid=df["Trackname"]+df["Artist"])
+	df.uid = df.uid.str.lower()
+	df.uid = df.uid.str.strip()
+
+	"""fixtracks"""
+	trackPlaysDB = pd.read_csv("exports/AllTracksPlayed.csv")
+	trackPlaysDB.uid = trackPlaysDB.uid.str.lower()
+	trackPlaysDB.uid = trackPlaysDB.uid.str.strip()
+
+	"""merge and clean"""
+
+	df = pd.merge(df, trackPlaysDB, how="left", on="uid", suffixes=('', '_y'))
+	df = df.loc[:, ["Playlist", "Track", "Artist", "Album", "Plays", "acousticness", "liveness",
+                 "instrumentalness", "valence", "energy", "tempo", "time_signature", "danceability", "speechiness"]]
+	df.iloc[:, 0:3] = df.iloc[:, 0:3].apply(lambda x: x.str.strip())
+	df.Plays = df.Plays.fillna(0).astype(int)
+	df.loc[:, ["acousticness", "liveness", "instrumentalness", "valence", "energy", "danceability", "speechiness"]] = df.loc[:, [
+		"acousticness", "liveness", "instrumentalness", "valence", "energy", "danceability", "speechiness"]].apply(lambda x: x.round(2))
+	df.tempo = df.tempo.astype(int)
+
+	df.to_csv('exports/MasterPlaylistDatabase.csv', index=False)
+
+def generateCombinedDatabases(network,lastfm_username,refresh=0):
+
+	if refresh==0:
+		
+		try:
+			generateMasterTrackDatabase()
+			generatePlaylistDb()
+			print("both datasets generated")
+		
+		except Exception as e:
+			print("An error occurred: \n" + e )
+	
+	elif refresh ==1:
+		try:
+			topAlbumsArtists(network,lastfm_username)
+			topTracksDB(network,lastfm_username)
+			generateMasterTrackDatabase()
+			generatePlaylistDb()
+			print("LastFM data refreshed and datasets generated")
+		except Exception as e:
+			print("An error occurred: \n" + e )
+
+	else:
+		print("Wrong refresh key: 1 for yes, 0 for no. Its pretty straightforward.")
