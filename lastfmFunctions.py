@@ -5,6 +5,7 @@ import sys
 import itertools
 import datetime
 import numpy as np
+import uuid
 
 TRACK_SEPARATOR = u" - "
 
@@ -119,7 +120,15 @@ def generateMasterTrackDatabase():
 	df = pd.merge(tracksDB, trackPlaysDB, how="left", on=["Track", "Artist"])
 
 	df_usable = df.loc[:, ["Track", "Artist", "Album", "Date Added", "Plays", "Popularity", "acousticness", "danceability", "speechiness", "tempo", "time_signature", "valence", "energy", "liveness", "instrumentalness"]].sort_values(by="Date Added", ascending=False)
-	df_usable = df_usable.fillna(0).reset_index(drop=True)
-	df_usable.loc[:, "Plays"] = df_usable.loc[:, "Plays"].astype(int)
-	df_usable.to_csv("exports/MasterTrackDatabase.csv")
-	return df_usable
+	df = df_usable.fillna(0).reset_index(drop=True)
+	df.loc[:, "Plays"] = df.loc[:, "Plays"].astype(int)
+	df.iloc[:, [0, 1, 2, 3]] = df.iloc[:, [0, 1, 2, 3]].apply(lambda x: x.str.strip())
+	df.iloc[:, [6, 7, 8, 9, 11, 12, 13, 14]] = df.iloc[:, [6, 7, 8, 9, 11, 12, 13, 14]].apply(lambda x: x.round(2))
+	df = df.assign(uid=df["Track"]+df["Artist"])
+	df["uid"] = df["uid"].apply(lambda x: uuid.uuid3(uuid.NAMESPACE_DNS, x))
+
+	cols = df.columns.tolist()
+	cols = cols[-1:]+cols[:-1]
+	df = df[cols]
+	df.to_csv("exports/MasterTrackDatabase.csv",index=False)
+	return df
