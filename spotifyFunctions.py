@@ -210,7 +210,6 @@ def generateAllDatasets(sp, username,refresh):
     df = pd.read_csv('exports/playlistDB.csv')
     exportVisualizationDataset(df)
     generatePlaylistPlots(df)
-    runRscript('playlistPlots.R')
     #####break
     print('playlist done, 1 minute break')
     sleep(60)
@@ -220,4 +219,3 @@ def generateAllDatasets(sp, username,refresh):
         updateDataset("saved", sp, username)
     df2 = pd.read_csv('exports/savedDB.csv')
     exportArtistAlbumSegments(df2)
-    runRscript('savedPlots.R') 
