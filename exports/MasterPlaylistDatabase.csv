@@ -1,39 +1,40 @@
 playlist,track,artist,album,plays,date_added,acousticness,liveness,instrumentalness,valence,energy,tempo,time_signature,danceability,speechiness
-2018,Pristine,Snail Mail,Pristine,5,2018-03-24,0.0,0.1,0.0,0.29,0.7,126,4,0.48,0.03
-2018,Ghost Town,Kanye West,ye,16,2018-06-11,0.1,0.33,0.0,0.33,0.54,83,4,0.57,0.03
-2018,Big Red Machine,Justin Vernon,Dark Was The Night (Red Hot Compilation),3,2018-06-10,0.96,0.12,0.89,0.04,0.36,64,4,0.23,0.03
-2018,Daggers of Black Haze,At The Gates,Daggers of Black Haze,6,2018-06-08,0.0,0.13,0.78,0.27,0.91,169,4,0.12,0.05
-2018,Demise Automation,Vein,Demise Automation,5,2018-06-08,0.0,0.35,0.03,0.12,1.0,135,4,0.29,0.16
-2018,lovely (with Khalid),Billie Eilish,lovely (with Khalid),9,2018-06-06,0.93,0.1,0.0,0.12,0.3,115,4,0.35,0.03
-2018,Hangout at the Gallows,Father John Misty,God's Favorite Customer,17,2018-06-05,0.13,0.43,0.0,0.57,0.66,141,4,0.53,0.03
-2018,potage,tricot,potage,8,2018-06-02,0.02,0.12,0.0,0.5,0.58,87,4,0.3,0.04
-2018,FAKE LOVE,BTS,Love Yourself 轉 'Tear',19,2018-05-31,0.0,0.31,0.0,0.34,0.72,77,4,0.56,0.04
-2018,Intro: Singularity,BTS,Love Yourself 轉 'Tear',15,2018-05-31,0.55,0.11,0.0,0.2,0.27,104,3,0.78,0.09
-2018,'Til It's Over,Anderson .Paak,'Til It's Over,6,2018-05-22,0.18,0.05,0.0,0.4,0.65,144,4,0.74,0.12
-2018,Bubblin,Anderson .Paak,Bubblin,6,2018-05-22,0.07,0.37,0.0,0.55,0.87,106,5,0.57,0.26
-2018,Tall Order,Linying,Tall Order,4,2018-05-21,0.5,0.08,0.0,0.33,0.55,90,4,0.68,0.07
-2018,,Travis Scott,Watch (feat. Lil Uzi Vert & Kanye West),0,2018-05-10,0.04,0.38,0.0,0.25,0.56,78,4,0.71,0.04
+2018,bless ur heart,serpentwithfeet,bless ur heart,4,2018-03-17,0.79,0.1,0.0,0.29,0.38,64,4,0.52,0.04
 2018,This Is America,Childish Gambino,This Is America,5,2018-05-07,0.12,0.35,0.0,0.55,0.46,120,4,0.85,0.14
+2018,,Travis Scott,Watch (feat. Lil Uzi Vert & Kanye West),0,2018-05-10,0.04,0.38,0.0,0.25,0.56,78,4,0.71,0.04
+2018,Tall Order,Linying,Tall Order,4,2018-05-21,0.5,0.08,0.0,0.33,0.55,90,4,0.68,0.07
+2018,Bubblin,Anderson .Paak,Bubblin,6,2018-05-22,0.07,0.37,0.0,0.55,0.87,106,5,0.57,0.26
+2018,'Til It's Over,Anderson .Paak,'Til It's Over,6,2018-05-22,0.18,0.05,0.0,0.4,0.65,144,4,0.74,0.12
+2018,Intro: Singularity,BTS,Love Yourself 轉 'Tear',15,2018-05-31,0.55,0.11,0.0,0.2,0.27,104,3,0.78,0.09
 2018,Somewhere a Judge,Hop Along,"Bark Your Head Off, Dog",9,2018-05-05,0.18,0.66,0.0,0.96,0.65,98,4,0.57,0.03
+2018,FAKE LOVE,BTS,Love Yourself 轉 'Tear',19,2018-05-31,0.0,0.31,0.0,0.34,0.72,77,4,0.56,0.04
+2018,Hangout at the Gallows,Father John Misty,God's Favorite Customer,17,2018-06-05,0.13,0.43,0.0,0.57,0.66,141,4,0.53,0.03
+2018,lovely (with Khalid),Billie Eilish,lovely (with Khalid),9,2018-06-06,0.93,0.1,0.0,0.12,0.3,115,4,0.35,0.03
+2018,Demise Automation,Vein,Demise Automation,5,2018-06-08,0.0,0.35,0.03,0.12,1.0,135,4,0.29,0.16
+2018,Daggers of Black Haze,At The Gates,Daggers of Black Haze,6,2018-06-08,0.0,0.13,0.78,0.27,0.91,169,4,0.12,0.05
+2018,Big Red Machine,Justin Vernon,Dark Was The Night (Red Hot Compilation),3,2018-06-10,0.96,0.12,0.89,0.04,0.36,64,4,0.23,0.03
+2018,Ghost Town,Kanye West,ye,16,2018-06-11,0.1,0.33,0.0,0.33,0.54,83,4,0.57,0.03
+2018,potage,tricot,potage,8,2018-06-02,0.02,0.12,0.0,0.5,0.58,87,4,0.3,0.04
+2018,Reborn,KIDS SEE GHOSTS,KIDS SEE GHOSTS,15,2018-06-12,0.34,0.2,0.04,0.23,0.6,100,4,0.58,0.04
 2018,Black Car,Beach House,Black Car,22,2018-05-05,0.32,0.11,0.84,0.26,0.57,77,4,0.41,0.03
-2018,Paranoid,Post Malone,beerbongs & bentleys,9,2018-05-01,0.04,0.17,0.0,0.24,0.55,159,4,0.61,0.14
+2018,Saunter,Forth Wanderers,Forth Wanderers,9,2018-04-30,0.01,0.12,0.02,0.39,0.76,135,4,0.53,0.03
+2018,Pristine,Snail Mail,Pristine,5,2018-03-24,0.0,0.1,0.0,0.29,0.7,126,4,0.48,0.03
 2018,Falling Into Me,Let's Eat Grandma,Falling Into Me,6,2018-03-24,0.0,0.08,0.0,0.21,0.85,109,4,0.52,0.04
 2018,Nice For What,Drake,Nice For What,9,2018-04-14,0.09,0.11,0.0,0.79,0.91,93,4,0.57,0.07
 2018,Sky Full Of Song,Florence + The Machine,Sky Full Of Song,7,2018-04-17,0.73,0.15,0.0,0.29,0.32,98,4,0.53,0.03
 2018,Pynk (feat. Grimes),Janelle Monáe,Pynk,4,2018-04-17,0.04,0.09,0.0,0.42,0.29,100,4,0.67,0.09
 2018,Honeycomb,Deafheaven,Honeycomb,13,2018-04-19,0.0,0.11,0.79,0.11,0.96,142,4,0.22,0.1
+2018,Paranoid,Post Malone,beerbongs & bentleys,9,2018-05-01,0.04,0.17,0.0,0.24,0.55,159,4,0.61,0.14
 2018,Drunk in LA,Beach House,7,23,2018-05-11,0.26,0.18,0.87,0.22,0.73,105,4,0.43,0.03
-2018,Reborn,KIDS SEE GHOSTS,KIDS SEE GHOSTS,15,2018-06-12,0.34,0.2,0.04,0.23,0.6,100,4,0.58,0.04
-2018,Just Dumb Enough To Try,Father John Misty,Disappointing Diamonds Are the Rarest of Them All / Just Dumb Enough to Try,9,2018-04-19,0.28,0.06,0.0,0.42,0.49,116,4,0.59,0.03
+2018,Disappointing Diamonds Are The Rarest Of Them All,Father John Misty,Disappointing Diamonds Are the Rarest of Them All / Just Dumb Enough to Try,6,2018-04-19,0.02,0.12,0.0,0.64,0.84,150,4,0.38,0.03
 2018,BUSY / SIRENS,Saba,CARE FOR ME,9,2018-04-19,0.47,0.1,0.0,0.47,0.46,133,4,0.67,0.34
 2018,LOGOUT,Saba,CARE FOR ME,7,2018-04-19,0.01,0.09,0.0,0.39,0.38,86,4,0.79,0.45
 2018,The Space Travelers Lullaby,Kamasi Washington,The Space Travelers Lullaby,2,2018-04-19,0.71,0.07,0.86,0.12,0.37,84,3,0.15,0.03
 2018,Prior Things,Hop Along,"Bark Your Head Off, Dog",5,2018-04-19,0.35,0.32,0.0,0.81,0.78,93,4,0.65,0.03
 2018,Nevermine,Forth Wanderers,Forth Wanderers,5,2018-04-30,0.05,0.3,0.52,0.29,0.66,164,4,0.38,0.03
-2018,Saunter,Forth Wanderers,Forth Wanderers,9,2018-04-30,0.01,0.12,0.02,0.39,0.76,135,4,0.53,0.03
-2018,Disappointing Diamonds Are The Rarest Of Them All,Father John Misty,Disappointing Diamonds Are the Rarest of Them All / Just Dumb Enough to Try,6,2018-04-19,0.02,0.12,0.0,0.64,0.84,150,4,0.38,0.03
+2018,Just Dumb Enough To Try,Father John Misty,Disappointing Diamonds Are the Rarest of Them All / Just Dumb Enough to Try,9,2018-04-19,0.28,0.06,0.0,0.42,0.49,116,4,0.59,0.03
+2018,Think I'm Still In Love With You,Joyce Manor,Think I'm Still In Love With You,6,2018-08-20,0.0,0.09,0.0,0.67,0.86,119,4,0.6,0.03
 2018,4th Dimension,KIDS SEE GHOSTS,KIDS SEE GHOSTS,11,2018-06-13,0.28,0.61,0.0,0.73,0.54,171,4,0.76,0.39
-2018,Canary Yellow,Deafheaven,Canary Yellow,11,2018-06-13,0.0,0.26,0.91,0.22,0.97,92,4,0.28,0.05
 2018,In Cold Blood - feat. Pusha T [Twin Shadow Version],alt-J,In Cold Blood (feat. Pusha T [Twin Shadow Version]),8,2018-06-16,0.13,0.36,0.01,0.28,0.48,143,4,0.79,0.1
 2018,Praise The Lord (Da Shine),A$AP Rocky,TESTING,12,2018-08-06,0.06,0.1,0.08,0.29,0.57,80,4,0.85,0.14
 2018,La Di Da,The Internet,La Di Da,2,2018-07-30,0.26,0.11,0.0,0.83,0.74,103,4,0.68,0.12
@@ -50,7 +51,7 @@ playlist,track,artist,album,plays,date_added,acousticness,liveness,instrumentaln
 2018,Disarray,Low,Disarray,8,2018-08-18,0.84,0.11,0.02,0.46,0.42,206,4,0.65,0.04
 2018,Animal,Troye Sivan,Animal,4,2018-08-20,0.54,0.3,0.01,0.05,0.31,122,4,0.34,0.04
 2018,nineteen,harunemuri,harutosyura,2,2018-06-07,0.13,0.22,0.0,0.59,0.97,99,4,0.67,0.06
-2018,Think I'm Still In Love With You,Joyce Manor,Think I'm Still In Love With You,6,2018-08-20,0.0,0.09,0.0,0.67,0.86,119,4,0.6,0.03
+2018,Canary Yellow,Deafheaven,Canary Yellow,11,2018-06-13,0.0,0.26,0.91,0.22,0.97,92,4,0.28,0.05
 2018,If You Give Enough,The Lemon Twigs,If You Give Enough,2,2018-07-30,0.89,0.24,0.12,0.26,0.39,138,3,0.38,0.03
 2018,Self Care,Mac Miller,Self Care,10,2018-07-30,0.37,0.12,0.0,0.18,0.54,141,4,0.52,0.21
 2018,All Mine,Kanye West,ye,12,2018-06-16,0.12,0.09,0.0,0.26,0.31,122,4,0.92,0.34
@@ -68,13 +69,13 @@ playlist,track,artist,album,plays,date_added,acousticness,liveness,instrumentaln
 2018,Charcoal Baby,Blood Orange,Charcoal Baby,6,2018-07-30,0.15,0.14,0.0,0.49,0.48,183,4,0.63,0.04
 2018,What's the Use?,Mac Miller,What's the Use?,6,2018-07-30,0.74,0.11,0.01,0.56,0.49,104,4,0.76,0.12
 2018,I Don't Dance,Birds in Row,We Already Lost The World,5,2018-07-14,0.0,0.2,0.01,0.38,0.96,124,4,0.28,0.07
-2018,bless ur heart,serpentwithfeet,bless ur heart,4,2018-03-17,0.79,0.1,0.0,0.29,0.38,64,4,0.52,0.04
-2018,God = Dog,Behemoth,God = Dog,4,2018-08-20,0.0,0.04,0.21,0.07,0.99,130,4,0.39,0.17
-2018,Catch It,Iceage,Catch it,10,2018-03-07,0.0,0.17,0.0,0.65,0.89,143,4,0.19,0.05
 2018,Wide Awake,Parquet Courts,Wide Awake,4,2018-03-10,0.11,0.07,0.44,0.9,0.94,122,4,0.85,0.04
+2018,God = Dog,Behemoth,God = Dog,4,2018-08-20,0.0,0.04,0.21,0.07,0.99,130,4,0.39,0.17
+2018,Breadwinner,Everything Everything,A Deeper Sea,6,2018-03-07,0.0,0.11,0.1,0.65,0.83,106,4,0.59,0.04
+2018,Catch It,Iceage,Catch it,10,2018-03-07,0.0,0.17,0.0,0.65,0.89,143,4,0.19,0.05
 2018,Track 10,Charli XCX,Pop 2,4,2018-01-18,0.21,0.08,0.0,0.27,0.65,100,4,0.64,0.04
 2018,Glint,Deafheaven,Ordinary Corrupt Human Love,5,2018-07-14,0.0,0.14,0.88,0.14,0.97,94,4,0.21,0.09
-2018,TABOO | TA13OO,Denzel Curry,TA13OO,17,2018-08-08,0.27,0.14,0.0,0.49,0.59,139,4,0.44,0.17
+2018,CLOUT COBAIN | CLOUT CO13A1N,Denzel Curry,TA13OO,24,2018-08-06,0.59,0.11,0.0,0.59,0.45,120,4,0.79,0.05
 2018,Nervous Young Inhumans (Single Edit),Car Seat Headrest,Nervous Young Inhumans (Single Edit),4,2018-01-18,0.0,0.31,0.03,0.52,0.45,132,4,0.51,0.04
 2018,Heart Attack,Tune-Yards,Heart Attack,4,2018-01-18,0.02,0.13,0.0,0.33,0.7,117,4,0.67,0.05
 2018,Learn How to Watch (feat. MAC MILLER & MadeinTYO),Carnage,Learn How to Watch (feat. Mac Miller & MadeinTYO),6,2018-01-18,0.32,0.16,0.0,0.36,0.77,130,4,0.56,0.34
@@ -83,27 +84,25 @@ playlist,track,artist,album,plays,date_added,acousticness,liveness,instrumentaln
 2018,In My View,Young Fathers,In My View,6,2018-01-22,0.17,0.06,0.76,0.44,0.76,130,5,0.4,0.37
 2018,Leave It In My Dreams,The Voidz,Leave It In My Dreams,7,2018-01-26,0.02,0.11,0.01,0.61,0.75,118,4,0.6,0.04
 2018,When You Die,MGMT,When You Die,4,2018-02-02,0.09,0.16,0.02,0.5,0.94,140,4,0.64,0.04
-2018,How Simple,Hop Along,How Simple,7,2018-02-03,0.07,0.1,0.0,0.52,0.72,126,4,0.63,0.03
-2018,CLOUT COBAIN | CLOUT CO13A1N,Denzel Curry,TA13OO,24,2018-08-06,0.59,0.11,0.0,0.59,0.45,120,4,0.79,0.05
-2018,Heaven's Only Wishful,MorMor,Heaven's Only Wishful,4,2018-02-07,0.01,0.08,0.42,0.68,0.54,99,4,0.78,0.02
-2018,Breadwinner,Everything Everything,A Deeper Sea,6,2018-03-07,0.0,0.11,0.1,0.65,0.83,106,4,0.59,0.04
+2018,TABOO | TA13OO,Denzel Curry,TA13OO,17,2018-08-08,0.27,0.14,0.0,0.49,0.59,139,4,0.44,0.17
 2018,Thanks 4 Nothing,Nilüfer Yanya,Thanks 4 Nothing,3,2018-02-07,0.4,0.1,0.0,0.38,0.49,112,4,0.86,0.04
 2018,Pain Killer,Iceage,Pain Killer,6,2018-03-07,0.0,0.25,0.0,0.28,0.92,146,4,0.13,0.09
+2018,How Simple,Hop Along,How Simple,7,2018-02-03,0.07,0.1,0.0,0.52,0.72,126,4,0.63,0.03
 2018,Powerglide (feat. Juicy J),Rae Sremmurd,Powerglide (feat. Juicy J),4,2018-03-03,0.02,0.12,0.0,0.57,0.82,174,4,0.71,0.15
 2018,44 More,Logic,44 More,3,2018-02-27,0.08,0.1,0.0,0.25,0.57,139,4,0.83,0.21
 2018,Rosebud,U.S. Girls,In a Poem Unlimited,6,2018-02-21,0.59,0.1,0.67,0.83,0.87,103,4,0.75,0.06
+2018,Pointlessness,The Voidz,Pointlessness,3,2018-02-19,0.13,0.08,0.11,0.05,0.63,129,4,0.26,0.04
 2018,Backseat (feat. Carly Rae Jepsen),Charli XCX,Pop 2,5,2018-01-18,0.25,0.39,0.0,0.34,0.61,120,4,0.63,0.04
-2018,No Wave,IDK,No Wave,3,2018-02-19,0.02,0.2,0.0,0.5,0.72,135,4,0.7,0.03
 2018,An Acre of Land,PJ Harvey,An Acre of Land,9,2018-02-19,0.9,0.1,0.0,0.07,0.19,79,4,0.47,0.03
 2018,X (with 2 Chainz & Saudi),ScHoolboy Q,Black Panther The Album Music From And Inspired By,5,2018-02-17,0.02,0.26,0.0,0.35,0.47,131,4,0.76,0.28
 2018,LEMON GLOW,Beach House,Lemon Glow,35,2018-02-16,0.45,0.23,0.97,0.51,0.83,148,4,0.47,0.03
-2018,Pointlessness,The Voidz,Pointlessness,3,2018-02-19,0.13,0.08,0.11,0.05,0.63,129,4,0.26,0.04
 2018,Look Alive (feat. Drake),BlocBoy JB,Look Alive (feat. Drake),4,2018-02-12,0.0,0.1,0.0,0.6,0.58,140,4,0.92,0.27
-Alt Rock,Street Spirit (Fade Out),Radiohead,The Bends,17,2018-09-24,0.31,0.18,0.69,0.13,0.45,138,4,0.49,0.03
+2018,No Wave,IDK,No Wave,3,2018-02-19,0.02,0.2,0.0,0.5,0.72,135,4,0.7,0.03
+2018,Heaven's Only Wishful,MorMor,Heaven's Only Wishful,4,2018-02-07,0.01,0.08,0.42,0.68,0.54,99,4,0.78,0.02
 Alt Rock,Fake Plastic Trees,Radiohead,The Bends,14,2018-09-24,0.17,0.2,0.1,0.13,0.23,73,4,0.45,0.03
 Alt Rock,Planet Telex,Radiohead,The Bends,20,2018-09-24,0.02,0.61,0.7,0.26,0.88,148,3,0.43,0.11
-Alt Rock,Disco 2000,Pulp,Different Class,8,2018-09-24,0.02,0.05,0.0,0.58,0.89,133,4,0.56,0.07
-Alt Rock,Common People,Pulp,Different Class,14,2018-09-24,0.01,0.07,0.0,0.54,0.8,144,4,0.32,0.04
+Alt Rock,Disco 2000,Pulp,Different Class,9,2018-09-24,0.02,0.05,0.0,0.58,0.89,133,4,0.56,0.07
+Alt Rock,Common People,Pulp,Different Class,15,2018-09-24,0.01,0.07,0.0,0.54,0.8,144,4,0.32,0.04
 Alt Rock,Feel the Pain,Dinosaur Jr.,Without a Sound,4,2018-09-24,0.0,0.07,0.02,0.85,0.8,131,4,0.34,0.05
 Alt Rock,Carry the Zero,Built To Spill,Keep It Like A Secret,14,2018-09-24,0.0,0.1,0.11,0.46,0.81,94,4,0.26,0.03
 Alt Rock,Cut Your Hair,Pavement,"Crooked Rain, Crooked Rain",4,2018-09-24,0.01,0.17,0.0,0.64,0.74,110,4,0.47,0.03
@@ -116,10 +115,12 @@ Alt Rock,Love Will Tear Us Apart,Joy Division,The Best Of,3,2018-09-24,0.0,0.14,
 Alt Rock,Song 2 - 2012 Remastered Version,Blur,Blur [Special Edition],5,2018-09-24,0.0,0.08,0.01,0.92,0.79,129,4,0.67,0.07
 Alt Rock,Losing My Religion,R.E.M.,Out Of Time (25th Anniversary Edition),6,2018-09-24,0.16,0.09,0.0,0.83,0.85,125,4,0.67,0.03
 Alt Rock,Where Is My Mind?,Pixies,Surfer Rosa (Remastered),12,2018-09-24,0.02,0.08,0.0,0.28,0.44,81,4,0.52,0.03
+Alt Rock,Street Spirit (Fade Out),Radiohead,The Bends,17,2018-09-24,0.31,0.18,0.69,0.13,0.45,138,4,0.49,0.03
 Alt Rock,Range Life,Pavement,"Crooked Rain, Crooked Rain: LA's Desert Origins",15,2018-09-24,0.04,0.19,0.0,0.72,0.72,112,4,0.56,0.03
 Alt Rock,Today - Remastered,The Smashing Pumpkins,Siamese Dream (2011 - Remaster),9,2018-09-24,0.0,0.05,0.57,0.42,0.83,82,4,0.46,0.03
 Alt Rock,Paranoid Android,Radiohead,OK Computer,8,2018-09-24,0.04,0.05,0.01,0.19,0.85,163,4,0.25,0.06
 Alt Rock,Closer,Nine Inch Nails,The Downward Spiral,4,2018-09-24,0.0,0.11,0.55,0.5,0.72,90,4,0.56,0.04
+Alt Rock,Bitter Sweet Symphony,The Verve,Urban Hymns,2,2018-10-03,0.04,0.46,0.0,0.52,0.89,171,4,0.39,0.04
 Alt Rock,And All That Could Have Been,Nine Inch Nails,Still,3,2018-10-01,0.61,0.12,0.95,0.22,0.43,140,1,0.57,0.03
 Alt Rock,Dead,Pixies,Doolittle,6,2018-09-29,0.0,0.19,0.86,0.83,0.71,120,4,0.73,0.03
 Alt Rock,Gouge Away,Pixies,Doolittle,7,2018-09-29,0.0,0.1,0.03,0.5,0.41,125,4,0.66,0.03
@@ -129,24 +130,25 @@ Alt Rock,Girls and Boys - 2012 Remastered Version,Blur,Parklife [Special Edition
 Alt Rock,,Pearl Jam,Ten,0,2018-09-24,0.01,0.4,0.0,0.6,0.88,75,4,0.28,0.04
 Alt Rock,Interstate Love Song,Stone Temple Pilots,Purple,4,2018-09-24,0.0,0.24,0.0,0.48,0.95,170,4,0.21,0.05
 Alt Rock,Hurt,Nine Inch Nails,The Downward Spiral,4,2018-09-24,0.7,0.14,0.03,0.08,0.19,79,4,0.48,0.03
-Alt Rock,Sabotage,Beastie Boys,Ill Communication,4,2018-09-24,0.03,0.1,0.03,0.54,0.94,168,4,0.32,0.1
+Alt Rock,Loser,Beck,Mellow Gold,3,2018-09-24,0.04,0.35,0.0,0.84,0.62,170,4,0.62,0.13
 Alt Rock,Hey,Pixies,Doolittle,41,2018-09-24,0.0,0.12,0.0,0.34,0.32,99,4,0.6,0.03
+Alt Rock,Debaser,Pixies,Doolittle,9,2018-09-24,0.0,0.1,0.4,0.57,0.88,135,4,0.49,0.04
 Alt Rock,Killing in the Name,Rage Against The Machine,Rage Against The Machine - XX (20th Anniversary Special Edition),3,2018-09-24,0.03,0.03,0.0,0.66,0.83,88,4,0.47,0.3
 Alt Rock,Teen Age Riot (album version),Sonic Youth,Daydream Nation (Deluxe Edition),6,2018-09-24,0.0,0.08,0.2,0.75,0.91,156,4,0.29,0.04
 Alt Rock,Say It Ain't So,Weezer,Weezer (Deluxe Edition),5,2018-09-24,0.0,0.07,0.0,0.46,0.44,76,4,0.64,0.03
-Alt Rock,Loser,Beck,Mellow Gold,3,2018-09-24,0.04,0.35,0.0,0.84,0.62,170,4,0.62,0.13
-Alt Rock,Debaser,Pixies,Doolittle,9,2018-09-24,0.0,0.1,0.4,0.57,0.88,135,4,0.49,0.04
-BROCKHAMPTON TOP BOIS,GUMMY,BROCKHAMPTON,SATURATION II,4,2018-07-19,0.2,0.18,0.0,0.79,0.67,80,4,0.69,0.06
+Alt Rock,Sabotage,Beastie Boys,Ill Communication,4,2018-09-24,0.03,0.1,0.03,0.54,0.94,168,4,0.32,0.1
 BROCKHAMPTON TOP BOIS,RENTAL,BROCKHAMPTON,SATURATION III,7,2018-07-19,0.19,0.25,0.0,0.51,0.45,82,4,0.67,0.07
-BROCKHAMPTON TOP BOIS,Sweet,BROCKHAMPTON,SATURATION II,4,2018-07-19,0.54,0.12,0.0,0.72,0.63,92,4,0.72,0.22
 BROCKHAMPTON TOP BOIS,,BROCKHAMPTON,SATURATION II,0,2018-07-19,0.02,0.11,0.05,0.4,0.66,141,4,0.69,0.05
+BROCKHAMPTON TOP BOIS,Sweet,BROCKHAMPTON,SATURATION II,4,2018-07-19,0.54,0.12,0.0,0.72,0.63,92,4,0.72,0.22
 BROCKHAMPTON TOP BOIS,FACE,BROCKHAMPTON,SATURATION,6,2018-07-19,0.59,0.08,0.0,0.68,0.7,119,4,0.94,0.12
 BROCKHAMPTON TOP BOIS,WASTE,BROCKHAMPTON,SATURATION,2,2018-07-19,0.51,0.24,0.0,0.41,0.41,116,3,0.42,0.04
-BROCKHAMPTON TOP BOIS,BLEACH,BROCKHAMPTON,SATURATION III,5,2018-07-19,0.46,0.44,0.0,0.72,0.66,156,4,0.6,0.18
 BROCKHAMPTON TOP BOIS,JUNKY,BROCKHAMPTON,SATURATION II,6,2018-07-19,0.32,0.26,0.0,0.68,0.66,82,4,0.64,0.4
+BROCKHAMPTON TOP BOIS,BLEACH,BROCKHAMPTON,SATURATION III,5,2018-07-19,0.46,0.44,0.0,0.72,0.66,156,4,0.6,0.18
+BROCKHAMPTON TOP BOIS,GUMMY,BROCKHAMPTON,SATURATION II,4,2018-07-19,0.2,0.18,0.0,0.79,0.67,80,4,0.69,0.06
 BROCKHAMPTON TOP BOIS,SUMMER,BROCKHAMPTON,SATURATION II,2,2018-07-19,0.85,0.12,0.05,0.54,0.55,79,4,0.5,0.03
-BROCKHAMPTON TOP BOIS,GOLD,BROCKHAMPTON,SATURATION,2,2018-07-19,0.07,0.2,0.0,0.29,0.65,110,4,0.81,0.17
 BROCKHAMPTON TOP BOIS,1999 WILDFIRE,BROCKHAMPTON,1999 WILDFIRE,19,2018-07-19,0.25,0.15,0.0,0.81,0.57,128,4,0.81,0.13
+BROCKHAMPTON TOP BOIS,GOLD,BROCKHAMPTON,SATURATION,2,2018-07-19,0.07,0.2,0.0,0.29,0.65,110,4,0.81,0.17
+Classic rock,,Guns N' Roses,Appetite For Destruction (Explicit Version),0,2013-05-23,0.09,0.1,0.11,0.69,0.9,125,4,0.45,0.05
 Classic rock,,Joe Satriani,Surfing With The Alien,0,2015-02-19,0.0,0.05,0.83,0.34,0.95,108,4,0.46,0.11
 Classic rock,,Joe Satriani,The Essential Joe Satriani,0,2015-02-19,0.0,0.43,0.83,0.58,0.93,167,4,0.39,0.08
 Classic rock,,Led Zeppelin,The Complete Studio Albums,0,2015-02-19,0.45,0.05,0.0,0.59,0.62,80,3,0.48,0.05
@@ -158,7 +160,6 @@ Classic rock,,Santana,Guitar Heaven: The Greatest Guitar Classics Of All Time (D
 Classic rock,,Chuck Berry,200 Blues,0,2015-02-16,0.76,0.32,0.0,0.97,0.86,167,4,0.55,0.08
 Classic rock,,Ugly Kid Joe,Rock,0,2015-02-09,0.23,0.08,0.0,0.46,0.45,75,4,0.47,0.03
 Classic rock,Stairway to Heaven,Led Zeppelin,Led Zeppelin IV,2,2015-01-27,0.57,0.18,0.01,0.21,0.34,84,4,0.35,0.03
-Classic rock,,Guns N' Roses,Appetite For Destruction (Explicit Version),0,2013-05-23,0.09,0.1,0.11,0.69,0.9,125,4,0.45,0.05
 Classic rock,,The Who,Greatest Hits,0,2015-01-27,0.34,0.28,0.38,0.14,0.69,117,4,0.39,0.03
 Classic rock,The Sound of Silence,Simon & Garfunkel,The Collection,1,2015-01-27,0.87,0.1,0.0,0.34,0.22,106,4,0.53,0.03
 Classic rock,,Eric Clapton,Clapton Chronicles: The Best Of Eric Clapton,0,2015-01-27,0.84,0.13,0.54,0.31,0.24,153,4,0.5,0.03
@@ -208,7 +209,7 @@ Classic rock,,Metallica,Metallica,0,2013-10-24,0.05,0.08,0.0,0.17,0.36,142,3,0.5
 Classic rock,,Metallica,Metallica,0,2013-10-24,0.0,0.06,0.0,0.43,0.84,89,4,0.63,0.03
 Classic rock,,Metallica,Metallica,0,2013-10-24,0.0,0.06,0.01,0.64,0.82,123,4,0.58,0.03
 Classic rock,,Metallica,Master Of Puppets,0,2013-10-24,0.0,0.1,0.12,0.38,0.83,104,4,0.33,0.03
-Classic rock,,Metallica,Master Of Puppets,0,2013-10-24,0.0,0.09,0.57,0.59,0.87,105,4,0.54,0.04
+Classic rock,,Metallica,Ride The Lightning,0,2013-10-24,0.02,0.11,0.2,0.32,0.91,113,4,0.26,0.11
 Classic rock,,Metallica,...And Justice For All,0,2013-10-24,0.0,0.13,0.08,0.42,0.7,106,4,0.44,0.06
 Classic rock,,Ozzy Osbourne,The Essential Ozzy Osbourne,0,2013-05-25,0.02,0.35,0.0,0.59,0.92,137,4,0.48,0.06
 Classic rock,,Whitesnake,Whitesnake's Greatest Hits,0,2013-05-25,0.15,0.14,0.0,0.69,0.88,92,4,0.48,0.03
@@ -233,7 +234,7 @@ Classic rock,,Pink Floyd,The Dark Side Of The Moon (2011 Remastered Version),0,2
 Classic rock,,Phil Collins,...But Seriously,0,2015-01-01,0.79,0.05,0.0,0.41,0.41,101,4,0.79,0.03
 Classic rock,,Dream Theater,Images And Words,0,2014-12-15,0.0,0.6,0.08,0.23,0.97,102,4,0.53,0.05
 Classic rock,The Count of Tuscany,Dream Theater,Black Clouds & Silver Linings,1,2014-05-21,0.0,0.68,0.01,0.09,0.76,98,3,0.24,0.04
-Classic rock,,Pink Floyd,Wish You Were Here [2011 - Remaster] (2011 Remastered Version),0,2014-05-11,0.74,0.83,0.01,0.38,0.26,122,4,0.48,0.04
+Classic rock,,Judas Priest,Playlist: The Very Best of Judas Priest,0,2014-05-12,0.02,0.11,0.0,0.5,0.95,164,4,0.36,0.08
 Classic rock,,Dream Theater,Live At Budokan,0,2014-05-11,0.0,0.15,0.0,0.08,0.59,75,4,0.31,0.04
 Classic rock,A Change Of Seasons - The Crimson Sunrise / Innocence / Carpe Diem / The Darkest Of Winters / Another World / The Inevitable Summer / The Crimson Sunset [EP Version],Dream Theater,A Change Of Seasons,1,2014-05-10,0.0,0.1,0.03,0.22,0.81,115,3,0.31,0.06
 Classic rock,,Iron Maiden,Powerslave (1998 Remastered Edition),0,2014-05-08,0.0,0.54,0.08,0.25,0.98,137,4,0.31,0.1
@@ -245,8 +246,8 @@ Classic rock,Soldier Of Fortune,Deep Purple,The Platinum Collection,1,2013-11-15
 Classic rock,,Iron Maiden,The Number Of The Beast (1998 Remastered Edition),0,2013-11-15,0.0,0.36,0.12,0.35,0.91,103,4,0.3,0.04
 Classic rock,,Iron Maiden,Piece Of Mind (1998 Remastered Edition),0,2013-11-15,0.05,0.3,0.0,0.41,0.89,110,4,0.38,0.09
 Classic rock,,Iron Maiden,Powerslave (1998 Remastered Edition),0,2013-11-15,0.0,0.14,0.0,0.52,0.95,95,4,0.46,0.07
-Classic rock,,Metallica,Ride The Lightning,0,2013-10-24,0.02,0.11,0.2,0.32,0.91,113,4,0.26,0.11
-Classic rock,,Judas Priest,Playlist: The Very Best of Judas Priest,0,2014-05-12,0.02,0.11,0.0,0.5,0.95,164,4,0.36,0.08
+Classic rock,,Metallica,Master Of Puppets,0,2013-10-24,0.0,0.09,0.57,0.59,0.87,105,4,0.54,0.04
+Classic rock,,Pink Floyd,Wish You Were Here [2011 - Remaster] (2011 Remastered Version),0,2014-05-11,0.74,0.83,0.01,0.38,0.26,122,4,0.48,0.04
 Fall,To Build a Home,The Cinematic Orchestra,Ma Fleur,7,2018-09-18,0.88,0.09,0.35,0.07,0.12,148,4,0.26,0.03
 Fall,Helicopter,Deerhunter,Halcyon Digest,23,2018-09-18,0.22,0.26,0.5,0.42,0.72,73,4,0.5,0.04
 Fall,Title and Registration,Death Cab for Cutie,Transatlanticism,10,2018-09-18,0.33,0.11,0.13,0.73,0.57,115,4,0.75,0.03
@@ -269,7 +270,7 @@ Fall,Helplessness Blues,Fleet Foxes,Helplessness Blues,11,2018-09-18,0.08,0.1,0.
 Fall,Carissa,Sun Kil Moon,Benji,11,2018-09-18,0.95,0.11,0.0,0.42,0.23,97,3,0.63,0.03
 Fall,Ragged Wood,Fleet Foxes,Fleet Foxes,8,2018-09-18,0.1,0.06,0.01,0.16,0.66,104,4,0.36,0.03
 Fall,Bum Bum Bum,Cass McCombs,Mangy Love,6,2018-09-18,0.74,0.1,0.3,0.37,0.51,79,4,0.51,0.03
-Fall,Weird Fishes/ Arpeggi,Radiohead,In Rainbows,11,2018-09-18,0.77,0.09,0.75,0.2,0.61,152,4,0.54,0.04
+Fall,Weird Fishes/ Arpeggi,Radiohead,In Rainbows,12,2018-09-18,0.77,0.09,0.75,0.2,0.61,152,4,0.54,0.04
 Fall,Knife,Grizzly Bear,Yellow House,3,2018-09-18,0.81,0.11,0.75,0.1,0.4,88,4,0.23,0.03
 Fall,Leaf House,Animal Collective,Sung Tongs,6,2018-09-18,0.7,0.35,0.07,0.35,0.79,133,3,0.54,0.05
 Fall,Fourth of July,Sufjan Stevens,Carrie & Lowell,1,2018-09-18,0.97,0.12,0.32,0.15,0.1,76,4,0.23,0.05
@@ -352,23 +353,23 @@ Hiphop,,Future,FUTURE,0,2017-03-15,0.01,0.16,0.02,0.28,0.43,150,4,0.83,0.43
 Hiphop,PRBLMS,6LACK,FREE 6LACK,2,2017-02-21,0.03,0.18,0.0,0.11,0.57,103,4,0.67,0.1
 Hiphop,Slide,Calvin Harris,Slide,11,2017-03-11,0.5,0.25,0.0,0.51,0.8,104,4,0.74,0.05
 Hiphop,,Drake,More Life,0,2017-03-28,0.5,0.11,0.02,0.22,0.25,111,4,0.62,0.04
-Hiphop,untitled 07 levitate,Kendrick Lamar,untitled 07 levitate,1,2016-12-30,0.51,0.11,0.0,0.53,0.49,127,4,0.79,0.2
-Hiphop,T-Shirt,Migos,Culture,3,2017-02-11,0.24,0.16,0.0,0.49,0.69,139,4,0.86,0.22
+Hiphop,,Kendrick Lamar,untitled 07 levitate,0,2016-12-30,0.51,0.11,0.0,0.53,0.49,127,4,0.79,0.2
+Hiphop,T-Shirt,Migos,Culture,2,2017-02-11,0.24,0.16,0.0,0.49,0.69,139,4,0.86,0.22
 Hiphop,Alright,Kendrick Lamar,To Pimp A Butterfly,2,2016-12-30,0.07,0.08,0.0,0.56,0.77,110,4,0.8,0.24
 Hiphop,m.A.A.d city,Kendrick Lamar,"good kid, m.A.A.d city (Deluxe)",9,2016-12-30,0.05,0.44,0.0,0.22,0.73,91,4,0.49,0.27
-Hiphop,A.D.H.D,Kendrick Lamar,Section.80,3,2016-12-30,0.33,0.11,0.0,0.58,0.8,157,4,0.61,0.24
-Hiphop,Pink Matter,Frank Ocean,channel ORANGE (Explicit Version),6,2016-12-30,0.95,0.11,0.0,0.44,0.23,171,3,0.4,0.06
+Hiphop,A.D.H.D,Kendrick Lamar,Section.80,2,2016-12-30,0.33,0.11,0.0,0.58,0.8,157,4,0.61,0.24
+Hiphop,Pink Matter,Frank Ocean,channel ORANGE (Explicit Version),5,2016-12-30,0.95,0.11,0.0,0.44,0.23,171,3,0.4,0.06
 Hiphop,Pyramids,Frank Ocean,channel ORANGE (Explicit Version),5,2016-12-30,0.01,0.79,0.0,0.17,0.66,107,4,0.4,0.05
-Hiphop,Super Rich Kids,Frank Ocean,channel ORANGE (Explicit Version),3,2016-12-30,0.24,0.22,0.0,0.62,0.42,60,4,0.74,0.08
+Hiphop,Super Rich Kids,Frank Ocean,channel ORANGE (Explicit Version),2,2016-12-30,0.24,0.22,0.0,0.62,0.42,60,4,0.74,0.08
 Hiphop,,Kendrick Lamar,DAMN.,0,2017-04-19,0.62,0.61,0.0,0.46,0.47,149,4,0.59,0.27
-Hiphop,Thinkin Bout You,Frank Ocean,channel ORANGE (Explicit Version),1,2016-12-30,0.38,0.1,0.0,0.2,0.35,129,4,0.72,0.05
-Hiphop,Pink + White,Frank Ocean,Blonde,7,2016-12-30,0.67,0.42,0.0,0.55,0.55,159,3,0.54,0.1
-Hiphop,Ivy,Frank Ocean,Blonde,9,2016-12-30,0.78,0.25,0.0,0.45,0.39,116,4,0.57,0.04
-Hiphop,nights,Frank Ocean,Blonde,12,2016-12-30,0.42,0.11,0.0,0.42,0.55,89,4,0.47,0.12
+Hiphop,,Frank Ocean,channel ORANGE (Explicit Version),0,2016-12-30,0.38,0.1,0.0,0.2,0.35,129,4,0.72,0.05
+Hiphop,Pink + White,Frank Ocean,Blonde,6,2016-12-30,0.67,0.42,0.0,0.55,0.55,159,3,0.54,0.1
+Hiphop,Ivy,Frank Ocean,Blonde,8,2016-12-30,0.78,0.25,0.0,0.45,0.39,116,4,0.57,0.04
+Hiphop,nights,Frank Ocean,Blonde,11,2016-12-30,0.42,0.11,0.0,0.42,0.55,89,4,0.47,0.12
 Hiphop,The Bird,Anderson .Paak,Malibu,1,2016-12-30,0.08,0.15,0.0,0.6,0.64,148,4,0.49,0.42
-Hiphop,Ultralight Beam,Kanye West,The Life Of Pablo,5,2016-12-30,0.63,0.54,0.0,0.37,0.4,105,4,0.67,0.38
-Hiphop,GLOWED UP,KAYTRANADA,99.9%,3,2016-12-30,0.04,0.14,0.01,0.43,0.62,135,4,0.68,0.34
-Hiphop,Solo,Frank Ocean,Blonde,6,2016-12-30,0.85,0.16,0.0,0.25,0.29,124,4,0.44,0.04
+Hiphop,Ultralight Beam,Kanye West,The Life Of Pablo,4,2016-12-30,0.63,0.54,0.0,0.37,0.4,105,4,0.67,0.38
+Hiphop,GLOWED UP,KAYTRANADA,99.9%,2,2016-12-30,0.04,0.14,0.01,0.43,0.62,135,4,0.68,0.34
+Hiphop,Solo,Frank Ocean,Blonde,5,2016-12-30,0.85,0.16,0.0,0.25,0.29,124,4,0.44,0.04
 Hiphop,King Kunta,Kendrick Lamar,To Pimp A Butterfly,3,2016-12-30,0.01,0.15,0.0,0.49,0.66,107,4,0.88,0.1
 Hiphop,,Kendrick Lamar,"good kid, m.A.A.d city (Deluxe)",0,2016-12-30,0.12,0.6,0.0,0.26,0.48,74,4,0.72,0.4
 Hiphop,,Childish Gambino,"""Awaken, My Love!""",0,2017-01-08,0.18,0.12,0.0,0.6,0.34,160,4,0.75,0.09
@@ -379,17 +380,17 @@ Hiphop,,Young Thug,Birds In The Trap Sing McKnight,0,2017-02-07,0.11,0.23,0.0,0.
 Hiphop,White Iverson,Post Malone,Stoney,1,2017-02-07,0.22,0.08,0.0,0.33,0.58,130,4,0.68,0.04
 Hiphop,Bad and Boujee (Feat. Lil Uzi Vert),Migos,Culture,2,2017-02-07,0.06,0.12,0.0,0.18,0.66,127,4,0.93,0.24
 Hiphop,,Travis Scott,Rodeo (Deluxe),0,2017-02-07,0.01,0.12,0.0,0.13,0.53,131,4,0.71,0.03
-Hiphop,Low Life,Future,EVOL,4,2017-02-07,0.34,0.15,0.28,0.1,0.33,143,4,0.72,0.07
-Hiphop,25 Bucks (feat. Purity Ring),Danny Brown,Old,2,2017-02-07,0.32,0.14,0.0,0.27,0.85,116,4,0.72,0.08
+Hiphop,Low Life,Future,EVOL,3,2017-02-07,0.34,0.15,0.28,0.1,0.33,143,4,0.72,0.07
+Hiphop,25 Bucks (feat. Purity Ring),Danny Brown,Old,1,2017-02-07,0.32,0.14,0.0,0.27,0.85,116,4,0.72,0.08
 Hiphop,Really Doe,Danny Brown,Atrocity Exhibition,2,2017-02-07,0.04,0.21,0.0,0.79,0.98,75,4,0.69,0.29
 Hiphop,,Young Thug,JEFFERY,0,2017-02-07,0.12,0.14,0.0,0.83,0.58,132,4,0.86,0.24
 Hiphop,Come Get Her,Rae Sremmurd,SremmLife,2,2017-02-07,0.19,0.07,0.0,0.11,0.57,185,4,0.69,0.16
 Hiphop,Man,Skepta,Konnichiwa,1,2017-01-08,0.01,0.21,0.0,0.55,0.76,137,4,0.74,0.26
 Hiphop,Shutdown,Skepta,Konnichiwa,1,2017-01-08,0.13,0.51,0.0,0.82,0.75,104,3,0.66,0.31
 Hiphop,Shut Up,Stormzy,WickedSkengMan 4,5,2017-01-08,0.83,0.64,0.0,0.95,0.67,86,4,0.46,0.56
-Hiphop,Come Down,Anderson .Paak,Malibu,4,2017-02-16,0.33,0.3,0.0,0.92,0.91,98,4,0.82,0.12
+Hiphop,Come Down,Anderson .Paak,Malibu,3,2017-02-16,0.33,0.3,0.0,0.92,0.91,98,4,0.82,0.12
 Hiphop,,Kendrick Lamar,untitled unmastered.,0,2017-05-02,0.32,0.65,0.0,0.11,0.5,90,3,0.68,0.48
-Hiphop,"Bitch, Don’t Kill My Vibe",Kendrick Lamar,"good kid, m.A.A.d city (Deluxe)",1,2016-12-30,0.02,0.44,0.0,0.1,0.7,133,4,0.59,0.09
+Hiphop,,Kendrick Lamar,"good kid, m.A.A.d city (Deluxe)",0,2016-12-30,0.02,0.44,0.0,0.1,0.7,133,4,0.59,0.09
 Hiphop,,Big Boi,Kill Jill,0,2017-05-07,0.2,0.1,0.0,0.11,0.53,139,4,0.77,0.23
 Hiphop,Magnolia,Playboi Carti,Playboi Carti,1,2017-05-03,0.01,0.35,0.0,0.44,0.58,162,4,0.79,0.29
 Hiphop,,Wifisfuneral,2 Step,0,2017-10-18,0.02,0.11,0.0,0.5,0.5,160,4,0.82,0.23
@@ -590,35 +591,35 @@ My Ultimate Indie Rock Playlist,Fluorescent Adolescent,Arctic Monkeys,Favourite 
 My Ultimate Indie Rock Playlist,,Glass Animals,How To Be A Human Being,0,2017-07-07,0.56,0.24,0.0,0.67,0.29,148,4,0.74,0.11
 My Ultimate Indie Rock Playlist,Last Nite,The Strokes,Is This It,5,2017-07-07,0.03,0.08,0.0,0.77,0.91,104,4,0.62,0.03
 My Ultimate Indie Rock Playlist,Feels Like We Only Go Backwards,Tame Impala,Lonerism,1,2017-07-07,0.03,0.12,0.65,0.56,0.9,150,4,0.29,0.05
-My Ultimate Indie Rock Playlist,The Less I Know the Better,Tame Impala,Currents,2,2017-07-07,0.01,0.12,0.02,0.74,0.76,116,4,0.64,0.03
-My Ultimate Indie Rock Playlist,Distraction,M1LDL1FE,Distraction,1,2017-07-07,0.0,0.14,0.0,0.6,0.87,106,4,0.55,0.03
-My Ultimate Indie Rock Playlist,Hard to Explain,The Strokes,Is This It,2,2017-07-07,0.0,0.1,0.85,0.62,0.68,82,4,0.41,0.06
-My Ultimate Indie Rock Playlist,Third of May / Ōdaigahara,Fleet Foxes,Crack-Up,8,2017-07-07,0.12,0.09,0.08,0.25,0.46,142,3,0.27,0.03
-My Ultimate Indie Rock Playlist,,Cage The Elephant,Thank You Happy Birthday,0,2017-07-07,0.0,0.07,0.0,0.13,0.61,105,4,0.46,0.03
-My Ultimate Indie Rock Playlist,Ragged Wood,Fleet Foxes,Fleet Foxes,8,2017-07-07,0.1,0.06,0.01,0.16,0.66,104,4,0.36,0.03
-My Ultimate Indie Rock Playlist,Let It Happen,Tame Impala,Currents,2,2017-07-07,0.0,0.11,0.02,0.61,0.87,125,4,0.6,0.04
-My Ultimate Indie Rock Playlist,Holding On,The War On Drugs,Holding On,3,2017-07-07,0.0,0.05,0.01,0.65,0.94,150,4,0.45,0.04
-My Ultimate Indie Rock Playlist,,Jagwar Ma,Every Now & Then,0,2017-07-07,0.0,0.65,0.0,0.48,0.88,100,4,0.51,0.04
 My Ultimate Indie Rock Playlist,,Ariel Pink,Another Weekend,0,2017-07-07,0.12,0.24,0.0,0.39,0.51,108,4,0.38,0.03
-My Ultimate Indie Rock Playlist,Cigarette Daydreams,Cage The Elephant,Melophobia,2,2017-07-07,0.08,0.08,0.0,0.28,0.68,113,4,0.64,0.03
-My Ultimate Indie Rock Playlist,Mykonos,Fleet Foxes,Sun Giant,10,2017-07-07,0.4,0.14,0.0,0.34,0.45,82,4,0.3,0.03
-My Ultimate Indie Rock Playlist,The Weather,Pond,The Weather,1,2017-07-07,0.74,0.06,0.18,0.25,0.79,75,4,0.25,0.06
-My Ultimate Indie Rock Playlist,Kids,MGMT,Oracular Spectacular/Congratulations,1,2017-07-07,0.0,0.36,0.0,0.17,0.93,122,4,0.45,0.07
+My Ultimate Indie Rock Playlist,Ragged Wood,Fleet Foxes,Fleet Foxes,8,2017-07-07,0.1,0.06,0.01,0.16,0.66,104,4,0.36,0.03
+My Ultimate Indie Rock Playlist,Distraction,M1LDL1FE,Distraction,1,2017-07-07,0.0,0.14,0.0,0.6,0.87,106,4,0.55,0.03
+My Ultimate Indie Rock Playlist,The Less I Know the Better,Tame Impala,Currents,2,2017-07-07,0.01,0.12,0.02,0.74,0.76,116,4,0.64,0.03
 My Ultimate Indie Rock Playlist,(Joe Gets Kicked Out of School for Using) Drugs With Friends (But Says This Isn't a Problem),Car Seat Headrest,Teens Of Denial,5,2017-07-07,0.33,0.09,0.0,0.4,0.45,106,4,0.44,0.03
-YEEZY,Love Lockdown,Kanye West,808s & Heartbreak (Softpak),4,2018-06-13,0.05,0.11,0.5,0.11,0.52,119,4,0.76,0.03
+My Ultimate Indie Rock Playlist,Hard to Explain,The Strokes,Is This It,2,2017-07-07,0.0,0.1,0.85,0.62,0.68,82,4,0.41,0.06
+My Ultimate Indie Rock Playlist,,Cage The Elephant,Thank You Happy Birthday,0,2017-07-07,0.0,0.07,0.0,0.13,0.61,105,4,0.46,0.03
+My Ultimate Indie Rock Playlist,Holding On,The War On Drugs,Holding On,3,2017-07-07,0.0,0.05,0.01,0.65,0.94,150,4,0.45,0.04
+My Ultimate Indie Rock Playlist,Third of May / Ōdaigahara,Fleet Foxes,Crack-Up,8,2017-07-07,0.12,0.09,0.08,0.25,0.46,142,3,0.27,0.03
+My Ultimate Indie Rock Playlist,Kids,MGMT,Oracular Spectacular/Congratulations,1,2017-07-07,0.0,0.36,0.0,0.17,0.93,122,4,0.45,0.07
+My Ultimate Indie Rock Playlist,The Weather,Pond,The Weather,1,2017-07-07,0.74,0.06,0.18,0.25,0.79,75,4,0.25,0.06
+My Ultimate Indie Rock Playlist,,Jagwar Ma,Every Now & Then,0,2017-07-07,0.0,0.65,0.0,0.48,0.88,100,4,0.51,0.04
+My Ultimate Indie Rock Playlist,Mykonos,Fleet Foxes,Sun Giant,10,2017-07-07,0.4,0.14,0.0,0.34,0.45,82,4,0.3,0.03
+My Ultimate Indie Rock Playlist,Cigarette Daydreams,Cage The Elephant,Melophobia,2,2017-07-07,0.08,0.08,0.0,0.28,0.68,113,4,0.64,0.03
+My Ultimate Indie Rock Playlist,Let It Happen,Tame Impala,Currents,2,2017-07-07,0.0,0.11,0.02,0.61,0.87,125,4,0.6,0.04
+YEEZY,Through the Wire,Kanye West,The College Dropout (Explicit),3,2018-06-13,0.01,0.16,0.0,0.66,0.74,83,4,0.57,0.25
+YEEZY,Power,Kanye West,My Beautiful Dark Twisted Fantasy,6,2018-06-13,0.02,0.82,0.0,0.55,0.91,154,4,0.54,0.13
 YEEZY,Gorgeous,Kanye West,My Beautiful Dark Twisted Fantasy,5,2018-06-13,0.03,0.18,0.0,0.12,0.74,91,4,0.58,0.04
 YEEZY,Dark Fantasy,Kanye West,My Beautiful Dark Twisted Fantasy,7,2018-06-13,0.3,0.17,0.0,0.42,0.57,87,4,0.57,0.05
-YEEZY,Power,Kanye West,My Beautiful Dark Twisted Fantasy,6,2018-06-13,0.02,0.82,0.0,0.55,0.91,154,4,0.54,0.13
-YEEZY,Stronger,Kanye West,Graduation (UK Version),7,2018-06-13,0.01,0.41,0.0,0.49,0.72,103,4,0.62,0.15
+YEEZY,Love Lockdown,Kanye West,808s & Heartbreak (Softpak),4,2018-06-13,0.05,0.11,0.5,0.11,0.52,119,4,0.76,0.03
+YEEZY,Amazing,Kanye West,808s & Heartbreak (Softpak),2,2018-06-13,0.22,0.06,0.12,0.5,0.55,146,4,0.59,0.05
 YEEZY,Heartless,Kanye West,808s & Heartbreak (Softpak),4,2018-06-13,0.05,0.25,0.0,0.65,0.65,87,4,0.79,0.14
 YEEZY,Everything I Am,Kanye West,Graduation (UK Version),3,2018-06-13,0.46,0.15,0.0,0.76,0.62,80,4,0.63,0.26
 YEEZY,Flashing Lights,Kanye West,Graduation (UK Version),11,2018-06-13,0.04,0.39,0.0,0.43,0.63,90,4,0.64,0.04
+YEEZY,Stronger,Kanye West,Graduation (UK Version),7,2018-06-13,0.01,0.41,0.0,0.49,0.72,103,4,0.62,0.15
 YEEZY,Gold Digger,Kanye West,Late Registration,2,2018-06-13,0.02,0.08,0.0,0.62,0.7,92,4,0.65,0.34
 YEEZY,Touch The Sky,Kanye West,Late Registration,2,2018-06-13,0.01,0.43,0.0,0.55,0.84,98,1,0.52,0.35
-YEEZY,Through the Wire,Kanye West,The College Dropout (Explicit),3,2018-06-13,0.01,0.16,0.0,0.66,0.74,83,4,0.57,0.25
 YEEZY,The New Workout Plan,Kanye West,The College Dropout (Explicit),8,2018-06-13,0.01,0.36,0.0,0.65,0.79,118,4,0.7,0.2
 YEEZY,Ghost Town,Kanye West,ye,16,2018-06-13,0.1,0.33,0.0,0.33,0.54,83,4,0.57,0.03
-YEEZY,Amazing,Kanye West,808s & Heartbreak (Softpak),2,2018-06-13,0.22,0.06,0.12,0.5,0.55,146,4,0.59,0.05
 YEEZY,All of the Lights (Interlude),Kanye West,My Beautiful Dark Twisted Fantasy,5,2018-06-13,0.93,0.13,0.91,0.51,0.11,93,3,0.24,0.04
 YEEZY,Lost In The World,Kanye West,My Beautiful Dark Twisted Fantasy,3,2018-06-13,0.15,0.53,0.01,0.28,0.77,117,4,0.61,0.22
 YEEZY,Monster,Kanye West,My Beautiful Dark Twisted Fantasy,5,2018-06-13,0.0,0.61,0.01,0.09,0.68,123,5,0.62,0.24
@@ -631,7 +632,7 @@ YEEZY,4th Dimension,KIDS SEE GHOSTS,KIDS SEE GHOSTS,11,2018-06-13,0.28,0.61,0.0,
 YEEZY,Famous,Kanye West,The Life Of Pablo,4,2018-06-13,0.07,0.11,0.0,0.42,0.75,174,4,0.47,0.13
 YEEZY,Black Skinhead,Kanye West,Yeezus,2,2018-06-13,0.0,0.18,0.0,0.28,0.82,130,4,0.58,0.32
 YEEZY,Reborn,KIDS SEE GHOSTS,KIDS SEE GHOSTS,15,2018-06-13,0.34,0.2,0.04,0.23,0.6,100,4,0.58,0.04
-YEEZY,Ultralight Beam,Kanye West,The Life Of Pablo,5,2018-06-13,0.63,0.54,0.0,0.37,0.4,105,4,0.67,0.38
+YEEZY,Ultralight Beam,Kanye West,The Life Of Pablo,4,2018-06-13,0.63,0.54,0.0,0.37,0.4,105,4,0.67,0.38
 YEEZY,Blame Game,Kanye West,My Beautiful Dark Twisted Fantasy,2,2018-06-13,0.3,0.11,0.0,0.68,0.58,85,4,0.57,0.05
 YEEZY,Runaway,Kanye West,My Beautiful Dark Twisted Fantasy,6,2018-06-13,0.2,0.52,0.0,0.1,0.58,86,4,0.38,0.1
 YEEZY,Devil In A New Dress,Kanye West,My Beautiful Dark Twisted Fantasy,3,2018-06-13,0.02,0.14,0.0,0.19,0.77,79,4,0.28,0.14
@@ -753,16 +754,16 @@ december - fin,Chamber of Reflection,Mac DeMarco,Salad Days,1,2017-12-02,0.26,0.
 december - fin,One More Love Song,Mac DeMarco,This Old Dog,2,2017-12-02,0.77,0.09,0.51,0.52,0.32,141,4,0.69,0.03
 december - fin,If We Were Vampires,Jason Isbell and the 400 Unit,The Nashville Sound,6,2017-12-12,0.82,0.11,0.0,0.68,0.21,96,4,0.63,0.03
 december - fin,Backseat (feat. Carly Rae Jepsen),Charli XCX,Pop 2,5,2017-12-30,0.25,0.39,0.0,0.34,0.61,120,4,0.63,0.04
-dont get any big ideas,All I Need,Radiohead,In Rainbows,2,2017-07-08,0.52,0.14,0.45,0.1,0.48,88,4,0.67,0.04
+dont get any big ideas,All I Need,Radiohead,In Rainbows,3,2017-07-08,0.52,0.14,0.45,0.1,0.48,88,4,0.67,0.04
 dont get any big ideas,True Love Waits,Radiohead,A Moon Shaped Pool,3,2017-07-14,0.94,0.1,0.1,0.04,0.13,136,4,0.28,0.04
-dont get any big ideas,Reckoner,Radiohead,In Rainbows,11,2017-07-12,0.51,0.07,0.16,0.2,0.66,104,4,0.52,0.03
+dont get any big ideas,Reckoner,Radiohead,In Rainbows,12,2017-07-12,0.51,0.07,0.16,0.2,0.66,104,4,0.52,0.03
 dont get any big ideas,Planet Telex,Radiohead,The Bends,20,2018-04-05,0.02,0.61,0.7,0.26,0.88,148,3,0.43,0.11
 dont get any big ideas,Fake Plastic Trees,Radiohead,The Bends,14,2017-07-08,0.17,0.2,0.1,0.13,0.23,73,4,0.45,0.03
 dont get any big ideas,Pyramid Song,Radiohead,Amnesiac,2,2017-07-08,0.79,0.11,0.43,0.07,0.34,77,4,0.13,0.03
 dont get any big ideas,Idioteque,Radiohead,Kid A,4,2017-07-08,0.04,0.09,0.0,0.53,0.93,137,3,0.62,0.24
 dont get any big ideas,Street Spirit (Fade Out),Radiohead,The Bends,17,2017-10-16,0.31,0.18,0.69,0.13,0.45,138,4,0.49,0.03
-dont get any big ideas,Nude,Radiohead,In Rainbows,13,2017-07-08,0.83,0.09,0.6,0.16,0.34,128,3,0.54,0.03
-dont get any big ideas,15 Step,Radiohead,In Rainbows,2,2017-07-08,0.05,0.09,0.35,0.85,0.85,94,4,0.6,0.04
+dont get any big ideas,Nude,Radiohead,In Rainbows,14,2017-07-08,0.83,0.09,0.6,0.16,0.34,128,3,0.54,0.03
+dont get any big ideas,15 Step,Radiohead,In Rainbows,4,2017-07-08,0.05,0.09,0.35,0.85,0.85,94,4,0.6,0.04
 dont get any big ideas,No Surprises (remastered),Radiohead,OK Computer OKNOTOK 1997 2017,4,2017-07-08,0.04,0.11,0.0,0.08,0.45,76,4,0.27,0.03
 dont get any big ideas,"There, There",Radiohead,Hail To the Thief,1,2017-10-15,0.02,0.11,0.52,0.72,0.68,126,4,0.61,0.03
 dont get any big ideas,Karma Police (Remastered),Radiohead,OK Computer OKNOTOK 1997 2017,2,2018-09-21,0.04,0.11,0.0,0.37,0.58,74,4,0.39,0.03
@@ -771,7 +772,7 @@ dont get any big ideas,Optimistic,Radiohead,Kid A,3,2018-09-21,0.05,0.3,0.85,0.5
 dont get any big ideas,Paranoid Android (Remastered),Radiohead,OK Computer OKNOTOK 1997 2017,3,2017-07-08,0.03,0.23,0.01,0.22,0.83,125,4,0.33,0.05
 dont get any big ideas,Decks Dark,Radiohead,A Moon Shaped Pool,5,2018-03-17,0.67,0.12,0.83,0.25,0.5,139,4,0.56,0.03
 dont get any big ideas,Daydreaming,Radiohead,A Moon Shaped Pool,5,2017-07-08,0.97,0.13,0.86,0.11,0.26,137,3,0.3,0.03
-dont get any big ideas,Weird Fishes/ Arpeggi,Radiohead,In Rainbows,11,2017-07-08,0.77,0.09,0.75,0.2,0.61,152,4,0.54,0.04
+dont get any big ideas,Weird Fishes/ Arpeggi,Radiohead,In Rainbows,12,2017-07-08,0.77,0.09,0.75,0.2,0.61,152,4,0.54,0.04
 dont get any big ideas,How to Disappear Completely,Radiohead,Kid A,5,2017-10-17,0.32,0.11,0.79,0.2,0.3,102,4,0.17,0.03
 dont get any big ideas,Let Down (Remastered),Radiohead,OK Computer OKNOTOK 1997 2017,4,2017-07-08,0.0,0.09,0.36,0.12,0.75,102,4,0.36,0.03
 dont get any big ideas,Identikit,Radiohead,A Moon Shaped Pool,1,2017-07-08,0.06,0.14,0.52,0.35,0.46,150,4,0.69,0.04
@@ -781,18 +782,18 @@ february - woofer,re:Stacks,Bon Iver,"For Emma, Forever Ago",7,2017-10-21,0.98,0
 february - woofer,Perth,Bon Iver,Bon Iver,12,2017-10-21,0.87,0.32,0.54,0.07,0.44,120,4,0.49,0.05
 february - woofer,Shooting Stars,Bag Raiders,Bag Raiders,2,2017-10-21,0.09,0.09,0.02,0.42,0.72,124,4,0.64,0.04
 february - woofer,Flume,Bon Iver,"For Emma, Forever Ago",8,2017-10-21,0.92,0.11,0.08,0.08,0.15,66,4,0.49,0.03
-february - woofer,Blood On Me,Sampha,Process,3,2017-10-21,0.12,0.61,0.01,0.61,0.52,104,4,0.78,0.14
-february - woofer,(No One Knows Me) Like The Piano,Sampha,Process,2,2017-10-21,0.98,0.11,0.0,0.18,0.2,128,4,0.62,0.03
+february - woofer,Blood On Me,Sampha,Process,2,2017-10-21,0.12,0.61,0.01,0.61,0.52,104,4,0.78,0.14
+february - woofer,(No One Knows Me) Like The Piano,Sampha,Process,1,2017-10-21,0.98,0.11,0.0,0.18,0.2,128,4,0.62,0.03
 february - woofer,No Reason,Bonobo,Migration,5,2017-10-21,0.32,0.1,0.53,0.16,0.59,121,4,0.66,0.05
 february - woofer,Slide,Calvin Harris,Slide,11,2017-10-21,0.5,0.25,0.0,0.51,0.8,104,4,0.74,0.05
 february - woofer,Holocene,Bon Iver,Bon Iver,19,2017-10-21,0.94,0.12,0.54,0.16,0.32,147,4,0.38,0.03
 february - woofer,Skinny Love,Bon Iver,"For Emma, Forever Ago",12,2017-10-21,0.84,0.14,0.0,0.11,0.26,76,4,0.59,0.05
-february - woofer,Come Down,Anderson .Paak,Malibu,4,2017-10-21,0.33,0.3,0.0,0.92,0.91,98,4,0.82,0.12
-february - woofer,Low Life,Future,EVOL,4,2017-10-21,0.34,0.15,0.28,0.1,0.33,143,4,0.72,0.07
-february - woofer,T-Shirt,Migos,Culture,3,2017-10-21,0.24,0.16,0.0,0.49,0.69,139,4,0.86,0.22
+february - woofer,Come Down,Anderson .Paak,Malibu,3,2017-10-21,0.33,0.3,0.0,0.92,0.91,98,4,0.82,0.12
+february - woofer,Low Life,Future,EVOL,3,2017-10-21,0.34,0.15,0.28,0.1,0.33,143,4,0.72,0.07
+february - woofer,T-Shirt,Migos,Culture,2,2017-10-21,0.24,0.16,0.0,0.49,0.69,139,4,0.86,0.22
 february - woofer,Blood Bank,Bon Iver,Blood Bank,14,2017-10-21,0.96,0.12,0.03,0.25,0.37,116,4,0.49,0.03
 february - woofer,,Young Thug,JEFFERY,0,2017-10-21,0.12,0.14,0.0,0.83,0.58,132,4,0.86,0.24
-february - woofer,25 Bucks (feat. Purity Ring),Danny Brown,Old,2,2017-10-21,0.32,0.14,0.0,0.27,0.85,116,4,0.72,0.08
+february - woofer,25 Bucks (feat. Purity Ring),Danny Brown,Old,1,2017-10-21,0.32,0.14,0.0,0.27,0.85,116,4,0.72,0.08
 february - woofer,,Travis Scott,Rodeo (Deluxe),0,2017-10-21,0.01,0.12,0.0,0.13,0.53,131,4,0.71,0.03
 february - woofer,White Iverson,Post Malone,Stoney,1,2017-10-21,0.22,0.08,0.0,0.33,0.58,130,4,0.68,0.04
 february - woofer,,Bonobo,Migration,0,2017-10-21,0.76,0.17,0.95,0.04,0.56,122,4,0.56,0.04
@@ -951,13 +952,13 @@ january - decisions,Destroyed By Hippie Powers,Car Seat Headrest,Teens Of Denial
 january - decisions,(Joe Gets Kicked Out of School for Using) Drugs With Friends (But Says This Isn't a Problem),Car Seat Headrest,Teens Of Denial,5,2017-10-21,0.33,0.09,0.0,0.4,0.45,106,4,0.44,0.03
 january - decisions,Luna,Deafheaven,New Bermuda,2,2017-10-21,0.0,0.38,0.91,0.05,0.96,102,4,0.15,0.16
 january - decisions,Drunk Drivers/Killer Whales,Car Seat Headrest,Teens Of Denial,8,2017-10-21,0.22,0.1,0.0,0.46,0.41,117,4,0.53,0.04
-january - decisions,GLOWED UP,KAYTRANADA,99.9%,3,2017-10-21,0.04,0.14,0.01,0.43,0.62,135,4,0.68,0.34
-january - decisions,Ultralight Beam,Kanye West,The Life Of Pablo,5,2017-10-21,0.63,0.54,0.0,0.37,0.4,105,4,0.67,0.38
-january - decisions,nights,Frank Ocean,Blonde,12,2017-10-21,0.42,0.11,0.0,0.42,0.55,89,4,0.47,0.12
+january - decisions,GLOWED UP,KAYTRANADA,99.9%,2,2017-10-21,0.04,0.14,0.01,0.43,0.62,135,4,0.68,0.34
+january - decisions,Ultralight Beam,Kanye West,The Life Of Pablo,4,2017-10-21,0.63,0.54,0.0,0.37,0.4,105,4,0.67,0.38
+january - decisions,nights,Frank Ocean,Blonde,11,2017-10-21,0.42,0.11,0.0,0.42,0.55,89,4,0.47,0.12
 january - decisions,Brought To The Water,Deafheaven,New Bermuda,2,2017-10-21,0.0,0.09,0.89,0.04,0.94,98,4,0.28,0.15
-january - decisions,Pink + White,Frank Ocean,Blonde,7,2017-10-21,0.67,0.42,0.0,0.55,0.55,159,3,0.54,0.1
-january - decisions,Solo,Frank Ocean,Blonde,6,2017-10-21,0.85,0.16,0.0,0.25,0.29,124,4,0.44,0.04
-january - decisions,Pink Matter,Frank Ocean,channel ORANGE (Explicit Version),6,2017-10-21,0.95,0.11,0.0,0.44,0.23,171,3,0.4,0.06
+january - decisions,Pink + White,Frank Ocean,Blonde,6,2017-10-21,0.67,0.42,0.0,0.55,0.55,159,3,0.54,0.1
+january - decisions,Solo,Frank Ocean,Blonde,5,2017-10-21,0.85,0.16,0.0,0.25,0.29,124,4,0.44,0.04
+january - decisions,Pink Matter,Frank Ocean,channel ORANGE (Explicit Version),5,2017-10-21,0.95,0.11,0.0,0.44,0.23,171,3,0.4,0.06
 january - decisions,Dream House,Deafheaven,Sunbather,11,2017-10-21,0.0,0.38,0.92,0.1,0.8,82,4,0.12,0.08
 january - decisions,Vincent,Car Seat Headrest,Teens Of Denial,3,2017-10-21,0.35,0.11,0.03,0.05,0.61,147,4,0.4,0.04
 july - local,,Alvvays,In Undertow,0,2017-10-21,0.0,0.1,0.0,0.31,0.69,116,4,0.36,0.04
@@ -1016,19 +1017,19 @@ july - local,Daydreaming,Radiohead,A Moon Shaped Pool,5,2017-10-21,0.97,0.13,0.8
 july - local,Wake Up,Arcade Fire,Funeral,8,2017-10-21,0.12,0.12,0.05,0.29,0.8,139,4,0.25,0.04
 july - local,Identikit,Radiohead,A Moon Shaped Pool,1,2017-10-21,0.06,0.14,0.52,0.35,0.46,150,4,0.69,0.04
 july - local,,Future Islands,Singles,0,2017-10-21,0.14,0.09,0.7,0.59,0.72,140,4,0.5,0.03
-july - local,15 Step,Radiohead,In Rainbows,2,2017-10-21,0.05,0.09,0.35,0.85,0.85,94,4,0.6,0.04
-july - local,Nude,Radiohead,In Rainbows,13,2017-10-21,0.83,0.09,0.6,0.16,0.34,128,3,0.54,0.03
+july - local,15 Step,Radiohead,In Rainbows,4,2017-10-21,0.05,0.09,0.35,0.85,0.85,94,4,0.6,0.04
+july - local,Nude,Radiohead,In Rainbows,14,2017-10-21,0.83,0.09,0.6,0.16,0.34,128,3,0.54,0.03
 july - local,Say It Ain't So,Weezer,Weezer,5,2017-10-21,0.01,0.07,0.0,0.45,0.55,151,4,0.63,0.04
 july - local,Myth,Beach House,Festival,11,2017-10-21,0.03,0.06,0.1,0.41,0.71,141,4,0.44,0.03
-july - local,All I Need,Radiohead,In Rainbows,2,2017-10-21,0.52,0.14,0.45,0.1,0.48,88,4,0.67,0.04
+july - local,All I Need,Radiohead,In Rainbows,3,2017-10-21,0.52,0.14,0.45,0.1,0.48,88,4,0.67,0.04
 july - local,Ran,Future Islands,The Far Field,1,2017-10-21,0.0,0.07,0.04,0.38,0.7,144,5,0.46,0.03
 july - local,Idioteque,Radiohead,Kid A,4,2017-10-21,0.04,0.09,0.0,0.53,0.93,137,3,0.62,0.24
 july - local,Banquet,Bloc Party,Silent Alarm,6,2017-10-21,0.0,0.08,0.02,0.88,0.94,150,4,0.58,0.05
 july - local,Pyramid Song,Radiohead,Amnesiac,2,2017-10-21,0.79,0.11,0.43,0.07,0.34,77,4,0.13,0.03
 july - local,,Future Islands,The Far Field,0,2017-10-21,0.0,0.09,0.0,0.51,0.91,144,4,0.57,0.08
-july - local,Reckoner,Radiohead,In Rainbows,11,2017-10-21,0.51,0.07,0.16,0.2,0.66,104,4,0.52,0.03
+july - local,Reckoner,Radiohead,In Rainbows,12,2017-10-21,0.51,0.07,0.16,0.2,0.66,104,4,0.52,0.03
 july - local,Float On,Modest Mouse,Good News For People Who Love Bad News,1,2017-10-21,0.01,0.09,0.0,0.55,0.89,100,4,0.65,0.03
-july - local,Weird Fishes/ Arpeggi,Radiohead,In Rainbows,11,2017-10-21,0.77,0.09,0.75,0.2,0.61,152,4,0.54,0.04
+july - local,Weird Fishes/ Arpeggi,Radiohead,In Rainbows,12,2017-10-21,0.77,0.09,0.75,0.2,0.61,152,4,0.54,0.04
 july - local,Lazuli,Beach House,"Indie, Vol. 1 (You Heard It Here First)",12,2017-10-21,0.01,0.26,0.63,0.72,0.81,219,4,0.34,0.03
 july - local,,Arcade Fire,Reflektor,0,2017-10-21,0.04,0.35,0.02,0.64,0.72,111,4,0.59,0.03
 july - local,Chamber of Reflection,Mac DeMarco,Salad Days,1,2017-10-21,0.26,0.1,0.91,0.5,0.56,131,4,0.54,0.09
@@ -1221,7 +1222,7 @@ running,nineteen,harunemuri,harutosyura,2,2018-08-29,0.13,0.22,0.0,0.59,0.97,99,
 running,1999 WILDFIRE,BROCKHAMPTON,1999 WILDFIRE,19,2018-08-29,0.25,0.15,0.0,0.81,0.57,128,4,0.81,0.13
 running,yumewomiyou,harunemuri,harutosyura,3,2018-08-29,0.11,0.08,0.05,0.52,0.83,127,4,0.69,0.03
 running,RENTAL,BROCKHAMPTON,SATURATION III,7,2018-08-29,0.19,0.25,0.0,0.51,0.45,82,4,0.67,0.07
-running,These Streets Will Never Look the Same,Chromatics,Kill For Love,14,2018-08-29,0.01,0.82,0.25,0.27,0.89,107,4,0.68,0.04
+running,These Streets Will Never Look the Same,Chromatics,Kill For Love,15,2018-08-29,0.01,0.82,0.25,0.27,0.89,107,4,0.68,0.04
 running,Destroyed By Hippie Powers,Car Seat Headrest,Teens Of Denial,3,2018-08-29,0.01,0.07,0.02,0.32,0.66,104,4,0.53,0.04
 running,The Hills,The Weeknd,Beauty Behind The Madness,10,2018-08-29,0.09,0.14,0.0,0.11,0.57,135,5,0.36,0.08
 running,Vengeance | Vengeance [Feat. Jpegmafia & Zillakami | Jpegmaf1a + Z1llakam1],Denzel Curry,TA13OO,8,2018-08-29,0.06,0.29,0.0,0.44,0.8,144,4,0.73,0.11
