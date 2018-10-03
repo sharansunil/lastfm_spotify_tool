@@ -18,10 +18,12 @@ class LastFmCredentials():
 	API_SECRET = '481449b2f6f3c95ee57eabe0cfe25258'
 
 	def gen_network(self):
-		net = pylast.LastFMNetwork(api_key=self.API_KEY, api_secret=self.API_SECRET,
-								   username=self.lastfm_username, password_hash=self.password)
+		net = pylast.LastFMNetwork(
+			api_key=self.API_KEY, 
+			api_secret=self.API_SECRET,
+			username=self.lastfm_username, 
+			password_hash=self.password)
 		return net
-
 
 class SpotifyCredentials():
 
@@ -46,11 +48,12 @@ class SpotifyCredentials():
 		return self.scope
 
 	def genAuth(self):
-		token = util.prompt_for_user_token(	username=self.sp_username, 
-											scope=self.scope,
-											client_id=self.client_id, 
-											client_secret=self.client_secret, 
-											redirect_uri=self.redirect_uri)
+		token = util.prompt_for_user_token(	
+			username=self.sp_username, 
+			scope=self.scope,
+			client_id=self.client_id, 
+			client_secret=self.client_secret, 
+			redirect_uri=self.redirect_uri)
 		sp = spotipy.Spotify(auth=token)
 		return sp
 
@@ -58,6 +61,7 @@ class SpotifyCredentials():
 class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials):
 
 	def __init__(self, lastfm_username, sp_username, scope="user-library-read", refresh_spotify=1, refresh_last_tracks_pl=1,refresh_last_top_albums_artists=1,refresh_playlists=1,refresh_artist=1):
+		
 		SpotifyCredentials.__init__(self,sp_username, scope)
 		LastFmCredentials.__init__(self,lastfm_username)
 		self.refresh_spotify = refresh_spotify
@@ -78,7 +82,12 @@ class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials):
 			warnings.filterwarnings("ignore", category=RuntimeWarning)
 			try:
 				spot_func.generateAllDatasets(self.sp, self.sp_username, refresh=self.refresh_spotify,playlists=self.playlists,artist=self.artist)
-				last_func.generateCombinedDatabases(self.network, self.lastfm_username, tracks_playlists=self.refresh_last_tracks_pl,top_albums_artists=self.refresh_last_top_albums_artists)
+				last_func.generateCombinedDatabases(
+					self.network, 
+					self.lastfm_username, 
+					tracks_playlists=self.refresh_last_tracks_pl,
+					top_albums_artists=self.refresh_last_top_albums_artists)
+			
 			except Exception as e:
 				print("f to pay resepects\n\n")
 				print(e)

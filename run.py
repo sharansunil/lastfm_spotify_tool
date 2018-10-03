@@ -16,9 +16,9 @@ main = Spotify_LastFM_Builder(
 	sp_username=sp_username, 
 	refresh_last_top_albums_artists=1, #refresh top artists and albums dataset from lastfm: no recommendation, up to user 
 	refresh_last_tracks_pl=1,#refresh last fm tracks and generates master dataset: recommended at 1
-	refresh_spotify=1, #refresh spotify database. time and data intensive. recommended at 0 adhoc refresh
-	refresh_playlists=1, #refresh playlist plots. recommended at 0 adhoc refresh
-	refresh_artist=1#refresh artist distribution plots recommended at 0 adhoc refresh
+	refresh_spotify=0, #refresh spotify database. time and data intensive. recommended at 0 adhoc refresh
+	refresh_playlists=0, #refresh playlist plots. recommended at 0 adhoc refresh
+	refresh_artist=0#refresh artist distribution plots recommended at 0 adhoc refresh
 )
 
 """set password by input instance or fix it in code, up to you"""
@@ -27,3 +27,4 @@ main.setPassword("synystrax")
 
 """run file"""
 main.create_all()
+ 

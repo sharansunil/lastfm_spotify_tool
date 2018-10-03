@@ -44,8 +44,9 @@ def generateRefSet(sp, username):
 		playlistarray.append(x)
 	plArray = list(itertools.chain(*playlistarray))
 
-	referenceDataset = pd.DataFrame(data=plArray, columns=[
-									'playlist', 'playlistID', 'artist', 'artistID', 'album', 'albumID', 'trackname', 'date_added', 'trackID'])
+	referenceDataset = pd.DataFrame(
+		data=plArray, 
+		columns=['playlist', 'playlistID', 'artist', 'artistID', 'album', 'albumID', 'trackname', 'date_added', 'trackID'])
 	referenceDataset.index.name = 'ID'
 	return referenceDataset
 
@@ -87,9 +88,7 @@ def savedTracksDf(sp):
 			ret.append(tup)
 		offset += 50
 
-	df = pd.DataFrame(ret, columns=('track', 'artist',
-									'album', 'date_added', 'popularity', 'trackID'))
-
+	df = pd.DataFrame(ret, columns=('track', 'artist','album', 'date_added', 'popularity', 'trackID'))
 	return df
 
 
