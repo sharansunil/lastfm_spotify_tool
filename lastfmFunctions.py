@@ -87,18 +87,6 @@ def topAlbumsArtists(network,username):
 	df2.to_csv("exports/TopAlbums.csv",index=False)
 	return df1,df2
 
-def makeAllLastFm(network,username):
-	tup=topAlbumsArtists(network,username)
-	recentTracks=generateTrackSet(network,username)
-	topArtists=tup[0]
-	topAlbums=tup[1]
-	dataframes={
-		"Recent Tracks":recentTracks,
-		"Top Artists":topArtists,
-		"Top Albums":topAlbums
-	}
-	return dataframes
-
 def topTracksDB(network, username):
 	df = generateTrackSet(network, username)
 	df = df.assign(key=pd.Series(np.random.randn(len(df.index))).values)
@@ -155,29 +143,32 @@ def generatePlaylistDb():
 	df.loc[:, "date_added"] = df.loc[:, "date_added"].apply(lambda x: x[:10])
 	df.to_csv('exports/MasterPlaylistDatabase.csv', index=False)
 
-def generateCombinedDatabases(network,lastfm_username,refresh=0):
+def generateCombinedDatabases(network,lastfm_username,tracks_playlists=0,top_albums_artists=0):
 
-	if refresh==0:
-		
-		try:
-			generateMasterTrackDatabase()
-			generatePlaylistDb()
-			print("both datasets generated")
-		
-		except Exception as e:
-			print("f to pay respects" )
-			print(e)
-	
-	elif refresh ==1:
-		try:
-			topAlbumsArtists(network,lastfm_username)
+	try:
+		retstr=""
+		if top_albums_artists==1 and tracks_playlists==1:
+			topAlbumsArtists(network, lastfm_username)
 			topTracksDB(network,lastfm_username)
 			generateMasterTrackDatabase()
 			generatePlaylistDb()
-			print("LastFM data refreshed and datasets generated")
-		except Exception as e:
-			print("f to pay respects")
-			print(e)
+			retstr="Top Albums,Artists datasets updated. Track and Playlist datasets updated."
+		
+		elif top_albums_artists ==1 and tracks_playlists==0:		
+			topAlbumsArtists(network,lastfm_username)
+			retstr="Top Albums,Artists datasets updated. Track and Playlist not updated"
 
-	else:
-		print("Wrong refresh key: 1 for yes, 0 for no. Its pretty straightforward.")
+		elif top_albums_artists==0 and tracks_playlists==1:
+			topTracksDB(network, lastfm_username)
+			generateMasterTrackDatabase()
+			generatePlaylistDb()
+			retstr="Tracks and Playlist dataset updated. Top Albums/Artists not updated."
+		else:
+			retstr="LastFm not updated at user request"
+
+		print(retstr)
+		
+	except Exception as e:
+		print("f to pay respects")
+		print(e)
+
