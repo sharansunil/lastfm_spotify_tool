@@ -9,8 +9,6 @@ import os
 import os.path
 
 """extracts data from Track object"""
-
-
 def show_tracks(playname, playid, tracks):
 	retdic = []
 	for item in tracks['items']:
@@ -29,9 +27,7 @@ def show_tracks(playname, playid, tracks):
 
 
 """playlist set generation"""
-
-
-def generateRefSet(sp, username):
+def generatePlaylistSet(sp, username):
 	playlists = sp.user_playlists(username)
 	playlistarray = []
 	for playlist in playlists['items']:
@@ -43,37 +39,23 @@ def generateRefSet(sp, username):
 		x = show_tracks(playname, playid, tracks)
 		playlistarray.append(x)
 	plArray = list(itertools.chain(*playlistarray))
-
-	referenceDataset = pd.DataFrame(
+	df = pd.DataFrame(
 		data=plArray, 
 		columns=['playlist', 'playlistID', 'artist', 'artistID', 'album', 'albumID', 'trackname', 'date_added', 'trackID'])
-	referenceDataset.index.name = 'ID'
-	return referenceDataset
-
-
-def generateFeatureSet(df, sp, segment):
-	df = df[[segment[0], segment[1]]]
-	df = df.assign(Features=df.iloc[:, -1])
-	features = df.iloc[:, -1].apply(sp.audio_features)
+	df.index.name = 'ID'
+	trackColumns = ['trackname', 'trackID']
+	df2 = df[[trackColumns[0], trackColumns[1]]]
+	df2 = df2.assign(Features=df.iloc[:, -1])
+	features = df2.iloc[:, -1].apply(sp.audio_features)
 	chain = list(itertools.chain(*features))
 	featdf = pd.DataFrame(chain)
-	trackSet2 = pd.concat([df.iloc[:, 0:2], featdf], axis=1, join='outer')
-	return trackSet2
-
-
-def generatePlaylistSet(sp, username):
-	trackColumns = ['trackname', 'trackID']
-	df = generateRefSet(sp, username)
-	featureSet = generateFeatureSet(df, sp, trackColumns)
-	totalSet = pd.merge(df, featureSet, on=["trackname", "trackID"])
+	trackSet2 = pd.concat([df2.iloc[:, 0:2], featdf], axis=1, join='outer')
+	totalSet = pd.merge(df, trackSet2, on=["trackname", "trackID"])
 	totalSet = totalSet.drop_duplicates()
 	totalSet = totalSet.sort_values(by=['playlist'])
 	return totalSet
 
-
 """saved tracks set generation"""
-
-
 def savedTracksDf(sp):
 	offset = 0
 	ret = []
@@ -87,13 +69,7 @@ def savedTracksDf(sp):
 				   track['album']['name'], date_added, track['popularity'], track['id']]
 			ret.append(tup)
 		offset += 50
-
 	df = pd.DataFrame(ret, columns=('track', 'artist','album', 'date_added', 'popularity', 'trackID'))
-	return df
-
-
-def generateSavedTracksSet(sp):
-	df = savedTracksDf(sp)
 	df['Features'] = df.iloc[:, -1]
 	try:
 		features = df.iloc[:, -1].apply(sp.audio_features)
@@ -106,27 +82,27 @@ def generateSavedTracksSet(sp):
 	df = df.sort_values(by=['date_added'], ascending=False)
 	return df
 
-
 """update dataset controller"""
-
-
-def updateDataset(key, sp, username):
+def updateDataset(sp, username,key="both"):
 	curdir = os.getcwd()
 	newdir = os.path.join(curdir, r'exports')
 	os.makedirs(newdir, exist_ok=True)
-	if key == "playlist":
+	if  key == "both":
+		df1 =savedTracksDf(sp)
+		df1.to_csv('exports/savedDB.csv', index=False)
+		df = generatePlaylistSet(sp, username)
+		df.to_csv('exports/playlistDB.csv', index=False)
+	elif key == "playlist":
 		df = generatePlaylistSet(sp, username)
 		df.to_csv('exports/playlistDB.csv', index=False)
 	elif key == "saved":
-		df = generateSavedTracksSet(sp)
+		df = savedTracksDf(sp)
 		df.to_csv('exports/savedDB.csv', index=False)
 	else:
 		print("Wrong key")
 
 
 """generate playlist profile plots"""
-
-
 def make_spider(df, row, title, color):
 	# number of variable
 	categories = list(df)
@@ -154,7 +130,6 @@ def make_spider(df, row, title, color):
 	plt.title(title, size=14, color=color, y=1.08, weight='bold')
 	plt.tight_layout()
 
-
 def generatePlaylistPlots(df):
 	# extract usable data
 	playlistAnalysis = df.groupby(["playlist"])['valence', 'energy', 'acousticness',
@@ -181,14 +156,11 @@ def generatePlaylistPlots(df):
 
 
 """generate artist distribution plots"""
-
-
 def prepareArtistDf():
 	df = pd.read_csv('exports/savedDB.csv')
 	df['duration_min'] = df['duration_ms'].apply(lambda x: x/(1000*60)).round(2)
 	df.drop(['duration_ms'], axis=1)
 	return df
-
 
 def getartistDist(df, artist, features):
 	artistSet = df[df.artist == artist]
@@ -202,7 +174,6 @@ def getartistDist(df, artist, features):
 		plt.legend()
 		plt.savefig(filename+artist+" "+feature+".png")
 
-
 def artistSegments():
 	df = prepareArtistDf()
 	sns.set(color_codes=True)
@@ -213,19 +184,16 @@ def artistSegments():
 		getartistDist(df, artist, features)
 
 
-"""main controller for all functions
-	- if playlist toggled to 0 no playlist graphs will be generated
-	- if artist is toggled to 0 no artist distribution folder and graphs will be created """
-
-
+"""	main controller for all functions
+	if playlist toggled to 0 no playlist graphs will be generated
+	if artist is toggled to 0 no artist distribution folder and graphs will be created """
 def generateAllDatasets(sp, username, refresh=1, playlists=1, artist=1):
 	refpr = "done"
 	plpr = "done"
 	art = "done"
 	retstr = ""
 	if refresh == 1:
-		updateDataset("playlist", sp, username)
-		updateDataset("saved", sp, username)
+		updateDataset(sp,username,key="both")
 	else:
 		refpr = "omitted"
 	df = pd.read_csv('exports/playlistDB.csv')

@@ -27,7 +27,7 @@ class LastFmCredentials():
 
 class SpotifyCredentials():
 
-	def __init__(self, sp_username, scope):
+	def __init__(self, sp_username, scope='user-library-read'):
 		self.sp_username = sp_username
 		self.scope = scope
 
