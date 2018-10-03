@@ -21,9 +21,7 @@ colors_border <- c( rgb(0.2,0.5,0.5,0.9), rgb(0.8,0.2,0.5,0.9), rgb(0.7,0.5,0.1,
 colors_in <- c( rgb(0.2,0.5,0.5,0.4), rgb(0.8,0.2,0.5,0.4), rgb(0.7,0.5,0.1,0.4))
 
 dfAve <- c(apply(df,2,median))
-
 df[nrow(df)+1,]=dfAve
-
 
 for (index in seq(3,nrow(df)-1)){
   

@@ -10,22 +10,20 @@ lastfm_username = "sharansunil"
 
 """creates main object to generate datasets and plots. all binary variables default to 1. scope is already set to user-library-read.
 set all variables to 1 if generating for the first time"""
-
 main = Spotify_LastFM_Builder(	
 	lastfm_username=lastfm_username, 
 	sp_username=sp_username
 )
 
 """set password by input instance or fix it in code, up to you"""
-#main.setPassword(input("Key in password dumbass:    "))
 main.setPassword("synystrax")
 
 """update dataset"""
 main.update_datasets(
 	##spotify refreshers - recommended to set at 0
-	refresh_spotify=1,
+	refresh_spotify=0,
 	refresh_artist_viz=1,
-	refresh_playlist_viz=1,
+	refresh_playlist_viz=0,
 	##lastfm refreshers - recommended to set at 1
 	lastfm_artistalbum=1,
 	lastfm_tracks=1

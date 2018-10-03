@@ -29,39 +29,39 @@ for (index in seq(3,nrow(df)-1)){
   rows<-c(1,2,nrow(df),index)
   
   svg(filename=paste("playlistPlots/",rownames(df[index,]),".svg",sep=""), 
-      width=6, 
-      height=6, 
-      pointsize=10)
+	  width=6, 
+	  height=6, 
+	  pointsize=10)
   
   radarchart(df[rows,], 
-             axistype=1 , 
-             #customize the polygons
-             pcol=colors_border, 
-             pfcol=colors_in, 
-             plwd=2, 
-             plty=1,
-             pty=32,
-             #customize the grid
-             cglcol="grey", 
-             cglty=1, 
-             axislabcol="black", 
-             caxislabels=seq(0,1,5), 
-             cglwd=0.5,
-             #custom labels
-             vlcex=0.7,
-             calcex=0.8,
-             title=rownames(df[index,]))
+			 axistype=1 , 
+			 #customize the polygons
+			 pcol=colors_border, 
+			 pfcol=colors_in, 
+			 plwd=2, 
+			 plty=1,
+			 pty=32,
+			 #customize the grid
+			 cglcol="grey", 
+			 cglty=1, 
+			 axislabcol="black", 
+			 caxislabels=seq(0,1,5), 
+			 cglwd=0.5,
+			 #custom labels
+			 vlcex=0.7,
+			 calcex=0.8,
+			 title=rownames(df[index,]))
   
   legend("topright",
-         legend=c("Average Playlist",rownames(df[index,])),
-         col=colors_in,
-         pt.cex=2.5,
-         pch=16,
-         bty="n",
-         cex=1,
-         text.col="black"
-  )
-  
-             dev.off()
-             
+		 legend=c("Average Playlist",rownames(df[index,])),
+		 col=colors_in,
+		 pt.cex=2.5,
+		 pch=16,
+		 bty="n",
+		 cex=1,
+		 text.col="black"
+)
+
+			 dev.off()
+			 
 }

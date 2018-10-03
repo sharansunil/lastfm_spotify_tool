@@ -3,6 +3,7 @@ import pandas as pd
 import datetime
 import numpy as np
 
+#global var dont touch
 TRACK_SEPARATOR = u" - "
 
 
