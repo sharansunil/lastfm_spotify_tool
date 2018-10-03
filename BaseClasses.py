@@ -4,7 +4,7 @@ import pylast
 import LastFmFunctions as last_func
 import SpotifyFunctions as spot_func
 import warnings
-
+import pandas as pd
 
 class LastFmCredentials():
 
@@ -60,15 +60,9 @@ class SpotifyCredentials():
 
 class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials):
 
-	def __init__(self, lastfm_username, sp_username, scope="user-library-read", refresh_spotify=1, refresh_last_tracks_pl=1,refresh_last_top_albums_artists=1,refresh_playlists=1,refresh_artist=1):
-		
+	def __init__(self, lastfm_username, sp_username, scope="user-library-read"):
 		SpotifyCredentials.__init__(self,sp_username, scope)
 		LastFmCredentials.__init__(self,lastfm_username)
-		self.refresh_spotify = refresh_spotify
-		self.refresh_last_tracks_pl = refresh_last_tracks_pl
-		self.refresh_last_top_albums_artists=refresh_last_top_albums_artists
-		self.playlists=refresh_playlists
-		self.artist=refresh_artist
 
 	def create_credentials(self):
 		sp = SpotifyCredentials.genAuth(self)
@@ -76,18 +70,41 @@ class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials):
 		self.sp = sp
 		self.network = network
 
-	def create_all(self):
+	"""updates dataset without loading datasets in memory,store as csv"""
+	def update_datasets(self,refresh_spotify=0,refresh_artist_viz=0,refresh_playlist_viz=0,lastfm_tracks=1,lastfm_artistalbum=1):
 		self.create_credentials()
 		with warnings.catch_warnings():
 			warnings.filterwarnings("ignore", category=RuntimeWarning)
 			try:
-				spot_func.generateAllDatasets(self.sp, self.sp_username, refresh=self.refresh_spotify,playlists=self.playlists,artist=self.artist)
+				spot_func.generateAllDatasets(	
+					self.sp, 
+					self.sp_username, 
+					refresh=refresh_spotify,
+					playlists=refresh_playlist_viz,
+					artist=refresh_artist_viz )
 				last_func.generateCombinedDatabases(
 					self.network, 
 					self.lastfm_username, 
-					tracks_playlists=self.refresh_last_tracks_pl,
-					top_albums_artists=self.refresh_last_top_albums_artists)
+					tracks_playlists=lastfm_tracks,
+					top_albums_artists=lastfm_artistalbum)
 			
 			except Exception as e:
 				print("f to pay resepects\n\n")
 				print(e)
+	
+	"""loads dataset into memory. toggle playlist and tracks to see which df's to load. selecting both will return as dictionary with playlist and tracks as keys"""
+	def load_datasets(self,playlist=1,tracks=1):
+		self.tr =pd.DataFrame()
+		self.pl=pd.DataFrame()
+		if playlist==1:
+			self.pl=pd.read_csv("exports/MasterPlaylistDatabase.csv",index_col="playlist")
+		if tracks ==1:
+			self.tr=pd.read_csv("exports/MasterTrackDatabase.csv",index_col="date_added")
+		if tracks==1 and playlist==1:
+			return {"playlist":self.pl,"tracks":self.tr}
+		elif tracks==1 and playlist==0:
+			return self.tr 
+		elif tracks==0 and playlist==1:
+			return self.pl
+		else:
+			print("invalid keys given, please only type 1 or 0")

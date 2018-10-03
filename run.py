@@ -13,18 +13,24 @@ set all variables to 1 if generating for the first time"""
 
 main = Spotify_LastFM_Builder(	
 	lastfm_username=lastfm_username, 
-	sp_username=sp_username, 
-	refresh_last_top_albums_artists=1, #refresh top artists and albums dataset from lastfm: no recommendation, up to user 
-	refresh_last_tracks_pl=1,#refresh last fm tracks and generates master dataset: recommended at 1
-	refresh_spotify=0, #refresh spotify database. time and data intensive. recommended at 0 adhoc refresh
-	refresh_playlists=0, #refresh playlist plots. recommended at 0 adhoc refresh
-	refresh_artist=0#refresh artist distribution plots recommended at 0 adhoc refresh
+	sp_username=sp_username
 )
 
 """set password by input instance or fix it in code, up to you"""
 #main.setPassword(input("Key in password dumbass:    "))
 main.setPassword("synystrax")
 
-"""run file"""
-main.create_all()
- 
+"""update dataset"""
+main.update_datasets(
+	##spotify refreshers - recommended to set at 0
+	refresh_spotify=0,
+	refresh_artist_viz=0,
+	refresh_playlist_viz=0,
+	##lastfm refreshers - recommended to set at 1
+	lastfm_artistalbum=1,
+	lastfm_tracks=1
+	)
+
+"""	load datasets. if both options set to 1 will return as dictionary with playlist and tracks as keys
+	default state: """
+df=main.load_datasets(playlist=1,tracks=1)
