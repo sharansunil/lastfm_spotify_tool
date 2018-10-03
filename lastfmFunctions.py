@@ -134,7 +134,7 @@ def generatePlaylistDb():
 
 	df = pd.merge(df, trackPlaysDB, how="left", on="uid", suffixes=('', '_y'))
 	df = df.loc[:, ["playlist", "track", "artist", "album", "plays","date_added" ,"acousticness", "liveness",
-                 "instrumentalness", "valence", "energy", "tempo", "time_signature", "danceability", "speechiness"]]
+				 "instrumentalness", "valence", "energy", "tempo", "time_signature", "danceability", "speechiness"]]
 	df.iloc[:, 0:3] = df.iloc[:, 0:3].apply(lambda x: x.str.strip())
 	df.plays = df.plays.fillna(0).astype(int)
 	df.loc[:, ["acousticness", "liveness", "instrumentalness", "valence", "energy", "danceability", "speechiness"]] = df.loc[:, [
