@@ -19,8 +19,9 @@ def show_tracks(playname, playid, tracks):
         trackid = track['id']
         albumid = track['album']['id']
         artistid = track['artists'][0]['id']
+        dateadded=item['added_at']
         retarray = [playname, playid, artist, artistid,
-                    album, albumid, trackname, trackid]
+                    album, albumid, trackname,dateadded ,trackid]
         retdic.append(retarray)
     return retdic
 
@@ -39,7 +40,7 @@ def generateRefSet(sp,username):
     plArray = list(itertools.chain(*playlistarray))
 
     referenceDataset = pd.DataFrame(data=plArray, columns=[
-                                    'Playlist', 'PlaylistID', 'Artist', 'ArtistID', 'Album', 'AlbumID', 'Trackname', 'TrackID'])
+                                    'playlist', 'playlistID', 'artist', 'artistID', 'album', 'albumID', 'trackname', 'date_added','trackID'])
     referenceDataset.index.name = 'ID'
     return referenceDataset
 
@@ -51,13 +52,14 @@ def generateFeatureSet(df,sp,segment):
     featdf = pd.DataFrame(chain)
     trackSet2 = pd.concat([df.iloc[:, 0:2], featdf], axis=1, join='outer')
     return trackSet2
+    
 def generatePlaylistSet(sp,username):
-    trackColumns = ['Trackname', 'TrackID']
+    trackColumns = ['trackname', 'trackID']
     df = generateRefSet(sp,username)
     featureSet = generateFeatureSet(df,sp,trackColumns)
-    totalSet = pd.merge(df, featureSet, on=["Trackname", "TrackID"])
+    totalSet = pd.merge(df, featureSet, on=["trackname", "trackID"])
     totalSet = totalSet.drop_duplicates()
-    totalSet = totalSet.sort_values(by=['Playlist'])
+    totalSet = totalSet.sort_values(by=['playlist'])
     return totalSet
 
 #########SAVED TRACKS SET GENERATION###############
@@ -75,8 +77,8 @@ def savedTracksDf(sp):
             ret.append(tup)
         offset += 50
 
-    df = pd.DataFrame(ret, columns=('Track', 'Artist',
-                                    'Album', 'Date Added', 'Popularity', 'TrackID'))
+    df = pd.DataFrame(ret, columns=('track', 'artist',
+                                    'album', 'date_added', 'popularity', 'trackID'))
 
     return df
 def generateSavedTracksSet(sp):
@@ -92,7 +94,7 @@ def generateSavedTracksSet(sp):
     df2 = pd.DataFrame(chain)
     df = pd.concat([df.iloc[:, 0:5], df2], axis=1, join='outer')
     df = df.drop_duplicates()
-    df = df.sort_values(by=['Date Added'],ascending=False)
+    df = df.sort_values(by=['date_added'],ascending=False)
     return df
 
 
@@ -137,7 +139,7 @@ def make_spider(df, row, title, color):
 
 def generatePlaylistPlots(df):
     # extract usable data
-    playlistAnalysis = df.groupby(["Playlist"])['valence', 'energy', 'acousticness',
+    playlistAnalysis = df.groupby(["playlist"])['valence', 'energy', 'acousticness',
                                                 'speechiness', 'danceability', 'instrumentalness', 'liveness', 'mode'].mean().round(3)
     plNames = list(playlistAnalysis.index)
     # Create a color palette:
@@ -158,7 +160,7 @@ def generatePlaylistPlots(df):
     print("images generated")
 
 def exportVisualizationDataset(df):
-    playlistAnalysis = df.groupby(["Playlist"])['valence', 'energy', 'acousticness',
+    playlistAnalysis = df.groupby(["playlist"])['valence', 'energy', 'acousticness',
                                                 'speechiness', 'danceability', 'instrumentalness', 'liveness', 'mode'].mean().round(3)
     playlistAnalysis.to_csv('exports/playlistViz.csv',index=False)
 
@@ -169,8 +171,8 @@ def runRscript(filename):
     subprocess.check_output(cmd)
 
 def exportArtistAlbumSegments(df):
-    artistProfile = df.groupby(['Artist']).mean().loc[:, ['Popularity', 'acousticness', 'danceability', 'energy', 'instrumentalness','liveness', 'speechiness', 'tempo', 'valence']].assign(no_albums=df.groupby(['Artist'])['Album'].nunique())
-    albumProfile = df.groupby(['Album']).mean().loc[:, ['Popularity', 'acousticness', 'danceability','energy', 'instrumentalness', 'liveness', 'speechiness', 'tempo', 'valence']]
+    artistProfile = df.groupby(['artist']).mean().loc[:, ['popularity', 'acousticness', 'danceability', 'energy', 'instrumentalness','liveness', 'speechiness', 'tempo', 'valence']].assign(no_albums=df.groupby(['artist'])['album'].nunique())
+    albumProfile = df.groupby(['album']).mean().loc[:, ['popularity', 'acousticness', 'danceability','energy', 'instrumentalness', 'liveness', 'speechiness', 'tempo', 'valence']]
     artistProfile.to_csv('exports/artistProfile.csv',index=False)
     albumProfile.to_csv('exports/albumProfile.csv',index=False)
 
@@ -183,7 +185,7 @@ def prepareArtistDf():
 	return df
 
 def getartistDist(df, artist, features):
-	artistSet = df[df.Artist == artist]
+	artistSet = df[df.artist == artist]
 	filename = "artistDistribution/"+artist+"/"
 	os.makedirs(os.path.dirname(filename), exist_ok=True)
 	for feature in features:
@@ -197,9 +199,9 @@ def getartistDist(df, artist, features):
 def artistSegments():
 	df = prepareArtistDf()
 	sns.set(color_codes=True)
-	artistList = list(df.loc[:, 'Artist'].unique())
+	artistList = list(df.loc[:, 'artist'].unique())
 	features = ['valence', 'acousticness', 'instrumentalness',
-             'energy', 'speechiness', 'Popularity', 'liveness']
+             'energy', 'speechiness', 'popularity', 'liveness']
 	for artist in artistList:
 		getartistDist(df, artist, features)
 

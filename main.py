@@ -16,15 +16,16 @@ LastFm = LastFmCredentials(username=lastfm_username, password=lastfm_password)
 sp = Spotify.genAuth()
 network=LastFm.gen_network()
 
-
 with warnings.catch_warnings():
 	warnings.filterwarnings("ignore", category=RuntimeWarning)
 	try:
-		spot_func.generateAllDatasets(sp, spotify_username, refresh=1)
+		spot_func.generateAllDatasets(sp, spotify_username, refresh=0)
 		last_func.generateCombinedDatabases(network, lastfm_username, refresh=1)
-		print("success")
+		print("OH HI MARK")
 	except Exception as e:
-		print("failed because of \n" + e)
+		print("f to pay resepects")
+		print(e)
 
-print("OH HI MARK")
-
+plDb=pd.read_csv("exports/MasterPlaylistDatabase.csv",index_col=0)
+trackDb=pd.read_csv("exports/MasterTrackDatabase.csv",index_col=3)
+trackDb=trackDb.sort_index(ascending=False)

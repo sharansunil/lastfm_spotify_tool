@@ -60,7 +60,7 @@ def generateTrackSet(network,username):
 		time = dates[counter][1]
 		trackArtist.append([trackname, artistname, albname, date, time])
 		counter += 1
-	df = pd.DataFrame(trackArtist, columns=['Track', 'Artist', 'Album', 'Date', 'Time'])
+	df = pd.DataFrame(trackArtist, columns=['track', 'artist', 'album', 'date', 'time'])
 	return df
 
 
@@ -76,14 +76,14 @@ def topAlbumsArtists(network,username):
 		sx = sx.get_name()
 		plays = obj.weight
 		ArtistPlays.append([sx, plays])
-	df1 = pd.DataFrame(ArtistPlays, columns=["Artist", "Plays"])
+	df1 = pd.DataFrame(ArtistPlays, columns=["artist", "plays"])
 	df1.to_csv('exports/TopArtist.csv',index=False)
 	for obj in topAlbums:
 		sx = obj.item
 		sx = sx.get_name()
 		plays = obj.weight
 		AlbumPlays.append([sx, plays])
-	df2 = pd.DataFrame(AlbumPlays, columns=["Album", "Plays"])
+	df2 = pd.DataFrame(AlbumPlays, columns=["album", "plays"])
 	df2.to_csv("exports/TopAlbums.csv",index=False)
 	return df1,df2
 
@@ -102,38 +102,38 @@ def makeAllLastFm(network,username):
 def topTracksDB(network, username):
 	df = generateTrackSet(network, username)
 	df = df.assign(key=pd.Series(np.random.randn(len(df.index))).values)
-	df = pd.DataFrame(df.groupby(["Track", "Artist"])["key"].nunique().to_frame(
+	df = pd.DataFrame(df.groupby(["track", "artist"])["key"].nunique().to_frame(
 	).reset_index().sort_values(by="key", ascending=False).reset_index().drop("index", axis=1))
-	df.columns=["Track","Artist","Plays"]
-	df = df.assign(uid=df["Track"]+df["Artist"])
+	df.columns=["track","artist","plays"]
+	df = df.assign(uid=df["track"]+df["artist"])
 	df.to_csv("exports/AllTracksPlayed.csv",index=False)
 	return df
 
 
 def generateMasterTrackDatabase():
 	tracksDB = pd.read_csv("exports/savedDB.csv", index_col=0).reset_index()
-	df = tracksDB.assign(uid=tracksDB["Track"]+tracksDB["Artist"])
+	df = tracksDB.assign(uid=tracksDB["track"]+tracksDB["artist"])
 	trackPlaysDB = pd.read_csv("exports/AllTracksPlayed.csv")
 	trackPlaysDB.uid = trackPlaysDB.uid.str.lower()
 	trackPlaysDB.uid = trackPlaysDB.uid.str.strip()
 	df.uid = df.uid.str.lower()
 	df.uid = df.uid.str.strip()
 	df = pd.merge(df, trackPlaysDB, how="left", on="uid", suffixes=('', '_y'))
-	df = df.drop(columns=['Track_y', 'Artist_y'])
-	df["Plays"] = df["Plays"].fillna(0)
-	df.loc[:, "Plays"] = df.loc[:, "Plays"].astype(int)
-	df = df.loc[:, ["Track", "Artist", "Album", "Date Added", "Plays", "Popularity", "acousticness", "danceability", "speechiness","tempo", "time_signature", "valence", "energy", "liveness", "instrumentalness"]].sort_values(by="Date Added", ascending=False)
+	df = df.drop(columns=['track_y', 'artist_y'])
+	df["plays"] = df["plays"].fillna(0)
+	df.loc[:, "plays"] = df.loc[:, "plays"].astype(int)
+	df = df.loc[:, ["track", "artist", "album", "date_added", "plays", "popularity", "acousticness", "danceability", "speechiness","tempo", "time_signature", "valence", "energy", "liveness", "instrumentalness"]].sort_values(by="date_added", ascending=False)
 	df.iloc[:, [0, 1, 2, 3]] = df.iloc[:, [0, 1, 2, 3]].apply(lambda x: x.str.strip())
 	df.iloc[:, [6, 7, 8, 9, 11, 12, 13, 14]] = df.iloc[:, [6, 7, 8, 9, 11, 12, 13, 14]].apply(lambda x: x.round(2))
 	df.tempo = df.tempo.apply(lambda x: int(x))
-	df = df.sort_values(by="Plays", ascending=False).reset_index(drop=True)
+	df = df.sort_values(by="plays", ascending=False).reset_index(drop=True)
 	df.to_csv("exports/MasterTrackDatabase.csv",index=False)
 
 
 def generatePlaylistDb():
 	""""fixdf"""
 	df = pd.read_csv("exports/playlistDB.csv", index_col=0).reset_index()
-	df = df.assign(uid=df["Trackname"]+df["Artist"])
+	df = df.assign(uid=df["trackname"]+df["artist"])
 	df.uid = df.uid.str.lower()
 	df.uid = df.uid.str.strip()
 
@@ -145,14 +145,14 @@ def generatePlaylistDb():
 	"""merge and clean"""
 
 	df = pd.merge(df, trackPlaysDB, how="left", on="uid", suffixes=('', '_y'))
-	df = df.loc[:, ["Playlist", "Track", "Artist", "Album", "Plays", "acousticness", "liveness",
+	df = df.loc[:, ["playlist", "track", "artist", "album", "plays","date_added" ,"acousticness", "liveness",
                  "instrumentalness", "valence", "energy", "tempo", "time_signature", "danceability", "speechiness"]]
 	df.iloc[:, 0:3] = df.iloc[:, 0:3].apply(lambda x: x.str.strip())
-	df.Plays = df.Plays.fillna(0).astype(int)
+	df.plays = df.plays.fillna(0).astype(int)
 	df.loc[:, ["acousticness", "liveness", "instrumentalness", "valence", "energy", "danceability", "speechiness"]] = df.loc[:, [
 		"acousticness", "liveness", "instrumentalness", "valence", "energy", "danceability", "speechiness"]].apply(lambda x: x.round(2))
 	df.tempo = df.tempo.astype(int)
-
+	df.loc[:, "date_added"] = df.loc[:, "date_added"].apply(lambda x: x[:10])
 	df.to_csv('exports/MasterPlaylistDatabase.csv', index=False)
 
 def generateCombinedDatabases(network,lastfm_username,refresh=0):
