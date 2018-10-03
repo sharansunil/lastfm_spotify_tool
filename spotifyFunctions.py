@@ -5,10 +5,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from math import pi
 from matplotlib.colors import ListedColormap
-import subprocess
-from time import sleep
 import os
 
+"""extracs data from Track object"""
 def show_tracks(playname, playid, tracks):
     retdic = []
     for  item in tracks['items']:
@@ -25,7 +24,7 @@ def show_tracks(playname, playid, tracks):
         retdic.append(retarray)
     return retdic
 
-######PLAYLIST SET GENERATION############
+"""playlist set generation"""
 def generateRefSet(sp,username):
     playlists = sp.user_playlists(username)
     playlistarray = []
@@ -62,7 +61,7 @@ def generatePlaylistSet(sp,username):
     totalSet = totalSet.sort_values(by=['playlist'])
     return totalSet
 
-#########SAVED TRACKS SET GENERATION###############
+"""saved tracks set generation"""
 def savedTracksDf(sp):
     offset = 0
     ret = []
@@ -84,8 +83,6 @@ def savedTracksDf(sp):
 def generateSavedTracksSet(sp):
     df = savedTracksDf(sp)
     df['Features'] = df.iloc[:, -1]
-    sleep(30)
-    print("wait over, getting features")
     try:
         features = df.iloc[:, -1].apply(sp.audio_features)
     except Exception as e:
@@ -97,8 +94,7 @@ def generateSavedTracksSet(sp):
     df = df.sort_values(by=['date_added'],ascending=False)
     return df
 
-
-#########CHOOSE BETWEEN PLAYLIST AND SAVED DATASET TO GENERATE#########
+"""update dataset controller"""
 def updateDataset(key,sp,username):
     if key=="playlist":
         df = generatePlaylistSet(sp,username)
@@ -109,7 +105,7 @@ def updateDataset(key,sp,username):
     else:
         print("Wrong key")
 
-###########CREATE VIZ#################
+"""generate playlist profile plots"""
 def make_spider(df, row, title, color):
     # number of variable
     categories = list(df)
@@ -157,29 +153,10 @@ def generatePlaylistPlots(df):
         make_spider(df=playlistAnalysis, row=row,
                        title=plNames[row], color=cmap(row))
         plt.savefig('playlistPlots/'+plNames[row]+'.svg')
-    print("images generated")
 
-def exportVisualizationDataset(df):
-    playlistAnalysis = df.groupby(["playlist"])['valence', 'energy', 'acousticness',
-                                                'speechiness', 'danceability', 'instrumentalness', 'liveness', 'mode'].mean().round(3)
-    playlistAnalysis.to_csv('exports/playlistViz.csv',index=False)
-
-def runRscript(filename):
-    command = 'Rscript'
-    path2script = filename
-    cmd = [command, path2script]
-    subprocess.check_output(cmd)
-
-def exportArtistAlbumSegments(df):
-    artistProfile = df.groupby(['artist']).mean().loc[:, ['popularity', 'acousticness', 'danceability', 'energy', 'instrumentalness','liveness', 'speechiness', 'tempo', 'valence']].assign(no_albums=df.groupby(['artist'])['album'].nunique())
-    albumProfile = df.groupby(['album']).mean().loc[:, ['popularity', 'acousticness', 'danceability','energy', 'instrumentalness', 'liveness', 'speechiness', 'tempo', 'valence']]
-    artistProfile.to_csv('exports/artistProfile.csv',index=False)
-    albumProfile.to_csv('exports/albumProfile.csv',index=False)
-
-###########CREATE ARTIST DISTRIBUTIONS##############
+"""generate artist distribution plots"""
 def prepareArtistDf():
 	df = pd.read_csv('exports/savedDB.csv')
-
 	df['duration_min'] = df['duration_ms'].apply(lambda x: x/(1000*60)).round(2)
 	df.drop(['duration_ms'], axis=1)
 	return df
@@ -205,19 +182,24 @@ def artistSegments():
 	for artist in artistList:
 		getartistDist(df, artist, features)
 
-def generateAllDatasets(sp, username,refresh):
-        ######playlist db generation
+def generateAllDatasets(sp, username,refresh=1,playlists=1,artist=1):
+    refpr="done"
+    plpr="done"
+    art="done"
     if refresh==1:
         updateDataset("playlist", sp, username)
-    df = pd.read_csv('exports/playlistDB.csv')
-    exportVisualizationDataset(df)
-    generatePlaylistPlots(df)
-    #####break
-    print('playlist done, 1 minute break')
-    sleep(60)
-    print('starting on saved db')
-    #####saved songs db generation
-    if refresh==1:
         updateDataset("saved", sp, username)
-    df2 = pd.read_csv('exports/savedDB.csv')
-    exportArtistAlbumSegments(df2)
+    else:
+        refpr="omitted"
+    df = pd.read_csv('exports/playlistDB.csv')
+    if playlists ==1:
+        generatePlaylistPlots(df)
+    else:
+        plpr="omitted"
+    if artist==1:
+        artistSegments()
+    else:
+        art="omitted"
+    retstr="Spotify updated with refresh {}, playlists {} and artists {}".format(refpr,plpr,art)
+    print(retstr)
+    
