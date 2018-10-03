@@ -165,7 +165,8 @@ def generateCombinedDatabases(network,lastfm_username,refresh=0):
 			print("both datasets generated")
 		
 		except Exception as e:
-			print("An error occurred: \n" + e )
+			print("f to pay respects" )
+			print(e)
 	
 	elif refresh ==1:
 		try:
@@ -175,7 +176,8 @@ def generateCombinedDatabases(network,lastfm_username,refresh=0):
 			generatePlaylistDb()
 			print("LastFM data refreshed and datasets generated")
 		except Exception as e:
-			print("An error occurred: \n" + e )
+			print("f to pay respects")
+			print(e)
 
 	else:
 		print("Wrong refresh key: 1 for yes, 0 for no. Its pretty straightforward.")
