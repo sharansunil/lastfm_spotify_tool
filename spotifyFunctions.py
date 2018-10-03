@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from math import pi
 from matplotlib.colors import ListedColormap
 import os
+import os.path 
 
 """extracs data from Track object"""
 def show_tracks(playname, playid, tracks):
@@ -96,6 +97,9 @@ def generateSavedTracksSet(sp):
 
 """update dataset controller"""
 def updateDataset(key,sp,username):
+    curdir = os.getcwd()
+    newdir = os.path.join(curdir, r'exports')
+    os.makedirs(newdir, exist_ok=True)
     if key=="playlist":
         df = generatePlaylistSet(sp,username)
         df.to_csv('exports/playlistDB.csv',index=False)
@@ -142,6 +146,9 @@ def generatePlaylistPlots(df):
     sns.set_palette("pastel")
     cmap = ListedColormap(sns.color_palette(n_colors=256))
     sns.set()
+    curdir = os.getcwd()
+    newdir = os.path.join(curdir, r'playlistPlots')
+    os.makedirs(newdir,exist_ok=True)
     # initialise average dataset
     playlistAnalysisMean = pd.DataFrame(playlistAnalysis.mean())
     playlistAnalysisMean = playlistAnalysisMean.transpose()
@@ -182,10 +189,15 @@ def artistSegments():
 	for artist in artistList:
 		getartistDist(df, artist, features)
 
+"""main controller for all functions
+    - if playlist toggled to 0 no playlist graphs will be generated
+    - if artist is toggled to 0 no artist distribution folder and graphs will be created """
+
 def generateAllDatasets(sp, username,refresh=1,playlists=1,artist=1):
     refpr="done"
     plpr="done"
     art="done"
+    retstr=""
     if refresh==1:
         updateDataset("playlist", sp, username)
         updateDataset("saved", sp, username)
@@ -200,6 +212,9 @@ def generateAllDatasets(sp, username,refresh=1,playlists=1,artist=1):
         artistSegments()
     else:
         art="omitted"
-    retstr="Spotify updated with refresh {}, playlists {} and artists {}".format(refpr,plpr,art)
+    if sum(refresh + playlists+ artist)==0:
+        retstr="Spotify not updated, proceeding to lastfm"
+    else:
+        retstr="Spotify updated with refresh {}, playlists {} and artists {}".format(refpr,plpr,art)
     print(retstr)
     
