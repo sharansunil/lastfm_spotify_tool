@@ -212,7 +212,7 @@ def generateAllDatasets(sp, username,refresh=1,playlists=1,artist=1):
         artistSegments()
     else:
         art="omitted"
-    if sum(refresh + playlists+ artist)==0:
+    if refresh + playlists+ artist ==0:
         retstr="Spotify not updated, proceeding to lastfm"
     else:
         retstr="Spotify updated with refresh {}, playlists {} and artists {}".format(refpr,plpr,art)
