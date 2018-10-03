@@ -8,7 +8,7 @@ from matplotlib.colors import ListedColormap
 import os
 import os.path
 
-"""extracs data from Track object"""
+"""extracts data from Track object"""
 
 
 def show_tracks(playname, playid, tracks):

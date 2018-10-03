@@ -5,6 +5,9 @@ import numpy as np
 
 TRACK_SEPARATOR = u" - "
 
+
+"""helper functions - reader can ignore"""
+
 def unicode_track_and_timestamp(track):
 	unicode_track = str(track.track)
 	return track.playback_date + "\t" + unicode_track
@@ -27,6 +30,7 @@ def fixTime(test):
 	test = test.strftime('%H:%M')
 	return test
 
+"""dataset generators, do not customise unless you know what youre doing"""
 
 def generateTrackSet(network,username):
 	df = list(network.get_user(username).get_recent_tracks(limit=1000))
@@ -97,7 +101,6 @@ def topTracksDB(network, username):
 	df.to_csv("exports/AllTracksPlayed.csv",index=False)
 	return df
 
-
 def generateMasterTrackDatabase():
 	tracksDB = pd.read_csv("exports/savedDB.csv", index_col=0).reset_index()
 	df = tracksDB.assign(uid=tracksDB["track"]+tracksDB["artist"])
@@ -116,7 +119,6 @@ def generateMasterTrackDatabase():
 	df.tempo = df.tempo.apply(lambda x: int(x))
 	df = df.sort_values(by="plays", ascending=False).reset_index(drop=True)
 	df.to_csv("exports/MasterTrackDatabase.csv",index=False)
-
 
 def generatePlaylistDb():
 	""""fixdf"""
@@ -142,6 +144,8 @@ def generatePlaylistDb():
 	df.tempo = df.tempo.astype(int)
 	df.loc[:, "date_added"] = df.loc[:, "date_added"].apply(lambda x: x[:10])
 	df.to_csv('exports/MasterPlaylistDatabase.csv', index=False)
+
+"""master output file, do not modify. shit might break"""
 
 def generateCombinedDatabases(network,lastfm_username,tracks_playlists=0,top_albums_artists=0):
 

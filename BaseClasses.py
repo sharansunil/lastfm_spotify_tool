@@ -46,15 +46,18 @@ class SpotifyCredentials():
 		return self.scope
 
 	def genAuth(self):
-		token = util.prompt_for_user_token(username=self.sp_username, scope=self.scope,
-										   client_id=self.client_id, client_secret=self.client_secret, redirect_uri=self.redirect_uri)
+		token = util.prompt_for_user_token(	username=self.sp_username, 
+											scope=self.scope,
+											client_id=self.client_id, 
+											client_secret=self.client_secret, 
+											redirect_uri=self.redirect_uri)
 		sp = spotipy.Spotify(auth=token)
 		return sp
 
 
 class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials):
 
-	def __init__(self, lastfm_username, sp_username, scope, refresh_spotify, refresh_last_tracks_pl,refresh_last_top_albums_artists,refresh_playlists,refresh_artist):
+	def __init__(self, lastfm_username, sp_username, scope="user-library-read", refresh_spotify=1, refresh_last_tracks_pl=1,refresh_last_top_albums_artists=1,refresh_playlists=1,refresh_artist=1):
 		SpotifyCredentials.__init__(self,sp_username, scope)
 		LastFmCredentials.__init__(self,lastfm_username)
 		self.refresh_spotify = refresh_spotify

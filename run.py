@@ -3,23 +3,27 @@ import pandas as pd
 from os import listdir 
 
 
-"""user specified arguments"""
-
-scope = 'user-library-read'
+#set user specific variables as needed.prompt for lastfm password is later
 sp_username = '1177566421'
 lastfm_username = "sharansunil"
 
-"""import main builder class and toggle settings accordingly:
-refresh_sp = 0/1 to refresh spotify data
-refresh_playlists = 0/1 to generate spotify playlist svg
-refresh_artist = 0/1 to generate artist profiles from spotify
-refresh_last_top_albums_artists = 0/1 to refresh and generate top artist and albums from lastfm
-refresh_last_tracks_pl =0/1 to refresh all lastfm track data and generate master databases """
 
-main = Spotify_LastFM_Builder(lastfm_username=lastfm_username, sp_username=sp_username, scope=scope, refresh_spotify=0,
-							  refresh_last_top_albums_artists=1, refresh_last_tracks_pl=1, refresh_playlists=1, refresh_artist=1)
+"""creates main object to generate datasets and plots. all binary variables default to 1. scope is already set to user-library-read.
+set all variables to 1 if generating for the first time"""
 
-"""set sensitive info and run create"""
+main = Spotify_LastFM_Builder(	
+	lastfm_username=lastfm_username, 
+	sp_username=sp_username, 
+	refresh_last_top_albums_artists=1, #refresh top artists and albums dataset from lastfm: no recommendation, up to user 
+	refresh_last_tracks_pl=1,#refresh last fm tracks and generates master dataset: recommended at 1
+	refresh_spotify=1, #refresh spotify database. time and data intensive. recommended at 0 adhoc refresh
+	refresh_playlists=1, #refresh playlist plots. recommended at 0 adhoc refresh
+	refresh_artist=1#refresh artist distribution plots recommended at 0 adhoc refresh
+)
+
+"""set password by input instance or fix it in code, up to you"""
 #main.setPassword(input("Key in password dumbass:    "))
 main.setPassword("synystrax")
+
+"""run file"""
 main.create_all()
