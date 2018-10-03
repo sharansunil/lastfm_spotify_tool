@@ -54,11 +54,13 @@ class SpotifyCredentials():
 
 class Data_Plot_Builder(SpotifyCredentials, LastFmCredentials):
 
-    def __init__(self, lastfm_username, sp_username, scope, refresh_sp, refresh_last):
+    def __init__(self, lastfm_username, sp_username, scope, refresh_sp, refresh_last,refresh_playlists,refresh_artist):
         SpotifyCredentials.__init__(self,sp_username, scope)
         LastFmCredentials.__init__(self,lastfm_username)
         self.refresh_sp = refresh_sp
         self.refresh_last = refresh_last
+        self.playlists=refresh_playlists
+        self.artist=refresh_artist
 
     def create_credentials(self):
         sp = SpotifyCredentials.genAuth(self)
@@ -71,8 +73,8 @@ class Data_Plot_Builder(SpotifyCredentials, LastFmCredentials):
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=RuntimeWarning)
             try:
-                spot_func.generateAllDatasets(self.sp, self.sp_username, refresh=self.refresh_sp)
+                spot_func.generateAllDatasets(self.sp, self.sp_username, refresh=self.refresh_sp,playlists=self.playlists,artist=self.artist)
                 last_func.generateCombinedDatabases(self.network, self.lastfm_username, refresh=self.refresh_last)
             except Exception as e:
-                print("f to pay resepects")
+                print("f to pay resepects\n\n")
                 print(e)
