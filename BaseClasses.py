@@ -5,6 +5,8 @@ import LastFmFunctions as last_func
 import SpotifyFunctions as spot_func
 import warnings
 import pandas as pd
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 class LastFmCredentials():
 
@@ -57,12 +59,31 @@ class SpotifyCredentials():
 		sp = spotipy.Spotify(auth=token)
 		return sp
 
+class GoogleSheetLoader:
 
-class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials):
+	def __init__(self):
+		self.gscope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
+		self.credentials = ServiceAccountCredentials.from_json_keyfile_name('spotfm_credentials.json', self.gscope)
+		self.gc = gspread.authorize(self.credentials)
+
+	def top100_to_df(self):
+		top100 = self.gc.open('best albums').worksheet("top100")
+		no_rows = int(top100.acell('S2').value)
+		no_col = int(top100.acell('S1').value)
+		retval = []
+		for row in range(1, no_rows):
+				retval.append(top100.row_values(row))
+		df = pd.DataFrame(retval[1:], columns=[x.lower() for x in retval[0]])
+		df = df.iloc[:, range(0, no_col)].fillna(0)
+		df.to_csv("exports/Top100.csv",index=False)
+		print("top 100 albums file downloaded")
+
+class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLoader):
 
 	def __init__(self, lastfm_username, sp_username, scope="user-library-read"):
 		SpotifyCredentials.__init__(self,sp_username, scope)
 		LastFmCredentials.__init__(self,lastfm_username)
+		GoogleSheetLoader.__init__(self)
 
 	def create_credentials(self):
 		sp = SpotifyCredentials.genAuth(self)
@@ -93,18 +114,27 @@ class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials):
 				print(e)
 	
 	"""loads dataset into memory. toggle playlist and tracks to see which df's to load. selecting both will return as dictionary with playlist and tracks as keys"""
-	def load_datasets(self,playlist=1,tracks=1):
+	def load_datasets(self,playlist=1,tracks=1,gsheet=1):
 		self.tr =pd.DataFrame()
 		self.pl=pd.DataFrame()
+		self.gs=pd.DataFrame()
 		if playlist==1:
 			self.pl=pd.read_csv("exports/MasterPlaylistDatabase.csv",index_col="playlist")
 		if tracks ==1:
 			self.tr=pd.read_csv("exports/MasterTrackDatabase.csv",index_col="date_added")
-		if tracks==1 and playlist==1:
-			return {"playlist":self.pl,"tracks":self.tr}
-		elif tracks==1 and playlist==0:
+		if gsheet ==1:
+			self.gs=pd.read_csv("exports/Top100.csv")
+		if tracks==1 and playlist==1 and gsheet==1: #all
+			return {"playlist":self.pl,"tracks":self.tr,"top100":self.gs}
+		elif tracks==1 and playlist==0 and gsheet==0: #tracks
 			return self.tr 
-		elif tracks==0 and playlist==1:
+		elif tracks == 1 and playlist == 0 and gsheet == 1: #tracks + gs
+			return {"tracks":self.tr,"top100":self.gs}
+		elif tracks==0 and playlist==1 and gsheet==0: #pl 
 			return self.pl
+		elif tracks == 0 and playlist == 1 and gsheet == 1: #pl + gs
+			return {"playlist":self.pl,"top100":self.gs}
+		elif tracks==0 and playlist==0 and gsheet==1: #gs
+			return self.gs
 		else:
 			print("invalid keys given, please only type 1 or 0")
