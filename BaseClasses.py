@@ -78,6 +78,22 @@ class GoogleSheetLoader:
 		df.to_csv("exports/Top100.csv",index=False)
 		print("top 100 albums file downloaded")
 
+	def frep(self,tracks,x):
+		rv = tracks.loc[tracks.album.str.contains(x), "plays"].tolist()
+		if len(rv) != 0:
+			rv = rv[0]
+		else:
+			rv = 0
+		return rv
+
+
+	def top100_plays(self,tracks, top100):
+		tracks.album = tracks.album.apply(lambda x: x.lower().strip())
+		tracks = tracks.groupby("album")["plays"].sum().to_frame().reset_index()
+		top100.album = top100.album.apply(lambda x: x.lower().strip())
+		top100 = top100.assign(plays=top100.album.apply(lambda x: self.frep(tracks,x)))
+		return top100
+
 class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLoader):
 
 	def __init__(self, lastfm_username, sp_username, scope="user-library-read"):

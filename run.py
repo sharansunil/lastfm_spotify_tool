@@ -24,13 +24,10 @@ spotify_fm.update_datasets(
 	)
 
 spotify_fm.top100_to_df()
-
 retdict=spotify_fm.load_datasets()
-
-retdict.keys()
-
 top100=retdict["top100"]
 tracks=retdict["tracks"]
 playlist=retdict["playlist"]
 
-top100.head()
+top100=spotify_fm.top100_plays(tracks,top100)
+
