@@ -24,6 +24,7 @@ Submit a pull request
 This project is licensed under The Unlicense
 
 ### Dependencies
+- Python 3.6+ only
 - pandas 0.23.4
 - seaborn 0.9.0
 - pylast https://github.com/pylast/pylast
