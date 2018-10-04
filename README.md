@@ -30,3 +30,4 @@ This project is licensed under The Unlicense
 - pylast https://github.com/pylast/pylast
 - spotipy https://spotipy.readthedocs.io/en/latest/# 
 - itertools
+- gspread
