@@ -64,10 +64,10 @@ class GoogleSheetLoader:
 	def __init__(self):
 		self.gscope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 		self.credentials = ServiceAccountCredentials.from_json_keyfile_name('spotfm_credentials.json', self.gscope)
-		self.gc = gspread.authorize(self.credentials)
 
 	def top100_to_df(self):
-		top100 = self.gc.open('best albums').worksheet("top100")
+		gc = gspread.authorize(self.credentials)
+		top100 = gc.open('best albums').worksheet("top100")
 		no_rows = int(top100.acell('S2').value)
 		no_col = int(top100.acell('S1').value)
 		retval = []
@@ -78,20 +78,25 @@ class GoogleSheetLoader:
 		df.to_csv("exports/Top100.csv",index=False)
 		print("top 100 albums file downloaded")
 
-	def frep(self,tracks,x):
-		rv = tracks.loc[tracks.album.str.contains(x), "plays"].tolist()
+	def frep(self,tracks,x,retseg):
+		rv = tracks.loc[tracks.album.str.contains(x), retseg].tolist()
 		if len(rv) != 0:
 			rv = rv[0]
 		else:
 			rv = 0
 		return rv
 
-
 	def top100_plays(self,tracks, top100):
 		tracks.album = tracks.album.apply(lambda x: x.lower().strip())
-		tracks = tracks.groupby("album")["plays"].sum().to_frame().reset_index()
+		tracks2 = tracks.groupby("album")["plays"].sum().to_frame().reset_index()
 		top100.album = top100.album.apply(lambda x: x.lower().strip())
-		top100 = top100.assign(plays=top100.album.apply(lambda x: self.frep(tracks,x)))
+		top100 = top100.assign(plays=top100.album.apply(lambda x: self.frep(tracks2,x,"plays")))
+		top100=top100.fillna(0)
+		cols = list(tracks.select_dtypes(include="float64").columns)
+		albums = pd.DataFrame(tracks.groupby('album')[cols].mean()).reset_index()
+		top100 = top100.assign(alt="")
+		top100.alt = top100.album.apply(lambda x: self.frep(tracks, x,"album"))
+		top100 = pd.merge(top100, albums, how="left", left_on="alt", right_on="album")
 		return top100
 
 class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLoader):
