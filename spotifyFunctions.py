@@ -206,7 +206,7 @@ def generateAllDatasets(sp, username, refresh=1, playlists=1, artist=1):
 	else:
 		art = "omitted"
 	if refresh + playlists + artist == 0:
-		retstr = "Spotify not updated, proceeding to lastfm"
+		retstr = "Spotify not updated, proceeding to lastfm. Datasets can be found in playlistDB.csv and savedDB.csv"
 	else:
 		retstr = "Spotify updated with refresh {}, playlists {} and artists {}".format(
 			refpr, plpr, art)

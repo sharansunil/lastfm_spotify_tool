@@ -8,7 +8,7 @@ import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-class LastFmCredentials():
+class LastFmCredentials:
 
 	def __init__(self, lastfm_username):
 		self.lastfm_username = lastfm_username
@@ -27,7 +27,7 @@ class LastFmCredentials():
 			password_hash=self.password)
 		return net
 
-class SpotifyCredentials():
+class SpotifyCredentials:
 
 	def __init__(self, sp_username, scope='user-library-read'):
 		self.sp_username = sp_username
@@ -64,20 +64,24 @@ class GoogleSheetLoader:
 	def __init__(self):
 		self.gscope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 		self.credentials = ServiceAccountCredentials.from_json_keyfile_name('spotfm_credentials.json', self.gscope)
-
-	def top100_to_df(self):
-		gc = gspread.authorize(self.credentials)
-		top100 = gc.open('best albums').worksheet("top100")
-		no_rows = int(top100.acell('S2').value)
-		no_col = int(top100.acell('S1').value)
-		retval = []
-		for row in range(1, no_rows):
-				retval.append(top100.row_values(row))
-		df = pd.DataFrame(retval[1:], columns=[x.lower() for x in retval[0]])
-		df = df.iloc[:, range(0, no_col)].fillna(0)
-		df.to_csv("exports/Top100.csv",index=False)
-		print("top 100 albums file downloaded")
-
+	def top100_to_df(self,refresh_gsheet):
+		self.trax = pd.read_csv("exports/MasterTrackDatabase.csv")
+		if refresh_gsheet==1:
+			gc = gspread.authorize(self.credentials)
+			top100 = gc.open('best albums').worksheet("top100")
+			no_rows = int(top100.acell('S2').value)
+			no_col = int(top100.acell('S1').value)
+			retval = []
+			for row in range(1, no_rows):
+					retval.append(top100.row_values(row))
+			df = pd.DataFrame(retval[1:], columns=[x.lower() for x in retval[0]])
+			df = df.iloc[:, range(0, no_col)].fillna(0)
+			df= self.top100_plays(self.trax,df)
+			df=df.drop("album_y",axis=1)
+			df.to_csv("exports/Top100.csv",index=False)
+			print("top 100 albums file downloaded")
+		else:
+			print("Gsheet Refresh not selected, dataset can be found in Top100.csv if generated previously")
 	def frep(self,tracks,x,retseg):
 		rv = tracks.loc[tracks.album.str.contains(x), retseg].tolist()
 		if len(rv) != 0:
@@ -113,7 +117,7 @@ class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLo
 		self.network = network
 
 	"""updates dataset without loading datasets in memory,store as csv"""
-	def update_datasets(self,refresh_spotify=0,refresh_artist_viz=0,refresh_playlist_viz=0,lastfm_tracks=1,lastfm_artistalbum=1):
+	def update_datasets(self,refresh_spotify=0,refresh_artist_viz=0,refresh_playlist_viz=0,lastfm_tracks=1,lastfm_artistalbum=1,refresh_gsheet=0):
 		self.create_credentials()
 		with warnings.catch_warnings():
 			warnings.filterwarnings("ignore", category=RuntimeWarning)
@@ -129,7 +133,7 @@ class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLo
 					self.lastfm_username, 
 					tracks_playlists=lastfm_tracks,
 					top_albums_artists=lastfm_artistalbum)
-			
+				self.top100_to_df(refresh_gsheet)
 			except Exception as e:
 				print("f to pay resepects\n\n")
 				print(e)

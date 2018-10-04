@@ -12,21 +12,22 @@ spotify_fm = Spotify_LastFM_Builder(
 """set last fm password"""
 spotify_fm.setPassword("synystrax")
 
-"""updates spotify and lastfm datasets. toggle settings as needed"""
+"""updates spotify,lastfm and connects gsheets. toggle settings as needed"""
 spotify_fm.update_datasets(
 	##spotify refreshers - recommended to set at 0
 	refresh_spotify=0,
 	refresh_artist_viz=0,
 	refresh_playlist_viz=0,
 	##lastfm refreshers - recommended to set at 1
-	lastfm_artistalbum=1,
-	lastfm_tracks=1
+	lastfm_artistalbum=0,
+	lastfm_tracks=0,
+	refresh_gsheet=1
 	)
 
-spotify_fm.top100_to_df()
 retdict=spotify_fm.load_datasets()
+
 top100=retdict["top100"]
 tracks=retdict["tracks"]
 playlist=retdict["playlist"]
 
-top100=spotify_fm.top100_plays(tracks,top100)
+top100.head()

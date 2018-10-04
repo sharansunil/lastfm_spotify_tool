@@ -169,7 +169,7 @@ def generateCombinedDatabases(network,lastfm_username,tracks_playlists=0,top_alb
 			generatePlaylistDb()
 			retstr="Tracks and Playlist dataset updated. Top Albums/Artists not updated."
 		else:
-			retstr="LastFm not updated at user request"
+			retstr="LastFm not updated proceeding to Gsheets. Datasets can be found at MasterTrackDatabase.csv and MasterPlaylistDatabase.csv"
 
 		print(retstr)
 		
