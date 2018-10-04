@@ -20,3 +20,6 @@ Submit an issue
 Submit a pull request
 
 ### Please feel free to give feedback and advice about my code be it optimisation, cleaning or more features!
+
+### License
+This project is licensed under The Unlicense
