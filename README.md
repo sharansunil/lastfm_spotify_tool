@@ -17,10 +17,15 @@ Please feel free to give feedback and advice about my code be it optimisation, c
 ### I found a bug?
 Submit an issue
 
-### I want to add something new. 
+### I want to add something new!
 Submit a pull request
 
 ### License
 This project is licensed under The Unlicense
 
-#### Huge thanks to the developers of the pylast and spotipy libraries for making excellent python libraries for extracting the data! 
+### Dependencies
+- pandas 0.23.4
+- seaborn 0.9.0
+- pylast https://github.com/pylast/pylast
+- spotipy https://spotipy.readthedocs.io/en/latest/# 
+- itertools
