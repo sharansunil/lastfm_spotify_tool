@@ -7,6 +7,7 @@ import warnings
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import gspread_dataframe as gd
 
 class LastFmCredentials:
 
@@ -79,7 +80,8 @@ class GoogleSheetLoader:
 			df= self.top100_plays(self.trax,df)
 			df=df.drop("album_y",axis=1)
 			df.to_csv("exports/Top100.csv",index=False)
-			print("top 100 albums file downloaded")
+			self.pushToGsheet(gc,"Top 100 Albums")
+			print("top 100 albums extracted and updated locally and on gsheet")
 		else:
 			print("Gsheet Refresh not selected, dataset can be found in Top100.csv if generated previously")
 	def frep(self,tracks,x,retseg):
@@ -89,7 +91,8 @@ class GoogleSheetLoader:
 		else:
 			rv = 0
 		return rv
-
+	def generateClient(self):
+		return gspread.authorize(self.credentials)
 	def top100_plays(self,tracks, top100):
 		tracks.album = tracks.album.apply(lambda x: x.lower().strip())
 		tracks2 = tracks.groupby("album")["plays"].sum().to_frame().reset_index()
@@ -102,6 +105,15 @@ class GoogleSheetLoader:
 		top100.alt = top100.album.apply(lambda x: self.frep(tracks, x,"album"))
 		top100 = pd.merge(top100, albums, how="left", left_on="alt", right_on="album")
 		return top100
+	def pushToGsheet(self,client,fname):
+		try:
+			ss = client.open(fname)
+		except gspread.exceptions.SpreadsheetNotFound:
+			ss = client.create(fname)
+			ss.share('sharansnl@gmail.com', perm_type='user', role='writer')
+		ss = ss.sheet1
+		df = pd.read_csv("exports/Top100.csv")
+		gd.set_with_dataframe(ss, df)
 
 class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLoader):
 
@@ -134,6 +146,7 @@ class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLo
 					tracks_playlists=lastfm_tracks,
 					top_albums_artists=lastfm_artistalbum)
 				self.top100_to_df(refresh_gsheet)
+
 			except Exception as e:
 				print("f to pay resepects\n\n")
 				print(e)
