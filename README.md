@@ -29,7 +29,7 @@ This project is licensed under The Unlicense
 - pandas 0.23.4
 - seaborn 0.9.0
 - itertools
-- pylast https://github.com/pylast/pylast
-- spotipy https://spotipy.readthedocs.io/en/latest/# 
+- pylast 3.0 https://github.com/pylast/pylast
+- spotipy 2.0 https://spotipy.readthedocs.io/en/latest/# 
 - gspread v3.0.1 https://gspread.readthedocs.io/en/latest/
 - gspread_dataframe https://pythonhosted.org/gspread-dataframe/
