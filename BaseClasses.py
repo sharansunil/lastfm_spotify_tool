@@ -79,9 +79,11 @@ class GoogleSheetLoader:
 			df = df.iloc[:, range(0, no_col)].fillna(0)
 			df= self.top100_plays(self.trax,df)
 			df=df.drop("album_y",axis=1)
+			df=df.drop("alt",axis=1)
 			df.to_csv("exports/Top100.csv",index=False)
+			df.to_excel(excel_writer="exports/Top 100.xlsx")
 			self.pushToGsheet(gc,"Top 100 Albums")
-			print("top 100 albums extracted and updated locally and on gsheet")
+			print("top 100 albums extracted and updated locally on csv,excel and on gsheet")
 		else:
 			print("Gsheet Refresh not selected, dataset can be found in Top100.csv if generated previously")
 	def frep(self,tracks,x,retseg):
