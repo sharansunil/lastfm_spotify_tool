@@ -99,6 +99,10 @@ def topTracksDB(network, username):
 	).reset_index().sort_values(by="key", ascending=False).reset_index().drop("index", axis=1))
 	df.columns=["track","artist","plays"]
 	df = df.assign(uid=df["track"]+df["artist"])
+	df.uid = df.uid.str.lower()
+	df.uid = df.uid.str.strip()
+	df.artist = df.artist.str.replace("$", "s")
+	df.uid = df.uid.str.replace("$", "s")
 	df.to_csv("exports/AllTracksPlayed.csv",index=False)
 	return df
 
@@ -106,10 +110,9 @@ def generateMasterTrackDatabase():
 	tracksDB = pd.read_csv("exports/savedDB.csv", index_col=0).reset_index()
 	df = tracksDB.assign(uid=tracksDB["track"]+tracksDB["artist"])
 	trackPlaysDB = pd.read_csv("exports/AllTracksPlayed.csv")
-	trackPlaysDB.uid = trackPlaysDB.uid.str.lower()
-	trackPlaysDB.uid = trackPlaysDB.uid.str.strip()
 	df.uid = df.uid.str.lower()
 	df.uid = df.uid.str.strip()
+	df.uid = df.uid.str.replace("$", "s")
 	df = pd.merge(df, trackPlaysDB, how="left", on="uid", suffixes=('', '_y'))
 	df = df.drop(columns=['track_y', 'artist_y'])
 	df["plays"] = df["plays"].fillna(0)
@@ -127,11 +130,9 @@ def generatePlaylistDb():
 	df = df.assign(uid=df["trackname"]+df["artist"])
 	df.uid = df.uid.str.lower()
 	df.uid = df.uid.str.strip()
-
+	df.uid = df.uid.str.replace("$", "s")
 	"""fixtracks"""
 	trackPlaysDB = pd.read_csv("exports/AllTracksPlayed.csv")
-	trackPlaysDB.uid = trackPlaysDB.uid.str.lower()
-	trackPlaysDB.uid = trackPlaysDB.uid.str.strip()
 
 	"""merge and clean"""
 

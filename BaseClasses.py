@@ -80,8 +80,11 @@ class GoogleSheetLoader:
 			df= self.top100_plays(self.trax,df)
 			df=df.drop("album_y",axis=1)
 			df=df.drop("alt",axis=1)
+			colf = list(df.select_dtypes(include="object").columns)
+			df.loc[:,colf]=df.loc[:,colf].apply(lambda x: x.str.strip())
+			df=df.fillna(0)
 			df.to_csv("exports/Top100.csv",index=False)
-			df.to_excel(excel_writer="exports/Top 100.xlsx")
+			df.to_excel(excel_writer="exports/Top 100.xlsx",index=False)
 			self.pushToGsheet(gc,"Top 100 Albums")
 			print("top 100 albums extracted and updated locally on csv,excel and on gsheet")
 		else:
@@ -105,7 +108,7 @@ class GoogleSheetLoader:
 		albums = pd.DataFrame(tracks.groupby('album')[cols].mean()).reset_index()
 		top100 = top100.assign(alt="")
 		top100.alt = top100.album.apply(lambda x: self.frep(tracks, x,"album"))
-		top100 = pd.merge(top100, albums, how="left", left_on="alt", right_on="album")
+		top100 = pd.merge(top100, albums, how="left", left_on="alt", right_on="album",suffixes=('','_y'))
 		return top100
 	def pushToGsheet(self,client,fname):
 		try:
