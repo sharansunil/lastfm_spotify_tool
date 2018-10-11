@@ -17,25 +17,6 @@ spotify_fm.update_datasets(
 	# lastfm refreshers - recommended to set at 1
 	lastfm_artistalbum=0,
 	lastfm_tracks=0,
-	refresh_gsheet=0
+	refresh_gsheet=1
 )
 retdict = spotify_fm.load_datasets()
-
-
-def splits(x):
-	if ' | ' in x:
-		x=x.split('|')[0]
-	return x
-errorbase=pd.read_csv('exports/errors.csv')
-errorbase.track=errorbase.track.apply(lambda x: x.replace('/',' '))
-errorbase.track = errorbase.track.apply(lambda x: x.replace('.', ' '))
-errorbase.track = errorbase.track.apply(lambda x: x.replace(':', ' '))
-errorbase.track = errorbase.track.apply(lambda x: x.replace('(', ' '))
-errorbase.track = errorbase.track.apply(lambda x: x.replace(')', ' '))
-errorbase.track = errorbase.track.apply(lambda x: x.replace(',', ' '))
-errorbase.track = errorbase.track.apply(lambda x: x.strip())
-errorbase.track = errorbase.track.apply(lambda x:splits(x))
-lyr=LyricGenerator()
-
-x=lyr.pullLyrics(errorbase)
-x

@@ -1,39 +1,47 @@
 import pandas as pd
-import lyricsgenius as genius
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import csv
+from bs4 import BeautifulSoup as bs
 import os
-import unidecode
-import sys
+import itertools
+from string import punctuation
+from time import time
+from time import sleep
+driver = webdriver.Chrome()
+def loadFiles():
+	with open('exports/errors.csv', 'r') as f:
+		reader = csv.reader(f)
+		f = list(reader)
+	f = list(itertools.chain(*f))
+	os.chdir("exports/lyric files")
+	return f
 
-class LyricGenerator:
+def scrapeToPage(driver, item):
+	driver.get("https://genius.com/")
+	elem = driver.find_element_by_name("q")
+	elem.clear()
+	elem.send_keys(item)
+	el_one = elem.send_keys(Keys.RETURN)
+	sleep(20)
+	el_one = driver.find_element_by_tag_name("search-result-item")
+	el_one.click()
+	el_two = driver.page_source
+	return el_two
 
-	def __init__(self):
-		self.lyric_token = '77eKBrbm6RQj4Sg0rxnmH7sFZwDcRmcRsBzde9en1SPcboe8Ilm2p8bt-2Ndr2zN'
 
-	def blockPrint(self):
-		sys.stdout = open(os.devnull, 'w')
-
-	def enablePrint(self):
-		sys.stdout = sys.__stdout__
-
-	def pullLyrics(self,df):
-		api= genius.Genius(self.lyric_token,verbose=False)
-		errors=[]
-		for item in df.itertuples():
-			artist=item[1]
-			track=item[2]
-			retstr='exports/lyric files/'+artist+'/'
-			track=unidecode.unidecode(track)
-			artist=unidecode.unidecode(artist)
-			os.makedirs(os.path.dirname(retstr), exist_ok=True)
-			self.blockPrint()
-			try:
-				song = api.search_song(track, artist)
-				song.save_lyrics(retstr+track,verbose=False,overwrite=True)
-			except Exception as e:
-				errors.append([artist,track,e])
-		self.enablePrint()
-		len_err=len(errors)
-		len_df=len(df.index)
-		retstr= "{} lyrics attempted. {} successful. {} errors.".format(len_df,len_df-len_err,len_err)
-		print(retstr)
-		return errors
+def writeAll(driver):
+	df = loadFiles()
+	for item in df:
+		try:
+			ret = scrapeToPage(driver, item)
+		except Exception as e:
+			print(e)
+		html = bs(ret, "html.parser")
+		lyrics = html.find("div", class_="lyrics").get_text("\n")
+		lyrics = lyrics.lstrip('\n')
+		lyrics = lyrics.rstrip('\n')
+		with open(item+".txt", "w") as text_file:
+			text_file.write(lyrics)
+	driver.delete_all_cookies()
+writeAll(driver)

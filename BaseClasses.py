@@ -201,24 +201,26 @@ class LyricGenerator:
 	def pullLyrics(self,df):
 		api = genius.Genius(self.lyric_token, verbose=False)
 		errors = []
-		mafk=[]
 		for item in df.itertuples():
 			artist = item[1]
 			track = item[2]
-			retstr = 'exports/lyric files/'+artist+'/'
 			track = unidecode.unidecode(track)
+			retstr = 'exports/lyric files/'+artist+'/'
+			track=track.replace("/"," ")
+			track = track.split("|")[0] if "|" in track else track
+			track=track.strip()
+			track=track.replace(":"," ")
 			artist = unidecode.unidecode(artist)
-			os.makedirs(os.path.dirname(retstr), exist_ok=True)
 			self.blockPrint()
 			try:
 				song=api.search_song(track, artist)
-				#song.save_lyrics(retstr+track, verbose=False, overwrite=True)
-				mafk.append(song)
-			except AttributeError as err:
-				errors.append([artist,track,str(err)])
+				os.makedirs(os.path.dirname(retstr), exist_ok=True)
+				song.save_lyrics(retstr+track, verbose=False, overwrite=False)
+			except AttributeError:
+				errors.append(track +' '+artist)
 		self.enablePrint()
 		len_err = len(errors)
 		len_df = len(df.index)
 		retstr = "{} lyrics attempted. {} successful. {} errors.".format(len_df, len_df-len_err, len_err)
 		print(retstr)
-		return mafk
+		return errors
