@@ -1,4 +1,4 @@
-# spotify+lastfm integration and visualization tool
+# music analysis integration (spotify, lastfm, genius, gdrive)
 
 This is a repo for my personal project to analyze my listening habits and music library. It currently encompasses an integration between spotify and lastfm to get listening and music data. A Gsheet integration is built to keep track of a labelled dataset I created for my favourite albums. A lyrics extraction feature has also been added and will be used for phase 2 which is sentiment analysis of lyrics and deploying a live website for the visualizations.
 
