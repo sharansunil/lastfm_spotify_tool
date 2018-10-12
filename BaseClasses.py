@@ -12,6 +12,14 @@ import sys
 import os
 import unidecode
 import lyricsgenius as genius
+from fuzzywuzzy import fuzz
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import csv
+from bs4 import BeautifulSoup as bs
+import itertools
+from time import sleep
+from os import listdir
 
 class LastFmCredentials:
 
@@ -198,7 +206,7 @@ class LyricGenerator:
 	def enablePrint(self):
 		sys.stdout = sys.__stdout__
 
-	def pullLyrics(self,df):
+	def pullGeniusLyrics(self,df):
 		api = genius.Genius(self.lyric_token, verbose=False)
 		errors = []
 		for item in df.itertuples():
@@ -224,3 +232,148 @@ class LyricGenerator:
 		retstr = "{} lyrics attempted. {} successful. {} errors.".format(len_df, len_df-len_err, len_err)
 		print(retstr)
 		return errors
+
+
+	def fuzzer(self,a,b):
+		if fuzz.partial_ratio(a, b) > 95:
+			return True
+		else:
+			False
+
+
+	def splitbar(self,s, pattern):
+		if pattern in s:
+			return s.split(pattern)[0]
+		else:
+			return s
+
+
+	def getTop100MissingLyrics(self,spotify_fm):
+		retdict=spotify_fm.load_datasets()
+		top100 = retdict["top100"]
+		top100 = top100.loc[:, ["artist", "album"]]
+		track = retdict["tracks"]
+		top100.album = top100.album.str.lower()
+		top100.album = top100.album.str.strip()
+		track.album = track.album.str.lower()
+		track.album = track.album.str.strip()
+		top100 = top100.assign(f=top100.album.isin(track.album))
+		top100f = top100[top100.f == False]
+		trackbum = list(track.album.unique())
+		matches = []
+		for item in top100f.itertuples():
+			album = item[2]
+			rv = ""
+			for alb in trackbum:
+				if self.fuzzer(album, alb):
+					rv = alb
+			matches.append((album, rv))
+		matched = pd.DataFrame(matches, columns=['album', 'ref'])
+		top100 = pd.merge(top100, matched, how="left", on="album")
+		top100.ref = top100.ref.fillna(top100.album)
+		top100 = top100.drop('f', axis=1)
+		track = track.assign(istop=track.album.isin(top100.ref))
+		top100s = track[track.istop == True]
+		lyr = pd.read_csv('exports/currentlyrics.csv')
+		top100s.track = top100s.track.str.strip()
+		top100s.track = top100s.track.str.lower()
+		top100s.track = top100s.track.apply(lambda x: self.splitbar(x, '|'))
+		top100s.track = top100s.track.apply(lambda x: self.splitbar(x, ':'))
+		top100_t = top100s.loc[:, ["artist", "track"]]
+		top100_t = top100_t.assign(isL=top100_t.artist.isin(lyr.artist))
+		top100_t = top100_t[top100_t.isL == False]
+		top100_t = top100_t.sort_index(ascending=False)
+		top100_t.artist = top100_t.artist.apply(lambda x: unidecode.unidecode(x))
+		top100_t.index = top100_t.artist
+		top100_t = top100_t.drop(["harunemuri", "MOL"]).reset_index(drop=True).drop('isL', axis=1)
+		return top100_t
+
+
+	def loadFiles(self,fname):
+		with open('fname', 'r') as f:
+			reader = csv.reader(f)
+			f = list(reader)
+		f = list(itertools.chain(*f))
+		os.chdir("exports/lyric files")
+		return f
+
+
+	def scrapeToPage(self,driver, item):
+		driver.get("https://genius.com/")
+		elem = driver.find_element_by_name("q")
+		elem.clear()
+		elem.send_keys(item)
+		el_one = elem.send_keys(Keys.RETURN)
+		sleep(20)
+		el_one = driver.find_element_by_tag_name("search-result-item")
+		el_one.click()
+		el_two = driver.page_source
+		return el_two
+
+
+	def writeAll(self):
+		driver = webdriver.Chrome()
+		df = self.loadFiles('dog.csv')
+		for item in df:
+			try:
+				ret = self.scrapeToPage(driver, item)
+			except Exception as e:
+				print(e)
+			html = bs(ret, "html.parser")
+			lyrics = html.find("div", class_="lyrics").get_text("\n")
+			lyrics = lyrics.lstrip('\n')
+			lyrics = lyrics.rstrip('\n')
+			with open(item+".txt", "w") as text_file:
+				text_file.write(lyrics)
+		driver.delete_all_cookies()
+
+
+	def getCurrLyr(self):
+		path = 'exports/lyric files/'
+
+		baselist = listdir(path)
+		len(baselist)
+		baselist.remove('.DS_Store')
+		bl = [unidecode.unidecode(item)for item in baselist]
+		x = []
+		for item in bl:
+			rv = [item, listdir(path+item+'/')]
+			x.append(rv)
+		f = []
+
+		for item in x:
+			artist = item[0]
+			rv = [(artist, tr.replace('.txt', '')) for tr in item[1]]
+			f.append(rv)
+		f = itertools.chain(*f)
+		f = list(f)
+
+		df = pd.DataFrame(f, columns=['artist', 'track'])
+		df = df.sort_values(by='artist').reset_index(drop=True)
+		df.to_csv('exports/currentlyrics.csv', index=False)
+		return df
+
+	def lyricController(self,spotify_fm):
+		df=self.getTop100MissingLyrics(spotify_fm)
+		success=0
+		if len(df)==0:
+			success=1
+			print("All lyrics retrieved previously, no changes.")
+		else:
+			errors=self.pullGeniusLyrics(df)
+			if len(errors)==0:
+				success=1
+				print("{} lyrics retrieved. No errors".format(len(df)))
+			else:
+				try:
+					self.writeAll()
+					success=1
+					print("{} lyrics retrieved despite errors")
+				except Exception as e:
+					print(e)
+		if success==1:
+			rdf=self.getCurrLyr()
+			return rdf
+		else:
+			print("Not all prints successful")
+			return errors
