@@ -9,8 +9,7 @@ This is a repo for my personal project to analyze my listening habits and music 
 
 ### What does each python file do?
 - BaseClasses contains all builder classes for spotify,lastfm, gsheet and genius.
-- Spotify and LastFm functions are built to be helper functions (built earlier, will integrate with BaseClasses soon)
-- run is the main runner tool 
+- run is the execution/testing ground
 
 ### License
 This project is licensed under The Unlicense
