@@ -1,6 +1,6 @@
 from BaseClasses import Spotify_LastFM_Builder, LyricGenerator
 import pandas as pd
-
+from fuzzywuzzy import fuzz 
 #usernames
 sp_username = '1177566421'
 lastfm_username = "sharansunil"
@@ -13,9 +13,9 @@ spotify_fm.setPassword("synystrax")
 
 spotify_fm.update_datasets(
 	# spotify refreshers - recommended to set at 0
-	refresh_spotify=1,
-	refresh_artist_viz=1,
-	refresh_playlist_viz=1,
+	refresh_spotify=0,
+	refresh_artist_viz=0,
+	refresh_playlist_viz=0,
 	# lastfm refreshers - recommended to set at 1
 	lastfm_artistalbum=0,
 	lastfm_tracks=0,
@@ -25,5 +25,4 @@ retdict = spotify_fm.load_datasets()
 
 #genius lyric pull
 lyr=LyricGenerator()
-df=lyr.lyricController(spotify_fm)
-
+df=lyr.lyricController(retdict)

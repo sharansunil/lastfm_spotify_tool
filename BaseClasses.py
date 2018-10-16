@@ -19,13 +19,13 @@ import os
 import os.path
 import pandas as pd
 import pylast
+import re
 import seaborn as sns
 import spotipy
 import spotipy.util as util
 import sys
 import unidecode
 import warnings
-
 
 """LastFM class details"""
 class LastFmCredentials:
@@ -581,7 +581,7 @@ class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLo
 		else:
 			print("invalid keys given, please only type 1 or 0")
 
-"""Lyric Class Details"""
+"""Lyric Class Details-needs fix"""
 class LyricGenerator:
 
 	def __init__(self):
@@ -593,14 +593,15 @@ class LyricGenerator:
 	def enablePrint(self):
 		sys.stdout = sys.__stdout__
 
-	def pullGeniusLyrics(self,df):
+	def geniusLyrics(self,df):
 		api = genius.Genius(self.lyric_token, verbose=False)
 		errors = []
 		for item in df.itertuples():
 			artist = item[1]
 			track = item[2]
 			track = unidecode.unidecode(track)
-			retstr = 'exports/lyric files/'+artist+'/'
+			artTitle=artist.title()
+			retstr = 'exports/lyric files/'+artTitle+'/'
 			track=track.replace("/"," ")
 			track = track.split("|")[0] if "|" in track else track
 			track=track.strip()
@@ -620,62 +621,61 @@ class LyricGenerator:
 		print(retstr)
 		return errors
 
+	def cleanString(self,s):
+		s = s.strip()
+		s = s.lower()
+		markers = ["|", "-"]
+		indices = [(i, x) for i, x in enumerate(s) if x in markers]
+		if indices != []:
+			mins = indices[0]
+			s = s.split(mins[1])[0].strip()
+		dirt = ["/", ":", ".", "(", ")"]
+		for x in dirt:
+			s = s.replace(x, '')
+		s = re.sub(' +', ' ', s)
+		return s
 
-	def fuzzer(self,a,b):
-		if fuzz.partial_ratio(a, b) > 95:
-			return True
-		else:
-			False
-
-
-	def splitbar(self,s, pattern):
-		if pattern in s:
-			return s.split(pattern)[0]
-		else:
-			return s
-
-
-	def getTop100MissingLyrics(self,spotify_fm):
-		retdict=spotify_fm.load_datasets()
-		top100 = retdict["top100"]
-		top100 = top100.loc[:, ["artist", "album"]]
-		track = retdict["tracks"]
-		top100.album = top100.album.str.lower()
-		top100.album = top100.album.str.strip()
-		track.album = track.album.str.lower()
-		track.album = track.album.str.strip()
-		top100 = top100.assign(f=top100.album.isin(track.album))
-		top100f = top100[top100.f == False]
-		trackbum = list(track.album.unique())
-		matches = []
-		for item in top100f.itertuples():
-			album = item[2]
-			rv = ""
-			for alb in trackbum:
-				if self.fuzzer(album, alb):
-					rv = alb
-			matches.append((album, rv))
-		matched = pd.DataFrame(matches, columns=['album', 'ref'])
-		top100 = pd.merge(top100, matched, how="left", on="album")
-		top100.ref = top100.ref.fillna(top100.album)
-		top100 = top100.drop('f', axis=1)
-		track = track.assign(istop=track.album.isin(top100.ref))
-		top100s = track[track.istop == True]
-		lyr = pd.read_csv('exports/currentlyrics.csv')
-		top100s.track = top100s.track.str.strip()
-		top100s.track = top100s.track.str.lower()
-		top100s.track = top100s.track.apply(lambda x: self.splitbar(x, '|'))
-		top100s.track = top100s.track.apply(lambda x: self.splitbar(x, ':'))
-		top100_t = top100s.loc[:, ["artist", "track"]]
-		top100_t = top100_t.assign(isL=top100_t.artist.isin(lyr.artist))
-		top100_t = top100_t[top100_t.isL == False]
-		top100_t = top100_t.sort_index(ascending=False)
-		top100_t.artist = top100_t.artist.apply(lambda x: unidecode.unidecode(x))
-		top100_t.index = top100_t.artist
-		top100_t = top100_t.drop(["harunemuri", "MOL"]).reset_index(drop=True).drop('isL', axis=1)
-		return top100_t
-
-
+	def getMissingAlbums(self,retdict):
+		curr = pd.read_csv("exports/currentlyrics.csv")
+		top100 = retdict["top100"].loc[:, ["artist", "album", "best song"]]
+		tracks = retdict["tracks"].loc[:, ["artist", "album", "track"]]
+		top100 = top100.applymap(self.cleanString)
+		tracks = tracks.applymap(self.cleanString).reset_index(drop=True)
+		curr = curr.applymap(self.cleanString)
+		top100 = top100.assign(inCurr=top100.iloc[:, -1].isin(curr.track))
+		errs = top100[top100.inCurr == False]
+		errs.index = errs.album
+		errs = errs.drop('album', axis=1)
+		errs = errs.drop(["harutosyura", "jord"])
+		currerrs = curr[curr.artist.isin(errs.artist)]
+		for item in errs.itertuples():
+			errtrack = item[2]
+			for trx in currerrs.itertuples():
+				basetrx = trx[2]
+				if errtrack in basetrx:
+					errs = errs.drop(item[0])
+					break
+		errs=errs.reset_index()
+		tracks2 = retdict["tracks"]
+		tracks2 = tracks2.loc[:, ["artist", "track", "album"]].reset_index(drop=True)
+		tracks2 = tracks2.applymap(self.cleanString)
+		errs = errs.assign(found=errs.album.isin(tracks2.album))
+		problems = errs.loc[:, ["album", "artist", "found"]]
+		problem_albums = tracks2[tracks2.artist.isin(problems.artist)].album.unique().tolist()
+		rv = []
+		for item in problems.itertuples():
+			if item[-1] == True:
+				rv.append([item[1], item[2]])
+			else:
+				x = [s for s in problem_albums if item[1] in s][0]
+				rv.append([x, item[2]])
+		rv = pd.DataFrame(rv, columns=["album", "artist"])
+		df = pd.merge(rv, tracks2, how="left", on="album", suffixes=["", "_"])
+		df = df.drop("artist_", axis=1)
+		df = df.drop('album', axis=1)
+		df = df.drop_duplicates()
+		return df
+ 
 	def loadFiles(self,fname):
 		with open('fname', 'r') as f:
 			reader = csv.reader(f)
@@ -698,10 +698,9 @@ class LyricGenerator:
 		return el_two
 
 
-	def writeAll(self):
+	def seleniumLyrics(self,lists):
 		driver = webdriver.Chrome()
-		df = self.loadFiles('dog.csv')
-		for item in df:
+		for item in lists:
 			try:
 				ret = self.scrapeToPage(driver, item)
 			except Exception as e:
@@ -710,12 +709,13 @@ class LyricGenerator:
 			lyrics = html.find("div", class_="lyrics").get_text("\n")
 			lyrics = lyrics.lstrip('\n')
 			lyrics = lyrics.rstrip('\n')
+			os.chdir("exports/lyric files")
 			with open(item+".txt", "w") as text_file:
 				text_file.write(lyrics)
 		driver.delete_all_cookies()
 
 
-	def getCurrLyr(self):
+	def getExistingLyrics(self):
 		path = 'exports/lyric files/'
 
 		baselist = listdir(path)
@@ -739,28 +739,31 @@ class LyricGenerator:
 		df = df.sort_values(by='artist').reset_index(drop=True)
 		df.to_csv('exports/currentlyrics.csv', index=False)
 		return df
-
-	def lyricController(self,spotify_fm):
-		df=self.getTop100MissingLyrics(spotify_fm)
+	
+	def lyricController(self,retdict):
+		self.getExistingLyrics()
+		df=self.getMissingAlbums(retdict)
+		print(df)
 		success=0
 		if len(df)==0:
 			success=1
 			print("All lyrics retrieved previously, no changes.")
 		else:
-			errors=self.pullGeniusLyrics(df)
+			errors=self.geniusLyrics(df)
 			if len(errors)==0:
 				success=1
 				print("{} lyrics retrieved. No errors".format(len(df)))
 			else:
 				try:
-					self.writeAll()
+					f=[item[1]+' ' +item[2]for item in df.itertuples()]
+					self.seleniumLyrics(f)
 					success=1
 					print("{} lyrics retrieved despite errors")
 				except Exception as e:
 					print(e)
 		if success==1:
-			rdf=self.getCurrLyr()
+			rdf=self.getExistingLyrics()
 			return rdf
 		else:
-			print("Not all prints successful")
+			print("Not all pulls successful")
 			return errors
