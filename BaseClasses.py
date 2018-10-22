@@ -581,7 +581,7 @@ class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLo
 		else:
 			print("invalid keys given, please only type 1 or 0")
 
-"""Lyric Class Details-needs fix"""
+"""Lyric Class Details-98% success"""
 class LyricGenerator:
 
 	def __init__(self):
@@ -611,7 +611,7 @@ class LyricGenerator:
 			try:
 				song=api.search_song(track, artist)
 				os.makedirs(os.path.dirname(retstr), exist_ok=True)
-				song.save_lyrics(retstr+track, verbose=False, overwrite=False)
+				song.save_lyrics(retstr+track, verbose=False, overwrite=True)
 			except AttributeError:
 				errors.append(track +' '+artist)
 		self.enablePrint()
