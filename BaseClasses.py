@@ -9,6 +9,7 @@ from selenium.webdriver.common.keys import Keys
 from time import sleep
 import csv
 import datetime
+import dateutil.parser
 import gspread
 import gspread_dataframe as gd
 import itertools
@@ -24,6 +25,7 @@ import seaborn as sns
 import spotipy
 import spotipy.util as util
 import sys
+import time
 import unidecode
 import warnings
 
@@ -304,31 +306,55 @@ class SpotifyCredentials:
 	"""saved tracks set generation"""
 
 	def savedTracksSpDf(self, sp):
+
 		offset = 0
 		ret = []
-		while offset < 2000:
+		currtrx = pd.read_csv('exports/savedDB.csv')
+		last_refreshed = float(dateutil.parser.parse(currtrx.iloc[0,3]).strftime('%s')) #latest update in db
+
+		def _get_trackset(sp, offset, last_refreshed):
 			results = sp.current_user_saved_tracks(limit=50, offset=offset)
 			for item in results['items']:
 				track = item['track']
 				date_added = item['added_at']
-				date_added = date_added[:10]
-				tup = [track['name'], track['artists'][0]['name'],
-                                    track['album']['name'], date_added, track['popularity'], track['id']]
+				# date_added = date_added[:10]
+				tup = [track['name'], track['artists'][0]['name'], track['album']
+							['name'], date_added, track['popularity'], track['id']]
 				ret.append(tup)
-			offset += 50
-		df = pd.DataFrame(ret, columns=('track', 'artist', 'album',
-                                  'date_added', 'popularity', 'trackID'))
-		df['Features'] = df.iloc[:, -1]
-		try:
-			features = df.iloc[:, -1].apply(sp.audio_features)
-		except Exception as e:
-			print(e)
-		chain = list(itertools.chain(*features))
-		df2 = pd.DataFrame(chain)
-		df = pd.concat([df.iloc[:, 0:5], df2], axis=1, join='outer')
-		df = df.drop_duplicates()
-		df = df.sort_values(by=['date_added'], ascending=False)
-		return df
+			df = pd.DataFrame(ret, columns=('track', 'artist', 'album',
+										'date_added', 'popularity', 'trackID'))
+			df = df.assign(epoch=df.date_added.apply(
+				lambda x: float(dateutil.parser.parse(x).strftime('%s'))))
+			df_to_feature = df[df.epoch > last_refreshed]
+			return df_to_feature
+
+		df_to_feature = _get_trackset(sp, offset, last_refreshed)
+		ori_len=len(currtrx)
+		if len(df_to_feature) != 0:
+			if len(df_to_feature) == 50 and df_to_feature.iloc[-1, -1] > last_refreshed:
+				offset += 50
+				df3 = _get_trackset(sp, offset, last_refreshed)
+				df_to_feature = pd.concat([df_to_feature, df3], axis=0, join='outer')
+			last_refreshed = df_to_feature.iloc[0, -1]
+			df_to_feature = df_to_feature.drop('epoch', axis=1)
+			df_to_feature = df_to_feature.assign(features=df_to_feature.iloc[:, -1])
+			df_to_feature.date_added = df_to_feature.date_added.apply(lambda x: x[:10])
+			try:
+				features = df_to_feature.iloc[:, -1].apply(sp.audio_features)
+			except Exception as e:
+				print(e)
+			chain = list(itertools.chain(*features))
+			df2 = pd.DataFrame(chain)
+			df = pd.concat([df_to_feature.iloc[:, 0:5], df2], axis=1, join='outer')
+			df = df.drop_duplicates()
+			currtrx = pd.concat([df, currtrx], axis=0, join='outer')
+			currtrx=currtrx.drop_duplicates()
+			currtrx = currtrx.sort_values(by=['date_added'], ascending=False).reset_index(drop=True)
+			print("{} tracks added".format(len(currtrx)-ori_len))
+		else:
+			print("No changes to saved tracks")
+
+		return currtrx
 
 	"""update dataset controller"""
 
@@ -338,8 +364,10 @@ class SpotifyCredentials:
 		os.makedirs(newdir, exist_ok=True)
 		if key == "both":
 			df1 = self.savedTracksSpDf(sp)
+			df1=df1.drop_duplicates()
 			df1.to_csv('exports/savedDB.csv', index=False)
 			df = self.generatePlaylistSet(sp, username)
+			df=df.drop_duplicates()
 			df.to_csv('exports/playlistDB.csv', index=False)
 		elif key == "playlist":
 			df = self.generatePlaylistSet(sp, username)
@@ -552,7 +580,7 @@ class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLo
 				self.top100_to_df(refresh_gsheet)
 
 			except Exception as e:
-				print("f to pay resepects\n\n")
+				print("f to pay respects\n\n")
 				print(e)
 	
 	"""loads dataset into memory. toggle playlist and tracks to see which df's to load. selecting both will return as dictionary with playlist and tracks as keys"""
@@ -743,12 +771,12 @@ class LyricGenerator:
 	def lyricController(self,retdict):
 		self.getExistingLyrics()
 		df=self.getMissingAlbums(retdict)
-		print(df)
 		success=0
 		if len(df)==0:
 			success=1
 			print("All lyrics retrieved previously, no changes.")
 		else:
+			print(df)
 			errors=self.geniusLyrics(df)
 			if len(errors)==0:
 				success=1
