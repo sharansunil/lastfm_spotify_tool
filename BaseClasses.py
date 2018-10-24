@@ -657,10 +657,11 @@ class LyricGenerator:
 		if indices != []:
 			mins = indices[0]
 			s = s.split(mins[1])[0].strip()
-		dirt = ["/", ":", ".", "(", ")"]
+		dirt = ["/", ":", ".", "(", ")","remastered"]
 		for x in dirt:
 			s = s.replace(x, '')
 		s = re.sub(' +', ' ', s)
+		s=unidecode.unidecode(s)
 		return s
 
 	def getMissingAlbums(self,retdict):
@@ -728,6 +729,7 @@ class LyricGenerator:
 
 	def seleniumLyrics(self,lists):
 		driver = webdriver.Chrome()
+		os.chdir("exports/lyric files/")
 		for item in lists:
 			try:
 				ret = self.scrapeToPage(driver, item)
@@ -737,7 +739,6 @@ class LyricGenerator:
 			lyrics = html.find("div", class_="lyrics").get_text("\n")
 			lyrics = lyrics.lstrip('\n')
 			lyrics = lyrics.rstrip('\n')
-			os.chdir("exports/lyric files")
 			with open(item+".txt", "w") as text_file:
 				text_file.write(lyrics)
 		driver.delete_all_cookies()
@@ -784,7 +785,7 @@ class LyricGenerator:
 			else:
 				try:
 					f=[item[1]+' ' +item[2]for item in df.itertuples()]
-					self.seleniumLyrics(f)
+					errors=self.seleniumLyrics(f)
 					success=1
 					print("{} lyrics retrieved despite errors")
 				except Exception as e:
