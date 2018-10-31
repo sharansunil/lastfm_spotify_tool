@@ -155,7 +155,6 @@ class LastFmCredentials:
 		df.uid = df.uid.str.strip()
 		df.uid = df.uid.str.replace("$", "s")
 		df = pd.merge(df, trackPlaysDB, how="left", on="uid", suffixes=('', '_y'))
-		df = df.drop(columns=['track_y', 'artist_y'])
 		df["plays"] = df["plays"].fillna(0)
 		df.loc[:, "plays"] = df.loc[:, "plays"].astype(int)
 		df = df.loc[:, ["track", "artist", "album", "date_added", "plays", "popularity", "acousticness", "danceability", "speechiness",
@@ -506,7 +505,7 @@ class GoogleSheetLoader:
 			df= self.top100_plays(self.trax,df)
 			df=df.drop("album_y",axis=1)
 			df=df.drop("alt",axis=1)
-			colf = list(df.select_dtypes(include="object").columns)
+			colf = list(df.select_dtypes(include=["object"]).columns)
 			df.loc[:,colf]=df.loc[:,colf].apply(lambda x: x.str.strip())
 			df=df.fillna(0)
 			df.to_csv("exports/Top100.csv",index=False)
@@ -530,7 +529,7 @@ class GoogleSheetLoader:
 		top100.album = top100.album.apply(lambda x: x.lower().strip())
 		top100 = top100.assign(plays=top100.album.apply(lambda x: self.frep(tracks2,x,"plays")))
 		top100=top100.fillna(0)
-		cols = list(tracks.select_dtypes(include="float64").columns)
+		cols = list(tracks.select_dtypes(include=["float64"]).columns)
 		albums = pd.DataFrame(tracks.groupby('album')[cols].mean()).reset_index()
 		top100 = top100.assign(alt="")
 		top100.alt = top100.album.apply(lambda x: self.frep(tracks, x,"album"))
@@ -581,7 +580,7 @@ class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLo
 
 			except Exception as e:
 				print("f to pay respects\n\n")
-				print(e)
+				raise e 
 	
 	"""loads dataset into memory. toggle playlist and tracks to see which df's to load. selecting both will return as dictionary with playlist and tracks as keys"""
 	def load_datasets(self,playlist=1,tracks=1,gsheet=1):
