@@ -495,8 +495,8 @@ class GoogleSheetLoader:
 		if refresh_gsheet==1:
 			gc = gspread.authorize(self.credentials)
 			top100 = gc.open('best albums').worksheet("top100")
-			no_rows = int(top100.acell('S2').value)
-			no_col = int(top100.acell('S1').value)
+			no_rows = int(top100.acell('Q2').value)
+			no_col = int(top100.acell('Q1').value)
 			retval = []
 			for row in range(1, no_rows):
 					retval.append(top100.row_values(row))
@@ -695,14 +695,14 @@ class LyricGenerator:
 			if item[-1] == True:
 				rv.append([item[1], item[2]])
 			else:
-				x = [s for s in problem_albums if item[1] in s][0]
+				x = [s for s in problem_albums if item[1] in s[0]]
 				rv.append([x, item[2]])
 		rv = pd.DataFrame(rv, columns=["album", "artist"])
 		df = pd.merge(rv, tracks2, how="left", on="album", suffixes=["", "_"])
 		df = df.drop("artist_", axis=1)
 		df = df.drop('album', axis=1)
 		df = df.drop_duplicates()
-		return df
+		return rv
  
 	def loadFiles(self,fname):
 		with open('fname', 'r') as f:
