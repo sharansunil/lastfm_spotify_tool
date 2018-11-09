@@ -309,7 +309,7 @@ class SpotifyCredentials:
 		offset = 0
 		ret = []
 		currtrx = pd.read_csv('exports/savedDB.csv')
-		last_refreshed = float(dateutil.parser.parse(currtrx.iloc[0,3]).strftime('%s')) #latest update in db
+		last_refreshed = float(dateutil.parser.parse(currtrx.iloc[0,5]).strftime('%s')) #latest update in db
 
 		def _get_trackset(sp, offset, last_refreshed):
 			results = sp.current_user_saved_tracks(limit=50, offset=offset)
@@ -344,7 +344,9 @@ class SpotifyCredentials:
 				print(e)
 			chain = list(itertools.chain(*features))
 			df2 = pd.DataFrame(chain)
-			df = pd.concat([df_to_feature.iloc[:, 0:5], df2], axis=1, join='outer')
+			df2=df2.assign(features=df2.uri.apply(lambda x: x[14:]))
+			df = df_to_feature.merge(df2, on='features')
+			print(df)
 			df = df.drop_duplicates()
 			currtrx = pd.concat([df, currtrx], axis=0, join='outer')
 			currtrx=currtrx.drop_duplicates()
@@ -690,19 +692,20 @@ class LyricGenerator:
 		errs = errs.assign(found=errs.album.isin(tracks2.album))
 		problems = errs.loc[:, ["album", "artist", "found"]]
 		problem_albums = tracks2[tracks2.artist.isin(problems.artist)].album.unique().tolist()
+
 		rv = []
 		for item in problems.itertuples():
 			if item[-1] == True:
 				rv.append([item[1], item[2]])
 			else:
-				x = [s for s in problem_albums if item[1] in s[0]]
-				rv.append([x, item[2]])
-		rv = pd.DataFrame(rv, columns=["album", "artist"])
-		df = pd.merge(rv, tracks2, how="left", on="album", suffixes=["", "_"])
+				x = [s for s in problem_albums if item[1] in s[0] or s[0] in item[1]]
+				rv.append([x[0], item[2]])
+		rvs = pd.DataFrame(rv, columns=["album", "artist"])
+		df = pd.merge(rvs, tracks2, how="left", on="album", suffixes=["", "_"])
 		df = df.drop("artist_", axis=1)
 		df = df.drop('album', axis=1)
 		df = df.drop_duplicates()
-		return rv
+		return df
  
 	def loadFiles(self,fname):
 		with open('fname', 'r') as f:
