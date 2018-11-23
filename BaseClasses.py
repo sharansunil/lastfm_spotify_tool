@@ -13,6 +13,7 @@ import dateutil.parser
 import gspread
 import gspread_dataframe as gd
 import itertools
+import json
 import lyricsgenius as genius
 import matplotlib.pyplot as plt
 import numpy as np
@@ -29,25 +30,50 @@ import time
 import unidecode
 import warnings
 
-"""LastFM class details"""
 class LastFmCredentials:
+
+
+	"""LastFM class details"""
 
 	def __init__(self, lastfm_username):
 		self.lastfm_username = lastfm_username
+		self.API_SECRET = ""
+		self.API_ID = ""
+		self.LF_PASSWORD = ""
 
-	def setPassword(self, password):
-		self.password = pylast.md5(password)
-
-	API_KEY = 'f2790f6bacdee1a1be45db1b542bd7fb'
-	API_SECRET = '481449b2f6f3c95ee57eabe0cfe25258'
 	TRACK_SEPARATOR = u" - "
 
+
+	def get_credentials(self):
+		with open('lastfm_credentials.json') as f:
+			current_creds = json.load(f)
+		if self.lastfm_username == current_creds["lastfm_username"]:
+			self.LF_PASSWORD = current_creds["lastfm_password"]
+			self.API_ID = current_creds["lastfm_client_id"]
+			self.API_SECRET = current_creds["lastfm_client_secret"]
+		else:
+			print("credentials do not exist, please use set_credentials to create them instead")
+
+	def set_credentials(self, client_id, client_secret, password):
+		self.API_ID = client_id
+		self.API_SECRET = client_secret
+		self.LF_PASSWORD = pylast.md5(password)
+		with open("lastfm_credentials.json", "r") as jsonFile:
+			data = json.load(jsonFile)
+		data["lastfm_username"] = self.lastfm_username
+		data["lastfm_password"] = self.LF_PASSWORD
+		data["lastfm_client_id"] = self.API_ID
+		data["lastfm_client_secret"] = self.API_SECRET
+		with open("lastfm_credentials.json", "w") as jsonFile:
+			json.dump(data, jsonFile)
+
 	def gen_network(self):
+		self.get_credentials()
 		net = pylast.LastFMNetwork(
-			api_key=self.API_KEY,
-			api_secret=self.API_SECRET,
+			api_key=self.CLIENT_ID,
+			api_secret=self.CLIENT_SECRET,
 			username=self.lastfm_username,
-			password_hash=self.password)
+			password_hash=self.LF_PASSWORD)
 		return net
 
 	#global var dont touch
@@ -221,36 +247,50 @@ class LastFmCredentials:
 			print("f to pay respects")
 			print(e)
 
-"""Spotify Class Details"""
 class SpotifyCredentials:
+	"""Spotify Class Details"""
 
-	def __init__(self, sp_username, scope='user-library-read'):
+	def __init__(self,sp_username):
 		self.sp_username = sp_username
-		self.scope = scope
-
-	client_id = 'fe3712517e674d46b0dad0f1e83149cd'
-	client_secret = '4adc68cc4f874edc9a7a2b655d8ccaf0'
-	redirect_uri = 'https://facebook.com'
-
-	def setScope(self, scope):
-		self.scope = scope
-
-	def setUsername(self, sp_username):
-		self.sp_username = sp_username
-
-	def getUsername(self):
-		return self.sp_username
-
-	def getScope(self):
-		return self.scope
+		self.CLIENT_SECRET = ""
+		self.CLIENT_ID = ""
+		self.REDIRECT_URI = ""
+		self.PASSWORD = ""
+	
+	def get_credentials(self):
+		with open ('spotify_credentials.json') as f:
+			current_creds=json.load(f)
+		if self.sp_username==current_creds["spotify_username"]:
+			self.PASSWORD=current_creds["spotify_password"]
+			self.CLIENT_ID=current_creds["spotify_client_id"]
+			self.CLIENT_SECRET=current_creds["spotify_client_secret"]
+			self.REDIRECT_URI=current_creds["redirect_uri"]
+		else:
+			print("credentials do not exist, please use set_credentials to create them instead")
+	
+	def set_credentials(self,client_id,client_secret,password,redirect_uri):
+		self.CLIENT_ID=client_id
+		self.CLIENT_SECRET=client_secret
+		self.PASSWORD=password
+		self.REDIRECT_URI=redirect_uri
+		with open("spotify_credentials.json","r") as jsonFile:
+			data=json.load(jsonFile)
+		data["spotify_username"]=self.sp_username
+		data["spotify_password"]=self.PASSWORD
+		data["spotify_client_id"]=self.CLIENT_ID
+		data["spotify_client_secret"]=self.CLIENT_SECRET
+		data["redirect_uri"]=self.REDIRECT_URI
+		with open("spotify_credentials.json", "w") as jsonFile:
+			json.dump(data, jsonFile)
 
 	def genAuth(self):
+		self.get_credentials()
 		token = util.prompt_for_user_token(
 			username=self.sp_username,
-			scope=self.scope,
-			client_id=self.client_id,
-			client_secret=self.client_secret,
-			redirect_uri=self.redirect_uri)
+			scope="user-library-read",
+			client_id=self.CLIENT_ID,
+			client_secret=self.CLIENT_SECRET,
+			redirect_uri=self.REDIRECT_URI)
 		sp = spotipy.Spotify(auth=token)
 		return sp
 
@@ -486,8 +526,8 @@ class SpotifyCredentials:
 				refpr, plpr, art)
 		print(retstr)
 
-"""Gsheet class details"""
 class GoogleSheetLoader:
+	"""Gsheet class details"""
 
 	def __init__(self):
 		self.gscope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
@@ -547,11 +587,10 @@ class GoogleSheetLoader:
 		df = pd.read_csv("exports/Top100.csv")
 		gd.set_with_dataframe(ss, df)
 
-"""Combined loader details"""
 class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLoader):
-
-	def __init__(self, lastfm_username, sp_username, scope="user-library-read"):
-		SpotifyCredentials.__init__(self,sp_username, scope)
+	"""Combined loader details"""
+	def __init__(self, lastfm_username, sp_username):
+		SpotifyCredentials.__init__(self,sp_username)
 		LastFmCredentials.__init__(self,lastfm_username)
 		GoogleSheetLoader.__init__(self)
 
@@ -610,8 +649,8 @@ class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLo
 		else:
 			print("invalid keys given, please only type 1 or 0")
 
-"""Lyric Class Details-98% success"""
 class LyricGenerator:
+	"""Lyric Class Details-98% success"""
 
 	def __init__(self):
 		self.lyric_token = '77eKBrbm6RQj4Sg0rxnmH7sFZwDcRmcRsBzde9en1SPcboe8Ilm2p8bt-2Ndr2zN'
