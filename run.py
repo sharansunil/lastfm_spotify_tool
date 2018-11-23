@@ -8,11 +8,12 @@ LASTFM_USERNAME='sharansunil'
 spotify_fm = Spotify_LastFM_Builder(
 	lastfm_username=LASTFM_USERNAME,
 	sp_username=SP_USERNAME)
+
 spotify_fm.update_datasets(
 	# spotify refreshers - recommended to set at 0
-	refresh_spotify=1,
-	refresh_artist_viz=1,
-	refresh_playlist_viz=1,
+	refresh_spotify=0,
+	refresh_artist_viz=0,
+	refresh_playlist_viz=0,
 	# lastfm refreshers - recommended to set at 1
 	lastfm_artistalbum=1,
 	lastfm_tracks=1,

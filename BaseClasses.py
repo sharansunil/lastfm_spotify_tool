@@ -43,7 +43,6 @@ class LastFmCredentials:
 
 	TRACK_SEPARATOR = u" - "
 
-
 	def get_credentials(self):
 		with open('lastfm_credentials.json') as f:
 			current_creds = json.load(f)
@@ -70,8 +69,8 @@ class LastFmCredentials:
 	def gen_network(self):
 		self.get_credentials()
 		net = pylast.LastFMNetwork(
-			api_key=self.CLIENT_ID,
-			api_secret=self.CLIENT_SECRET,
+			api_key=self.API_ID,
+			api_secret=self.API_SECRET,
 			username=self.lastfm_username,
 			password_hash=self.LF_PASSWORD)
 		return net
@@ -596,6 +595,7 @@ class Spotify_LastFM_Builder(SpotifyCredentials, LastFmCredentials,GoogleSheetLo
 
 	def create_credentials(self):
 		sp = SpotifyCredentials.genAuth(self)
+		lfcc=LastFmCredentials.get_credentials(self)
 		network = LastFmCredentials.gen_network(self)
 		self.sp = sp
 		self.network = network
@@ -653,8 +653,9 @@ class LyricGenerator:
 	"""Lyric Class Details-98% success"""
 
 	def __init__(self):
-		self.lyric_token = '77eKBrbm6RQj4Sg0rxnmH7sFZwDcRmcRsBzde9en1SPcboe8Ilm2p8bt-2Ndr2zN'
-
+		with open('genius_credential.json') as f:
+			current_creds=json.load(f)
+		self.lyric_token = current_creds["lyric_token"]
 	def blockPrint(self):
 		sys.stdout = open(os.devnull, 'w')
 
